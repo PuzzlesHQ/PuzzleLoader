@@ -1,7 +1,5 @@
 package io.github.puzzle.cosmic.api.data;
 
-import io.github.puzzle.cosmic.util.ApiDeclaration;
-
 public interface IDataPoint<T> {
 
     T setValue(T value);

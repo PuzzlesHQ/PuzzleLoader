@@ -1,6 +1,5 @@
 package io.github.puzzle.cosmic.impl.data.points.single;
 
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.Vector4;
 import finalforeach.cosmicreach.savelib.crbin.CRBinDeserializer;
 import finalforeach.cosmicreach.savelib.crbin.CRBinSerializer;

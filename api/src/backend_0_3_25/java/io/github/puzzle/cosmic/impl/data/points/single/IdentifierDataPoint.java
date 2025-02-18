@@ -3,7 +3,6 @@ package io.github.puzzle.cosmic.impl.data.points.single;
 import finalforeach.cosmicreach.savelib.crbin.CRBinDeserializer;
 import finalforeach.cosmicreach.savelib.crbin.CRBinSerializer;
 import finalforeach.cosmicreach.util.Identifier;
-import io.github.puzzle.cosmic.api.util.IPuzzleIdentifier;
 import io.github.puzzle.cosmic.impl.data.points.AbstractDataPoint;
 
 public class IdentifierDataPoint extends AbstractDataPoint<Identifier> {

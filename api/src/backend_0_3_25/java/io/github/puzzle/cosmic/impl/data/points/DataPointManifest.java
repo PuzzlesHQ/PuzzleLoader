@@ -3,8 +3,8 @@ package io.github.puzzle.cosmic.impl.data.points;
 import finalforeach.cosmicreach.savelib.crbin.CRBinDeserializer;
 import finalforeach.cosmicreach.savelib.crbin.CRBinSerializer;
 import finalforeach.cosmicreach.savelib.crbin.ICRBinSerializable;
-import io.github.puzzle.cosmic.api.data.IDataPointManifest;
 import io.github.puzzle.cosmic.api.data.IDataPoint;
+import io.github.puzzle.cosmic.api.data.IDataPointManifest;
 
 import java.util.HashMap;
 import java.util.Map;
