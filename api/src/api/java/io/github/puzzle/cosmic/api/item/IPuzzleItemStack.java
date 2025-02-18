@@ -2,6 +2,7 @@ package io.github.puzzle.cosmic.api.item;
 
 import io.github.puzzle.cosmic.api.block.IPuzzleBlockPosition;
 import io.github.puzzle.cosmic.api.block.IPuzzleBlockState;
+import io.github.puzzle.cosmic.api.data.IDataPointManifest;
 import io.github.puzzle.cosmic.api.entity.player.IPuzzlePlayer;
 import io.github.puzzle.cosmic.util.ApiDeclaration;
 
@@ -32,4 +33,6 @@ public interface IPuzzleItemStack {
     IPuzzleItemStack _setAmount(int amount);
 
     String _getName();
+
+    IDataPointManifest _getPointManifest();
 }

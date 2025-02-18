@@ -19,6 +19,16 @@ public class ApiClassTransformer extends AbstractClassTransformer {
     String implName;
 
     @Override
+    public void setClassName(String className) {
+        super.setClassName(className);
+
+        api = null;
+        apiName = null;
+        impl = null;
+        implName = null;
+    }
+
+    @Override
     public AnnotationVisitor visitAnnotation(String descriptor, boolean visible) {
         return new AnnotationScanner(descriptor, super.visitAnnotation(descriptor, visible));
     }
@@ -59,20 +69,24 @@ public class ApiClassTransformer extends AbstractClassTransformer {
     }
 
     private void implementDefault(MethodVisitor visitor, String descriptor) {
+        visitor.visitCode();
         visitor.visitVarInsn(Opcodes.ALOAD, 0);
         visitor.visitTypeInsn(Opcodes.CHECKCAST, Object.class.getName().replaceAll("\\.", "/"));
         visitor.visitTypeInsn(Opcodes.CHECKCAST, descriptor);
-        visitor.visitInsn(Opcodes.LRETURN);
-        visitor.visitMaxs(-1, -1);
+        visitor.visitInsn(Opcodes.ARETURN);
+        visitor.visitMaxs(5, 5);
+        visitor.visitEnd();
     }
 
     private void implementStatic(MethodVisitor visitor, String name, String descriptor) {
+        visitor.visitCode();
         visitor.visitParameter(name, 0);
         visitor.visitVarInsn(Opcodes.ALOAD, 0);
         visitor.visitTypeInsn(Opcodes.CHECKCAST, Object.class.getName().replaceAll("\\.", "/"));
         visitor.visitTypeInsn(Opcodes.CHECKCAST, descriptor);
-        visitor.visitInsn(Opcodes.LRETURN);
-        visitor.visitMaxs(-1, -1);
+        visitor.visitInsn(Opcodes.ARETURN);
+        visitor.visitMaxs(5, 5);
+        visitor.visitEnd();
     }
 
     public class AnnotationScanner extends AnnotationVisitor {

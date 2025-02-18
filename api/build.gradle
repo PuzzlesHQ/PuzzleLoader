@@ -33,13 +33,16 @@ configurations {
 
     api
     apiImplementation.extendsFrom(api)
+
+    compile
+    apiCompileOnly.extendsFrom(compile)
+    backend_0_3_25CompileOnly.extendsFrom(compile)
 }
 
 var gdxVersion = "1.13.0"
-var puzzleVersion = "2.3.3"
+var puzzleVersion = "2.3.1"
 
 var crUrl = "https://github.com/CRModders/CosmicArchive/raw/refs/heads/main/versions/pre-alpha/${cosmic_reach_client_version}/client/Cosmic%20Reach-${cosmic_reach_client_version}.jar"
-var crUrl1 = "https://github.com/CRModders/CosmicArchive/raw/refs/heads/main/versions/pre-alpha/${cosmic_reach_client_version}/client/Cosmic-Reach-${cosmic_reach_client_version}.jar"
 
 File libFolder = file("lib")
 if (!libFolder.exists()) libFolder.mkdir()
@@ -49,11 +52,13 @@ if (!crFile.exists()) {
     try {
         new URL(crUrl).withInputStream { i -> crFile.withOutputStream { it << i}}
     } catch (Exception ignore) {
-        new URL(crUrl1).withInputStream { i -> crFile.withOutputStream { it << i}}
+        new URL(crUrl.replaceAll("%20", "-")).withInputStream { i -> crFile.withOutputStream { it << i}}
     }
 }
 
 dependencies {
+    compile 'org.jetbrains:annotations:24.0.0'
+
     api "com.badlogicgames.gdx:gdx:$gdxVersion"
 
     require "com.github.PuzzleLoader:PuzzleLoader:${puzzleVersion}:client"
@@ -95,6 +100,7 @@ tasks.register("buildBackend-0.3.25", ShadowJar) {
     group = "buildSrc"
     configurations = [ project.configurations.embed ]
     from sourceSets.backend_0_3_25.output
+    from processBackend_0_3_25Resources.outputs
 }
 
 

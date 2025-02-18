@@ -1,17 +1,27 @@
 package io.github.puzzle.cosmic.impl.mixin.item;
 
 import finalforeach.cosmicreach.items.ItemStack;
+import finalforeach.cosmicreach.savelib.crbin.CRBinDeserializer;
+import finalforeach.cosmicreach.savelib.crbin.CRBinSerializer;
 import io.github.puzzle.cosmic.api.block.IPuzzleBlockPosition;
 import io.github.puzzle.cosmic.api.block.IPuzzleBlockState;
+import io.github.puzzle.cosmic.api.data.IDataPointManifest;
 import io.github.puzzle.cosmic.api.entity.player.IPuzzlePlayer;
 import io.github.puzzle.cosmic.api.item.IPuzzleItem;
 import io.github.puzzle.cosmic.api.item.IPuzzleItemSlot;
 import io.github.puzzle.cosmic.api.item.IPuzzleItemStack;
+import io.github.puzzle.cosmic.impl.data.points.DataPointManifest;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ItemStack.class)
 public class ItemStackMixin implements IPuzzleItemStack {
+
+    @Unique
+    DataPointManifest puzzleLoader$manifest = new DataPointManifest();
 
     @Unique
     ItemStack puzzleLoader$stack = IPuzzleItemStack.as(this);
@@ -94,5 +104,20 @@ public class ItemStackMixin implements IPuzzleItemStack {
     @Override
     public String _getName() {
         return puzzleLoader$stack.getName();
+    }
+
+    @Inject(method = "read", at = @At("TAIL"))
+    private void write(CRBinDeserializer crbd, CallbackInfo ci) {
+        puzzleLoader$manifest = crbd.readObj("data_point_manifest", DataPointManifest.class);
+    }
+
+    @Inject(method = "write", at = @At("TAIL"))
+    private void write(CRBinSerializer crbs, CallbackInfo ci) {
+        crbs.writeObj("data_point_manifest", puzzleLoader$manifest);
+    }
+
+    @Override
+    public IDataPointManifest _getPointManifest() {
+        return puzzleLoader$manifest;
     }
 }

@@ -3,9 +3,13 @@ package com.github.puzzle.game.block;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import com.github.puzzle.game.block.generators.BlockGenerator;
-import com.github.puzzle.game.block.generators.ExperimentalBlockGenerator;
 import com.github.puzzle.game.block.generators.PassThroughBlockGenerator;
+import com.github.puzzle.game.items.data.DataTag;
+import com.github.puzzle.game.items.data.DataTagManifest;
+import com.github.puzzle.game.items.data.attributes.IntDataAttribute;
 import com.github.puzzle.game.resources.PuzzleGameAssetLoader;
+import com.github.puzzle.game.util.DataTagUtil;
+import finalforeach.cosmicreach.items.ItemStack;
 import finalforeach.cosmicreach.util.Identifier;
 
 import java.util.LinkedHashMap;
@@ -17,13 +21,18 @@ import java.util.LinkedHashMap;
  */
 public class DataModBlock implements IModBlock {
 
-    public static class JsonBlock {
+    public static class JsonBlock implements Json.Serializable {
         public String stringId;
-        public LinkedHashMap<String, String> defaultParams;
-        public LinkedHashMap<String, BlockGenerator.State> blockStates;
-        public String blockEntityId;
-        public LinkedHashMap<String, ?> blockEntityParams;
-        public BlockGenerator.State defaultProperties;
+
+        @Override
+        public void write(Json json) {
+            json.writeField(this, "stringId");
+        }
+
+        @Override
+        public void read(Json json, JsonValue jsonValue) {
+            json.readField(this, "stringId", jsonValue);
+        }
     }
 
     public Identifier debugResourceLocation;
