@@ -64,7 +64,7 @@ dependencies {
 
     api "com.badlogicgames.gdx:gdx:$gdxVersion"
 
-    require "com.github.PuzzleLoader:PuzzleLoader:${puzzleVersion}:client"
+    require "com.github.PuzzlesHQ:PuzzleLoader:${puzzleVersion}:client"
     embed files("./lib/api.jar")
     require files(crFile)
 }
