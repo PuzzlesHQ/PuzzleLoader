@@ -3,7 +3,6 @@ package io.github.puzzle.cosmic.impl.data.points.array;
 import finalforeach.cosmicreach.savelib.crbin.CRBinDeserializer;
 import finalforeach.cosmicreach.savelib.crbin.CRBinSerializer;
 import finalforeach.cosmicreach.savelib.crbin.ICRBinSerializable;
-import finalforeach.cosmicreach.savelib.crbin.SchemaType;
 import io.github.puzzle.cosmic.impl.data.points.AbstractDataPoint;
 
 public class ObjectArrayDataPoint extends AbstractDataPoint<ICRBinSerializable[]> {
