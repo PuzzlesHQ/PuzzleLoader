@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.Unique;
 public class ItemSlotMixin implements IPuzzleItemSlot {
 
     @Unique
-    ItemSlot puzzleLoader$slot = IPuzzleItemSlot.as(this);
+    private final transient ItemSlot puzzleLoader$slot = IPuzzleItemSlot.as(this);
 
     @Override
     public void _set(IPuzzleItemSlot iPuzzleItemSlot) {

@@ -45,67 +45,67 @@ public abstract class PlayerMixin implements IPuzzlePlayer {
     @Shadow public transient boolean loading;
 
     @Override
-    public IPuzzleEntity getEntity() {
+    public IPuzzleEntity _getEntity() {
         return IPuzzleEntity.as(entity);
     }
 
     @Override
-    public void proneCheck(IPuzzleZone iPuzzleZone) {
+    public void _proneCheck(IPuzzleZone iPuzzleZone) {
         proneCheck(iPuzzleZone.as());
     }
 
     @Override
-    public void crouchCheck(IPuzzleZone iPuzzleZone) {
+    public void _crouchCheck(IPuzzleZone iPuzzleZone) {
         crouchCheck(iPuzzleZone.as());
     }
 
     @Override
-    public void respawn(IPuzzleWorld iPuzzleWorld) {
+    public void _respawn(IPuzzleWorld iPuzzleWorld) {
         respawn(iPuzzleWorld.as());
     }
 
     @Override
-    public void respawn(IPuzzleZone iPuzzleZone) {
+    public void _respawn(IPuzzleZone iPuzzleZone) {
         respawn(iPuzzleZone.as());
     }
 
     @Override
-    public void setPosition(float x, float y, float z) {
+    public void _setPosition(float x, float y, float z) {
         entity.setPosition(x, y, z);
     }
 
     @Override
-    public IPuzzleZone getZone() {
+    public IPuzzleZone _getZone() {
         return IPuzzleZone.as(GameSingletons.world.getZoneCreateIfNull(zoneId));
     }
 
     @Override
-    public IPuzzleChunk getChunk(IPuzzleWorld world) {
+    public IPuzzleChunk _getChunk(IPuzzleWorld world) {
         return IPuzzleChunk.as(getChunk(world.as()));
     }
 
     @Override
-    public short getBlockLight(IPuzzleWorld iPuzzleWorld) {
+    public short _getBlockLight(IPuzzleWorld iPuzzleWorld) {
         return getBlockLight(iPuzzleWorld.as());
     }
 
     @Override
-    public int getSkyLight(IPuzzleWorld iPuzzleWorld) {
+    public int _getSkyLight(IPuzzleWorld iPuzzleWorld) {
         return getSkyLight(iPuzzleWorld.as());
     }
 
     @Override
-    public void spawnDroppedItem(IPuzzleWorld iPuzzleWorld, IPuzzleItemStack iPuzzleItemStack) {
+    public void _spawnDroppedItem(IPuzzleWorld iPuzzleWorld, IPuzzleItemStack iPuzzleItemStack) {
         spawnDroppedItem(iPuzzleWorld.as(), iPuzzleItemStack.as());
     }
 
     @Override
-    public boolean isLoading() {
+    public boolean _isLoading() {
         return loading;
     }
 
     @Override
-    public IPuzzleAccount getAccount() {
+    public IPuzzleAccount _getAccount() {
         return IPuzzleAccount.as(GameSingletons.getAccountFromPlayer(as()));
     }
 

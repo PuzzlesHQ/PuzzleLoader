@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.Unique;
 public class IdentifierMixin implements IPuzzleIdentifier {
 
     @Unique
-    Identifier puzzleLoader$id = IPuzzleIdentifier.as(this);
+    private final transient Identifier puzzleLoader$id = IPuzzleIdentifier.as(this);
 
     @Override
     public String _getNamespace() {

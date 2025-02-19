@@ -7,11 +7,13 @@
     "defaultRequire": 1
   },
   "mixins": [
+    "account.AccountMixin",
     "block.BlockEntityMixin",
     "block.BlockMixin",
     "block.BlockPositionMixin",
     "block.BlockStateMixin",
     "entity.EntityMixin",
+    "entity.EntityUniqueIdMixin",
     "entity.player.PlayerMixin",
     "item.ItemMixin",
     "item.ItemSlotMixin",

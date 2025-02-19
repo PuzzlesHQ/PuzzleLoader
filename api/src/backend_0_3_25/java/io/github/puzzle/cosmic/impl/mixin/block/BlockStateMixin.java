@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.Unique;
 public abstract class BlockStateMixin implements IPuzzleBlockState {
 
     @Unique
-    BlockState puzzleLoader$state = IPuzzleBlockState.as(this);
+    private final transient BlockState puzzleLoader$state = IPuzzleBlockState.as(this);
 
     @Override
     public IPuzzleBlock _getBlock() {

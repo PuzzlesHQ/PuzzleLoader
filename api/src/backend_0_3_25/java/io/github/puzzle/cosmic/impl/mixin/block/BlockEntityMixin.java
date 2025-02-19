@@ -19,7 +19,7 @@ public class BlockEntityMixin implements IPuzzleBlockEntity {
     @Shadow int z;
 
     @Unique
-    BlockEntity puzzleLoader$entity = IPuzzleBlockEntity.as(this);
+    private final transient BlockEntity puzzleLoader$entity = IPuzzleBlockEntity.as(this);
 
     @Override
     public int _getGlobalX() {

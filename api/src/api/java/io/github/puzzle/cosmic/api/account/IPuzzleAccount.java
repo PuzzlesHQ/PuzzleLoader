@@ -6,20 +6,20 @@ import io.github.puzzle.cosmic.util.ApiDeclaration;
 @ApiDeclaration(api = IPuzzleAccount.class, impl = "Account")
 public interface IPuzzleAccount {
 
-    String getDisplayName();
-    String getUsername();
-    String getUniqueId();
+    String _getDisplayName();
+    String _getUsername();
+    String _getUniqueId();
 
-    void setUsername(String username);
-    void setUniqueId(String uniqueId);
+    void _setUsername(String username);
+    void _setUniqueId(String uniqueId);
 
-    String getPrefix();
-    String getDebugString();
+    String _getPrefix();
+    String _getDebugString();
 
-    boolean canSave();
-    boolean isAllowed();
-    boolean isOperator();
+    boolean _canSave();
+    boolean _isAllowed();
+    boolean _isOperator();
 
-    IPuzzlePlayer getPlayer();
+    IPuzzlePlayer _getPlayer();
 
 }

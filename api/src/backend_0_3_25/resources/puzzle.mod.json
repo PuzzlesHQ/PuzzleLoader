@@ -10,7 +10,7 @@
   "entrypoints": {
   },
   "depends": {
-    "cosmic-reach": "${crVersion}",
+    "cosmic-reach": ">=${crVersion}",
     "puzzle-loader": ">=2.0.0"
   },
   "allowedSides": {

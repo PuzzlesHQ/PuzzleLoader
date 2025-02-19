@@ -21,7 +21,7 @@ public class BlockPositionMixin implements IPuzzleBlockPosition {
     @Shadow public int localZ;
     @Shadow public Chunk chunk;
     @Unique
-    BlockPosition puzzleLoader$blockPosition = IPuzzleBlockPosition.as(this);
+    private final transient BlockPosition puzzleLoader$blockPosition = IPuzzleBlockPosition.as(this);
 
     @Override
     public int _getLocalX() {

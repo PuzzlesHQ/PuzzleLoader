@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.Unique;
 public class BlockMixin implements IPuzzleBlock {
 
     @Unique
-    Block puzzleLoader$block = IPuzzleBlock.as(this);
+    private final transient Block puzzleLoader$block = IPuzzleBlock.as(this);
 
     @Override
     public IPuzzleBlockState _getDefaultState() {

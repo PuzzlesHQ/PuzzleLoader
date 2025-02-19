@@ -13,29 +13,27 @@ import io.github.puzzle.cosmic.util.ApiDeclaration;
 @ApiDeclaration(api = IPuzzlePlayer.class, impl = "Player")
 public interface IPuzzlePlayer {
 
-    IPuzzleEntity getEntity();
+    IPuzzleEntity _getEntity();
 
-    void proneCheck(IPuzzleZone zone);
-    void crouchCheck(IPuzzleZone zone);
+    void _proneCheck(IPuzzleZone zone);
+    void _crouchCheck(IPuzzleZone zone);
 
-    void respawn(IPuzzleWorld world);
-    void respawn(IPuzzleZone zone);
+    void _respawn(IPuzzleWorld world);
+    void _respawn(IPuzzleZone zone);
 
-    void setPosition(float x, float y, float z);
+    void _setPosition(float x, float y, float z);
 
-    IPuzzleZone getZone();
-    IPuzzleChunk getChunk(IPuzzleWorld world);
+    IPuzzleZone _getZone();
+    IPuzzleChunk _getChunk(IPuzzleWorld world);
 
-    short getBlockLight(IPuzzleWorld world);
-    int getSkyLight(IPuzzleWorld world);
+    short _getBlockLight(IPuzzleWorld world);
+    int _getSkyLight(IPuzzleWorld world);
 
-    void spawnDroppedItem(IPuzzleWorld world, IPuzzleItemStack itemStack);
+    void _spawnDroppedItem(IPuzzleWorld world, IPuzzleItemStack itemStack);
 
-    default Vector3 getPosition() {
-        return getEntity().getPosition();
-    }
+    Vector3 _getPosition();
 
-    boolean isLoading();
+    boolean _isLoading();
 
     default void setZone(IPuzzleZone zone) {
         setZone(zone.getId());
@@ -47,11 +45,9 @@ public interface IPuzzlePlayer {
 
     void setZone(String zoneId);
 
-    default boolean isDead() {
-        return getEntity().isDead();
-    }
+    boolean _isDead();
 
-    IPuzzleAccount getAccount();
-    String getUsername();
+    IPuzzleAccount _getAccount();
+    String _getUsername();
 
 }

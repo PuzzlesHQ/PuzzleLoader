@@ -16,23 +16,23 @@ public abstract class AccountMixin implements IPuzzleAccount {
     @Shadow private String uniqueId;
 
     @Override
-    public String getUsername() {
+    public String _getUsername() {
         return username;
     }
 
     @Override
-    public String getUniqueId() {
+    public String _getUniqueId() {
         return uniqueId;
     }
 
-    public IPuzzlePlayer getPlayer() {
+    public IPuzzlePlayer _getPlayer() {
         if (GameSingletons.isHost && GameSingletons.isClient) {
             GameSingletons.client().getAccount();
         }
         return IPuzzlePlayer.as(GameSingletons.getPlayerFromAccount(IPuzzleAccount.as(this)));
     }
 
-    public boolean isOperator() {
+    public boolean _isOperator() {
         return GameSingletons.isHost && GameSingletons.isClient || ServerSingletons.OP_LIST.hasAccount(IPuzzleAccount.as(this));
     }
 }

@@ -1,30 +1,38 @@
 package io.github.puzzle.cosmic.impl.mixin.item;
 
+import com.badlogic.gdx.math.Vector3;
+import finalforeach.cosmicreach.entities.ItemEntity;
 import finalforeach.cosmicreach.items.ItemStack;
 import finalforeach.cosmicreach.savelib.crbin.CRBinDeserializer;
 import finalforeach.cosmicreach.savelib.crbin.CRBinSerializer;
+import finalforeach.cosmicreach.world.Zone;
 import io.github.puzzle.cosmic.api.block.IPuzzleBlockPosition;
 import io.github.puzzle.cosmic.api.block.IPuzzleBlockState;
 import io.github.puzzle.cosmic.api.data.IDataPointManifest;
+import io.github.puzzle.cosmic.api.entity.IPuzzleEntity;
 import io.github.puzzle.cosmic.api.entity.player.IPuzzlePlayer;
 import io.github.puzzle.cosmic.api.item.IPuzzleItem;
 import io.github.puzzle.cosmic.api.item.IPuzzleItemSlot;
 import io.github.puzzle.cosmic.api.item.IPuzzleItemStack;
+import io.github.puzzle.cosmic.api.world.IPuzzleZone;
 import io.github.puzzle.cosmic.impl.data.points.DataPointManifest;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ItemStack.class)
-public class ItemStackMixin implements IPuzzleItemStack {
+public abstract class ItemStackMixin implements IPuzzleItemStack {
+
+    @Shadow public abstract ItemEntity spawnItemEntityAt(Zone zone, Vector3 position);
 
     @Unique
-    DataPointManifest puzzleLoader$manifest = new DataPointManifest();
+    private transient DataPointManifest puzzleLoader$manifest = new DataPointManifest();
 
     @Unique
-    ItemStack puzzleLoader$stack = IPuzzleItemStack.as(this);
+    private final transient ItemStack puzzleLoader$stack = IPuzzleItemStack.as(this);
 
     @Override
     public IPuzzleItemStack _copy() {
@@ -44,6 +52,11 @@ public class ItemStackMixin implements IPuzzleItemStack {
     @Override
     public void _cycleSwapGroupItem() {
         puzzleLoader$stack.cycleSwapGroupItem();
+    }
+
+    @Override
+    public IPuzzleEntity _spawnItemEntityAt(IPuzzleZone iPuzzleZone, Vector3 vector3) {
+        return IPuzzleEntity.as(spawnItemEntityAt(iPuzzleZone.as(), vector3));
     }
 
     @Override
