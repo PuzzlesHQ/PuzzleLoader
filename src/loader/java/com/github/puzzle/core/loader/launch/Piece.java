@@ -13,11 +13,9 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.lang.reflect.Method;
+import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class Piece {
@@ -35,8 +33,6 @@ public class Piece {
     public static final Logger LOGGER = LogManager.getLogger("Puzzle | Loader");
 
     public static void launch(String[] args, EnvType type) {
-
-
         Piece piece = new Piece();
         env.set(type);
         DEFAULT_PROVIDER = env.get() == EnvType.CLIENT ? CLIENT_PROVIDER : SERVER_PROVIDER;
@@ -81,6 +77,17 @@ public class Piece {
         try {
             OptionSpec<String> provider_option = parser.accepts("gameProvider").withOptionalArg().ofType(String.class);
             OptionSpec<String> modFolder_option = parser.accepts("modFolder").withOptionalArg().ofType(String.class);
+            OptionSpec<String> modPaths = parser.accepts("mod-paths").withOptionalArg().ofType(String.class);
+
+            if (options.has(modPaths)) {
+                String v = modPaths.value(options);
+                if (!v.contains(File.pathSeparator)) {
+                    addFile(new File(v));
+                } else {
+                    String[] jars = modPaths.value(options).split(File.pathSeparator);
+                    for (String jar : jars) addFile(new File(jar));
+                }
+            }
 
             if (options.has(modFolder_option)) ModLocator.setModFolder(new File(modFolder_option.value(options)));
             classLoader.addClassLoaderExclusion(DEFAULT_PROVIDER.substring(0, DEFAULT_PROVIDER.lastIndexOf('.')));
@@ -110,5 +117,18 @@ public class Piece {
             LOGGER.error("Unable To Launch", e);
             System.exit(1);
         }
+    }
+
+    private void addFile(File f) throws MalformedURLException {
+        if (!f.exists()) return;
+
+        if (f.getName().endsWith(".jar")) {
+            classLoader.addURL(f.toURL());
+            return;
+        }
+
+        if (f.isDirectory())
+            for (File fc : Objects.requireNonNull(f.listFiles()))
+                addFile(fc);
     }
 }
