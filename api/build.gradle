@@ -44,7 +44,8 @@ var apiVersion = "1.0.0"
 var gdxVersion = "1.13.0"
 var puzzleVersion = "9276247"
 
-var crUrl = "https://github.com/CRModders/CosmicArchive/raw/refs/heads/main/versions/pre-alpha/${cosmic_reach_client_version}/client/Cosmic%20Reach-${cosmic_reach_client_version}.jar"
+var crClientUrl = "https://github.com/CRModders/CosmicArchive/raw/refs/heads/main/versions/pre-alpha/${cosmic_reach_client_version}/client/Cosmic%20Reach-${cosmic_reach_client_version}.jar"
+var crServerUrl = "https://github.com/CRModders/CosmicArchive/raw/refs/heads/main/versions/pre-alpha/${cosmic_reach_client_version}/server/Cosmic%20Reach-${cosmic_reach_client_version}.jar"
 
 File libFolder = file("lib")
 if (!libFolder.exists()) libFolder.mkdir()
@@ -52,9 +53,9 @@ if (!libFolder.exists()) libFolder.mkdir()
 File crFile = file("lib/cr${cosmic_reach_client_version}.jar")
 if (!crFile.exists()) {
     try {
-        new URL(crUrl).withInputStream { i -> crFile.withOutputStream { it << i}}
+        new URL(crServerUrl).withInputStream { i -> crFile.withOutputStream { it << i}}
     } catch (Exception ignore) {
-        new URL(crUrl.replaceAll("%20", "-")).withInputStream { i -> crFile.withOutputStream { it << i}}
+        new URL(crServerUrl.replaceAll("%20", "-")).withInputStream { i -> crFile.withOutputStream { it << i}}
     }
 }
 
