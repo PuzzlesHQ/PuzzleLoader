@@ -1,7 +1,8 @@
 {
   "formatVersion": 2,
-  "name": "Cosmic API ${crVersion}",
+  "name": "Cosmic API",
   "id": "cosmic-api",
+  "version": "${version} - ${crVersion}",
   "description": "This is the cosmic-api module of the Puzzle Loader.",
   "authors": [ "Mr_Zombii" ],
   "meta": {
@@ -10,7 +11,7 @@
   "entrypoints": {
   },
   "depends": {
-    "cosmic-reach": ">=${crVersion}",
+    "cosmic-reach": "${crVersion}",
     "puzzle-loader": ">=2.0.0"
   },
   "allowedSides": {

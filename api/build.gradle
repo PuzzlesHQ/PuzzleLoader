@@ -10,7 +10,7 @@ plugins {
 
 sourceSets {
     api
-    backend_0_3_25
+    backend_0_3_26
 }
 
 group = 'com.github'
@@ -26,21 +26,23 @@ repositories {
 
 configurations {
     require
-    backend_0_3_25Implementation.extendsFrom(require)
+    backend_0_3_26Implementation.extendsFrom(require)
 
     embed
-    backend_0_3_25Implementation.extendsFrom(embed)
+    backend_0_3_26Implementation.extendsFrom(embed)
 
     api
     apiImplementation.extendsFrom(api)
 
     compile
     apiCompileOnly.extendsFrom(compile)
-    backend_0_3_25CompileOnly.extendsFrom(compile)
+    backend_0_3_26CompileOnly.extendsFrom(compile)
 }
 
+var apiVersion = "1.0.0"
+
 var gdxVersion = "1.13.0"
-var puzzleVersion = "2.3.1"
+var puzzleVersion = "9276247"
 
 var crUrl = "https://github.com/CRModders/CosmicArchive/raw/refs/heads/main/versions/pre-alpha/${cosmic_reach_client_version}/client/Cosmic%20Reach-${cosmic_reach_client_version}.jar"
 
@@ -66,13 +68,14 @@ dependencies {
     require files(crFile)
 }
 
-processBackend_0_3_25Resources {
+processBackend_0_3_26Resources {
     // Locations of where to inject the properties
     def resourceTargets = [ "puzzle.mod.json" ]
 
     // Left item is the name in the target, right is the varuable name
     def replaceProperties = [
             "crVersion"     : cosmic_reach_client_version,
+            "version"       : apiVersion
     ]
 
     inputs.properties replaceProperties
@@ -96,11 +99,15 @@ tasks.register("buildAPI", Jar) {
     }
 }
 
-tasks.register("buildBackend-0.3.25", ShadowJar) {
+tasks.register("buildBackend-0.3.26", ShadowJar) {
     group = "buildSrc"
     configurations = [ project.configurations.embed ]
-    from sourceSets.backend_0_3_25.output
-    from processBackend_0_3_25Resources.outputs
+
+    archiveBaseName = "cosmic-api"
+    archiveVersion = "v" + apiVersion + "-" + cosmic_reach_client_version
+
+    from sourceSets.backend_0_3_26.output
+    from processBackend_0_3_26Resources.outputs
 }
 
 
