@@ -42,6 +42,7 @@ configurations {
 var apiVersion = "1.0.0"
 
 var gdxVersion = "1.13.0"
+var saveLibVersion = "244b61a8d9";
 var puzzleVersion = "9276247"
 
 var crClientUrl = "https://github.com/CRModders/CosmicArchive/raw/refs/heads/main/versions/pre-alpha/${cosmic_reach_client_version}/client/Cosmic%20Reach-${cosmic_reach_client_version}.jar"
@@ -63,6 +64,7 @@ dependencies {
     compile 'org.jetbrains:annotations:24.0.0'
 
     api "com.badlogicgames.gdx:gdx:$gdxVersion"
+    api "com.github.FinalForEach:Cosmic-Reach-Save-Library:$saveLibVersion"
 
     require "com.github.PuzzlesHQ:PuzzleLoader:${puzzleVersion}:client"
     embed files("./lib/api.jar")

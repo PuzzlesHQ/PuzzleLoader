@@ -118,6 +118,20 @@ public class ClientCosmicReachProvider implements IGameProvider {
 
     @Override
     public void addBuiltinMods() {
+        /* Cosmic Reach as a mod */
+        ModInfo.Builder cosmicReachInfo = ModInfo.Builder.New();
+        {
+            cosmicReachInfo.setName(getName());
+            cosmicReachInfo.setId("cosmic-reach");
+            cosmicReachInfo.setDesc("The base Game");
+            cosmicReachInfo.addAuthor("FinalForEach");
+            cosmicReachInfo.setVersion(getGameVersion());
+            HashMap<String, JsonValue> meta = new HashMap<>();
+            meta.put("icon", JsonObject.valueOf("icons/logox256.png"));
+            cosmicReachInfo.setMeta(meta);
+            ModLocator.addMod(cosmicReachInfo.build().getOrCreateModContainer());
+        }
+
         /* Puzzle Loader as a Mod */
         ModInfo.Builder puzzleLoaderInfo = ModInfo.Builder.New();
         {
@@ -152,21 +166,6 @@ public class ClientCosmicReachProvider implements IGameProvider {
 
             ModLocator.addMod(puzzleLoaderInfo.build().getOrCreateModContainer());
         }
-
-        /* Cosmic Reach as a mod */
-        ModInfo.Builder cosmicReachInfo = ModInfo.Builder.New();
-        {
-            cosmicReachInfo.setName(getName());
-            puzzleLoaderInfo.setId("cosmic-reach");
-            cosmicReachInfo.setDesc("The base Game");
-            cosmicReachInfo.addAuthor("FinalForEach");
-            cosmicReachInfo.setVersion(getGameVersion());
-            HashMap<String, JsonValue> meta = new HashMap<>();
-            meta.put("icon", JsonObject.valueOf("icons/logox256.png"));
-            cosmicReachInfo.setMeta(meta);
-            ModLocator.addMod(cosmicReachInfo.build().getOrCreateModContainer());
-        }
-
     }
 
     static @Nullable File lookForJarVariations(String offs) {

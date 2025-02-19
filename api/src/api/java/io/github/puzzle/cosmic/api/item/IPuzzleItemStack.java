@@ -3,7 +3,7 @@ package io.github.puzzle.cosmic.api.item;
 import com.badlogic.gdx.math.Vector3;
 import io.github.puzzle.cosmic.api.block.IPuzzleBlockPosition;
 import io.github.puzzle.cosmic.api.block.IPuzzleBlockState;
-import io.github.puzzle.cosmic.api.data.IDataPointManifest;
+import io.github.puzzle.cosmic.api.data.point.IDataPointManifest;
 import io.github.puzzle.cosmic.api.entity.IPuzzleEntity;
 import io.github.puzzle.cosmic.api.entity.player.IPuzzlePlayer;
 import io.github.puzzle.cosmic.api.world.IPuzzleZone;
