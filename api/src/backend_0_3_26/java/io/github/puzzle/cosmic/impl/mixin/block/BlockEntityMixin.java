@@ -1,17 +1,28 @@
 package io.github.puzzle.cosmic.impl.mixin.block;
 
 import finalforeach.cosmicreach.blockentities.BlockEntity;
+import finalforeach.cosmicreach.blocks.BlockPosition;
 import finalforeach.cosmicreach.util.Identifier;
 import io.github.puzzle.cosmic.api.block.IPuzzleBlockEntity;
+import io.github.puzzle.cosmic.api.block.IPuzzleBlockPosition;
 import io.github.puzzle.cosmic.api.block.IPuzzleBlockState;
 import io.github.puzzle.cosmic.api.entity.player.IPuzzlePlayer;
+import io.github.puzzle.cosmic.api.event.IBlockEntityEvent;
 import io.github.puzzle.cosmic.api.util.IPuzzleIdentifier;
+import io.github.puzzle.cosmic.api.world.IPuzzleChunk;
 import io.github.puzzle.cosmic.api.world.IPuzzleZone;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 
 @Mixin(BlockEntity.class)
-public class BlockEntityMixin implements IPuzzleBlockEntity {
+public abstract class BlockEntityMixin implements IPuzzleBlockEntity {
+
+    @Shadow public abstract int getGlobalX();
+
+    @Shadow public abstract int getGlobalY();
+
+    @Shadow public abstract int getGlobalZ();
 
     @Unique
     private final transient BlockEntity puzzleLoader$entity = IPuzzleBlockEntity.as(this);
@@ -29,6 +40,21 @@ public class BlockEntityMixin implements IPuzzleBlockEntity {
     @Override
     public int _getGlobalZ() {
         return puzzleLoader$entity.getGlobalZ();
+    }
+
+    @Override
+    public IPuzzleBlockPosition _getBlockPosition() {
+        return IPuzzleBlockPosition.as(new BlockPosition(_getChunk().as(), _getLocalX(), _getLocalY(), _getLocalZ()));
+    }
+
+    @Override
+    public IPuzzleZone _getZone() {
+        return IPuzzleZone.as(puzzleLoader$entity.getZone());
+    }
+
+    @Override
+    public IPuzzleChunk _getChunk() {
+        return IPuzzleChunk.as(puzzleLoader$entity.getZone().getChunkAtBlock(getGlobalX(), getGlobalY(), getGlobalZ()));
     }
 
     @Override
@@ -84,6 +110,16 @@ public class BlockEntityMixin implements IPuzzleBlockEntity {
     @Override
     public IPuzzleBlockState _getBlockState() {
         return IPuzzleBlockState.as(puzzleLoader$entity.getBlockState());
+    }
+
+    @Override
+    public void _onNeighborUpdate(IBlockEntityEvent iBlockEntityEvent) {
+        // Insert code here
+    }
+
+    @Override
+    public void _updateNeighbors(IBlockEntityEvent iBlockEntityEvent) {
+        _getBlockPosition()._updateNeighboringBlockEntities(iBlockEntityEvent);
     }
 
     @Override
