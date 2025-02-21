@@ -3,9 +3,9 @@ package io.github.puzzle.cosmic.api.constants;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 import io.github.puzzle.cosmic.util.Alternative;
-import io.github.puzzle.cosmic.util.Temporary;
+import io.github.puzzle.cosmic.util.SourceOnly;
 
-@Temporary
+@SourceOnly
 @Alternative("Direction")
 public enum Direction {
     NEG_X(-1, 0, 0),

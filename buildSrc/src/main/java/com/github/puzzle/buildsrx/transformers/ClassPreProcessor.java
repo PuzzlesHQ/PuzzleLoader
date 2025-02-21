@@ -3,7 +3,7 @@ package com.github.puzzle.buildsrx.transformers;
 import com.github.puzzle.buildsrx.GameScanner;
 import io.github.puzzle.cosmic.util.Alternative;
 import io.github.puzzle.cosmic.util.ApiGen;
-import io.github.puzzle.cosmic.util.Temporary;
+import io.github.puzzle.cosmic.util.SourceOnly;
 import org.objectweb.asm.*;
 
 import java.util.Objects;
@@ -12,7 +12,7 @@ public class ClassPreProcessor extends AbstractClassTransformer {
 
     @Override
     public AnnotationVisitor visitAnnotation(String descriptor, boolean visible) {
-        if (Objects.equals(descriptor, Temporary.class.descriptorString()))
+        if (Objects.equals(descriptor, SourceOnly.class.descriptorString()))
             RemoveClassTransformer.classesToRemove.add(className);
 
         return new AnnotationScanner(descriptor, super.visitAnnotation(descriptor, visible));
@@ -39,7 +39,7 @@ public class ClassPreProcessor extends AbstractClassTransformer {
 
         @Override
         public AnnotationVisitor visitAnnotation(String descriptor, boolean visible) {
-            if (Objects.equals(descriptor, Temporary.class.descriptorString()))
+            if (Objects.equals(descriptor, SourceOnly.class.descriptorString()))
                 RemoveClassTransformer.fieldsToRemove.add(className+name);
 
             return super.visitAnnotation(descriptor, visible);
@@ -59,7 +59,7 @@ public class ClassPreProcessor extends AbstractClassTransformer {
 
         @Override
         public AnnotationVisitor visitAnnotation(String descriptor, boolean visible) {
-            if (Objects.equals(descriptor, Temporary.class.descriptorString()))
+            if (Objects.equals(descriptor, SourceOnly.class.descriptorString()))
                 RemoveClassTransformer.methodsToRemove.add(className + name + this.descriptor);
 
             return super.visitAnnotation(descriptor, visible);
