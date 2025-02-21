@@ -2,6 +2,7 @@ package io.github.puzzle.cosmic.impl.mixin.block;
 
 import finalforeach.cosmicreach.blockentities.BlockEntity;
 import finalforeach.cosmicreach.blocks.BlockPosition;
+import finalforeach.cosmicreach.constants.Direction;
 import finalforeach.cosmicreach.savelib.crbin.CRBinDeserializer;
 import finalforeach.cosmicreach.savelib.crbin.CRBinSerializer;
 import finalforeach.cosmicreach.util.Identifier;
@@ -10,12 +11,11 @@ import io.github.puzzle.cosmic.api.block.IPuzzleBlockPosition;
 import io.github.puzzle.cosmic.api.block.IPuzzleBlockState;
 import io.github.puzzle.cosmic.api.data.point.IDataPointManifest;
 import io.github.puzzle.cosmic.api.entity.player.IPuzzlePlayer;
-import io.github.puzzle.cosmic.api.event.IBlockEntityEvent;
+import io.github.puzzle.cosmic.api.event.IBlockUpdateEvent;
 import io.github.puzzle.cosmic.api.util.IPuzzleIdentifier;
 import io.github.puzzle.cosmic.api.world.IPuzzleChunk;
 import io.github.puzzle.cosmic.api.world.IPuzzleZone;
 import io.github.puzzle.cosmic.impl.data.point.DataPointManifest;
-import io.github.puzzle.cosmic.impl.event.BlockEntityEvent;
 import io.github.puzzle.cosmic.util.annotation.Internal;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -123,27 +123,24 @@ public class BlockEntityMixin implements IPuzzleBlockEntity {
     }
 
     @Override
-    public void _onNeighborUpdate(IBlockEntityEvent iBlockEntityEvent) {
-        // Insert code here
+    public void _onNeighborUpdate(IBlockUpdateEvent iBlockUpdateEvent) {
+        // Implemented to prevent crash, can be overridden.
     }
 
     @Override
-    public void _updateNeighbors(IBlockEntityEvent iBlockEntityEvent) {
-        _getBlockPosition()._updateNeighboringBlockEntities(iBlockEntityEvent);
+    public void _updateNeighbors(IBlockUpdateEvent event) {
+        _getBlockPosition()._updateNeighbors(event);
     }
 
     @Override
-    public void _updateNeighbors() {
-        _getBlockPosition()._updateNeighboringBlockEntities(BlockEntityEvent.of(this));
+    public void _updateNeighborInDirection(Direction direction, IBlockUpdateEvent event) {
+        _getBlockPosition()._updateNeighborInDirection(event, direction);
     }
 
     @Override
     public BlockEntity as() {
         return puzzleLoader$entity;
     }
-
-
-    protected transient IDataPointManifest puzzleLoader$pointManifest = new DataPointManifest();
 
     @Inject(method = "read", at = @At("TAIL"), remap = false)
     private void write(CRBinDeserializer crbd, CallbackInfo ci) {

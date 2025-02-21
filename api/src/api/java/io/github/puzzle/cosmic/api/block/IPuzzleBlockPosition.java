@@ -1,7 +1,8 @@
 package io.github.puzzle.cosmic.api.block;
 
 import io.github.puzzle.cosmic.api.constants.Direction;
-import io.github.puzzle.cosmic.api.event.IBlockEntityEvent;
+import io.github.puzzle.cosmic.api.event.IBlockEntityUpdateEvent;
+import io.github.puzzle.cosmic.api.event.IBlockUpdateEvent;
 import io.github.puzzle.cosmic.api.world.IPuzzleChunk;
 import io.github.puzzle.cosmic.api.world.IPuzzleZone;
 import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
@@ -47,7 +48,8 @@ public interface IPuzzleBlockPosition {
 
     int _getSkylight();
 
-    void _updateNeighboringBlockEntities(IBlockEntityEvent event);
+    void _updateNeighbors(IBlockUpdateEvent event);
+    void _updateNeighborInDirection(IBlockUpdateEvent event, Direction direction);
 
     IPuzzleBlockPosition _getOffsetBlockPos(IPuzzleZone zone, int offsetX, int offsetY, int offsetZ);
     IPuzzleBlockPosition _getOffsetBlockPos(int offsetX, int offsetY, int offsetZ);

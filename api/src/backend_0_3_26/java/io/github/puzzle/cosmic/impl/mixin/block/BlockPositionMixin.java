@@ -1,6 +1,5 @@
 package io.github.puzzle.cosmic.impl.mixin.block;
 
-import com.badlogic.gdx.utils.Pool;
 import finalforeach.cosmicreach.blocks.BlockPosition;
 import finalforeach.cosmicreach.blocks.BlockState;
 import finalforeach.cosmicreach.constants.Direction;
@@ -8,12 +7,11 @@ import finalforeach.cosmicreach.world.Chunk;
 import io.github.puzzle.cosmic.api.block.IPuzzleBlockEntity;
 import io.github.puzzle.cosmic.api.block.IPuzzleBlockPosition;
 import io.github.puzzle.cosmic.api.block.IPuzzleBlockState;
-import io.github.puzzle.cosmic.api.event.IBlockEntityEvent;
+import io.github.puzzle.cosmic.api.event.IBlockUpdateEvent;
 import io.github.puzzle.cosmic.api.world.IPuzzleChunk;
 import io.github.puzzle.cosmic.api.world.IPuzzleZone;
 import io.github.puzzle.cosmic.util.annotation.Internal;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 
 @Internal
@@ -129,17 +127,32 @@ public class BlockPositionMixin implements IPuzzleBlockPosition {
     }
 
     @Override
-    public void _updateNeighboringBlockEntities(IBlockEntityEvent event) {
-        IPuzzleBlockEntity source = event.getSourceEntity();
-        IPuzzleBlockPosition position = source._getBlockPosition();
+    public boolean _hasBlockEntity() {
+        return _getBlockEntity() != null;
+    }
 
-        for (Direction d : Direction.values()) {
-            IPuzzleBlockPosition offs = position._getOffsetBlockPos(source._getZone(), d);
+    @Override
+    public void _updateNeighbors(IBlockUpdateEvent event) {
+        event.setSourcePosition(this);
+
+        for (Direction direction : Direction.values()) {
+            IPuzzleBlockPosition offs = _getOffsetBlockPos(_getZone(), direction);
             IPuzzleBlockEntity entity = offs._getBlockEntity();
 
             if (entity != null)
                 entity._onNeighborUpdate(event);
         }
+    }
+
+    @Override
+    public void _updateNeighborInDirection(IBlockUpdateEvent event, Direction direction) {
+        event.setSourcePosition(this);
+
+        IPuzzleBlockPosition offs = _getOffsetBlockPos(_getZone(), direction);
+        IPuzzleBlockEntity entity = offs._getBlockEntity();
+
+        if (entity != null)
+            entity._onNeighborUpdate(event);
     }
 
     @Override
