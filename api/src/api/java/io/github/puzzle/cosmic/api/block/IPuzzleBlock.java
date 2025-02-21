@@ -1,9 +1,9 @@
 package io.github.puzzle.cosmic.api.block;
 
 import io.github.puzzle.cosmic.api.util.IPuzzleIdentifier;
-import io.github.puzzle.cosmic.util.ApiDeclaration;
+import io.github.puzzle.cosmic.util.ApiGen;
 
-@ApiDeclaration(api = IPuzzleBlock.class, impl = "Block")
+@ApiGen("Block")
 public interface IPuzzleBlock {
 
     IPuzzleBlockState _getDefaultState();

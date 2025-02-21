@@ -8,15 +8,10 @@ import io.github.puzzle.cosmic.api.entity.player.IPuzzlePlayer;
 import io.github.puzzle.cosmic.api.util.IPuzzleIdentifier;
 import io.github.puzzle.cosmic.api.world.IPuzzleZone;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 
 @Mixin(BlockEntity.class)
 public class BlockEntityMixin implements IPuzzleBlockEntity {
-
-    @Shadow int x;
-    @Shadow int y;
-    @Shadow int z;
 
     @Unique
     private final transient BlockEntity puzzleLoader$entity = IPuzzleBlockEntity.as(this);
@@ -34,24 +29,6 @@ public class BlockEntityMixin implements IPuzzleBlockEntity {
     @Override
     public int _getGlobalZ() {
         return puzzleLoader$entity.getGlobalZ();
-    }
-
-    @Override
-    public int _getLocalX() {
-        int chunkX = Math.floorDiv(x, 16);
-        return x - chunkX * 16;
-    }
-
-    @Override
-    public int _getLocalY() {
-        int chunkY = Math.floorDiv(y, 16);
-        return y - chunkY * 16;
-    }
-
-    @Override
-    public int _getLocalZ() {
-        int chunkZ = Math.floorDiv(z, 16);
-        return z - chunkZ * 16;
     }
 
     @Override

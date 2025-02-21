@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.regex.Pattern;
 
+@Deprecated(forRemoval = true, since = "2.3.5")
 public class DataTag<T> implements ICRBinSerializable {
 
     public String name;
@@ -64,6 +65,7 @@ public class DataTag<T> implements ICRBinSerializable {
         return "{"  + name + ": " + attribute.getFormattedString() + "}";
     }
 
+    @Deprecated(forRemoval = true, since = "2.3.5")
     public interface DataTagAttribute<T> extends ICRBinSerializable {
 
         void setValue(T value);

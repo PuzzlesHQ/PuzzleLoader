@@ -1,5 +1,6 @@
 package com.github.puzzle.game.items.data;
 
+@Deprecated(forRemoval = true, since = "2.3.5")
 public class DataTagPreset<T> {
 
     String name;

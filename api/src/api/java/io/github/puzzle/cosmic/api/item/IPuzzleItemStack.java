@@ -7,9 +7,9 @@ import io.github.puzzle.cosmic.api.data.point.IDataPointManifest;
 import io.github.puzzle.cosmic.api.entity.IPuzzleEntity;
 import io.github.puzzle.cosmic.api.entity.player.IPuzzlePlayer;
 import io.github.puzzle.cosmic.api.world.IPuzzleZone;
-import io.github.puzzle.cosmic.util.ApiDeclaration;
+import io.github.puzzle.cosmic.util.ApiGen;
 
-@ApiDeclaration(api = IPuzzleItemStack.class, impl = "ItemStack")
+@ApiGen("ItemStack")
 public interface IPuzzleItemStack {
 
     IPuzzleItemStack _copy();

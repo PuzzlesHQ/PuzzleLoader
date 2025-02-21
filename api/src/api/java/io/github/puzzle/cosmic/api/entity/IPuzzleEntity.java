@@ -3,9 +3,9 @@ package io.github.puzzle.cosmic.api.entity;
 import com.badlogic.gdx.math.Vector3;
 import io.github.puzzle.cosmic.api.data.point.IDataPointManifest;
 import io.github.puzzle.cosmic.api.util.IPuzzleIdentifier;
-import io.github.puzzle.cosmic.util.ApiDeclaration;
+import io.github.puzzle.cosmic.util.ApiGen;
 
-@ApiDeclaration(api = IPuzzleEntity.class, impl = "Entity")
+@ApiGen("Entity")
 public interface IPuzzleEntity {
 
     Vector3 _getPosition();

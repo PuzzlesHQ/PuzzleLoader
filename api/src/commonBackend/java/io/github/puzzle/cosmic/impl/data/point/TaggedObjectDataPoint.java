@@ -4,6 +4,7 @@ import finalforeach.cosmicreach.savelib.crbin.CRBinDeserializer;
 import finalforeach.cosmicreach.savelib.crbin.CRBinSerializer;
 import finalforeach.cosmicreach.savelib.crbin.ICRBinSerializable;
 import io.github.puzzle.cosmic.api.data.point.ITaggedDataPoint;
+import io.github.puzzle.cosmic.impl.data.point.AbstractDataPoint;
 
 public class TaggedObjectDataPoint extends AbstractDataPoint<ICRBinSerializable> implements ITaggedDataPoint<ICRBinSerializable> {
 

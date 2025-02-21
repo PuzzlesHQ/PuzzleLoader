@@ -1,8 +1,8 @@
 package io.github.puzzle.cosmic.api.util;
 
-import io.github.puzzle.cosmic.util.ApiDeclaration;
+import io.github.puzzle.cosmic.util.ApiGen;
 
-@ApiDeclaration(api = IPuzzleIdentifier.class, impl = "Identifier")
+@ApiGen("Identifier")
 public interface IPuzzleIdentifier {
 
     String _getNamespace();

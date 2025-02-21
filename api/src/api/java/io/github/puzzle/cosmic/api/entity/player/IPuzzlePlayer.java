@@ -8,9 +8,9 @@ import io.github.puzzle.cosmic.api.util.IPuzzleIdentifier;
 import io.github.puzzle.cosmic.api.world.IPuzzleChunk;
 import io.github.puzzle.cosmic.api.world.IPuzzleWorld;
 import io.github.puzzle.cosmic.api.world.IPuzzleZone;
-import io.github.puzzle.cosmic.util.ApiDeclaration;
+import io.github.puzzle.cosmic.util.ApiGen;
 
-@ApiDeclaration(api = IPuzzlePlayer.class, impl = "Player")
+@ApiGen("Player")
 public interface IPuzzlePlayer {
 
     IPuzzleEntity _getEntity();

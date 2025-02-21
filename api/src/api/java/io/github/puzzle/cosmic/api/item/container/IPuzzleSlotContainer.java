@@ -1,8 +1,8 @@
 package io.github.puzzle.cosmic.api.item.container;
 
-import io.github.puzzle.cosmic.util.ApiDeclaration;
+import io.github.puzzle.cosmic.util.ApiGen;
 
-@ApiDeclaration(api = IPuzzleSlotContainer.class, impl = "SlotContainer")
+@ApiGen("SlotContainer")
 public interface IPuzzleSlotContainer {
 
 }

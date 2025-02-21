@@ -1,8 +1,8 @@
 package io.github.puzzle.cosmic.api.world;
 
-import io.github.puzzle.cosmic.util.ApiDeclaration;
+import io.github.puzzle.cosmic.util.ApiGen;
 
-@ApiDeclaration(api = IPuzzleWorld.class, impl = "World")
+@ApiGen("World")
 public interface IPuzzleWorld {
 
 }

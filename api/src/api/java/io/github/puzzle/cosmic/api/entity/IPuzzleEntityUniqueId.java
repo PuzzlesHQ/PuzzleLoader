@@ -1,11 +1,8 @@
 package io.github.puzzle.cosmic.api.entity;
 
-import io.github.puzzle.cosmic.util.ApiDeclaration;
+import io.github.puzzle.cosmic.util.ApiGen;
 
-@ApiDeclaration(
-        api = IPuzzleEntityUniqueId.class,
-        impl = "EntityUniqueId"
-)
+@ApiGen("EntityUniqueId")
 public interface IPuzzleEntityUniqueId {
 
     long _getTime();

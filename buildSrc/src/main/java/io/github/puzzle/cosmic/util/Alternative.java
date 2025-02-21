@@ -7,9 +7,8 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ApiDeclaration {
+public @interface Alternative {
 
-    Class<?> api();
-    String impl();
+    String value();
 
 }

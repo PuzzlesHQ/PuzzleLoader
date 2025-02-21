@@ -1,9 +1,9 @@
 package io.github.puzzle.cosmic.api.item;
 
 import io.github.puzzle.cosmic.api.item.container.IPuzzleSlotContainer;
-import io.github.puzzle.cosmic.util.ApiDeclaration;
+import io.github.puzzle.cosmic.util.ApiGen;
 
-@ApiDeclaration(api = IPuzzleItemSlot.class, impl = "ItemSlot")
+@ApiGen("ItemSlot")
 public interface IPuzzleItemSlot {
 
     void _set(IPuzzleItemSlot src);

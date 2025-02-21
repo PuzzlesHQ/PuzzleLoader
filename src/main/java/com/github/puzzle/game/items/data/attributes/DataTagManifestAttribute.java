@@ -5,6 +5,7 @@ import com.github.puzzle.game.items.data.DataTagManifest;
 import finalforeach.cosmicreach.savelib.crbin.CRBinDeserializer;
 import finalforeach.cosmicreach.savelib.crbin.CRBinSerializer;
 
+@Deprecated(forRemoval = true, since = "2.3.5")
 public class DataTagManifestAttribute implements DataTag.DataTagAttribute<DataTagManifest> {
 
     DataTagManifest manifest;

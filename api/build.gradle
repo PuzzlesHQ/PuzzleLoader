@@ -2,6 +2,10 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import com.github.puzzle.buildsrx.GameScanner
 import com.github.puzzle.buildsrx.GenericTransformer
 import com.github.puzzle.buildsrx.transformers.ApiClassTransformer
+import com.github.puzzle.buildsrx.transformers.RedirectClassTransformer
+import com.github.puzzle.buildsrx.transformers.ClassPreProcessor
+import com.github.puzzle.buildsrx.transformers.RemoveClassTransformer
+import org.gradle.api.internal.artifacts.configurations.DefaultConfigurationContainer
 
 plugins {
     id 'java'
@@ -11,6 +15,7 @@ plugins {
 sourceSets {
     api
     backend_0_3_26
+    commonBackend
 }
 
 group = 'com.github'
@@ -24,20 +29,32 @@ repositories {
     }
 }
 
+def setupConfiguration(Configuration configuration, boolean isCompile) {
+    configurations.getAsMap().keySet().forEach {
+        if (it.contains("backend_") || it.contains("backendCommon")) {
+            if (!isCompile && it.contains("Implementation")) {
+                configurations.getByName((String) it).extendsFrom(configuration)
+            } else {
+                configurations.getByName((String) it).extendsFrom(configuration)
+            }
+        }
+    }
+}
+
 configurations {
     require
-    backend_0_3_26Implementation.extendsFrom(require)
-
     embed
-    backend_0_3_26Implementation.extendsFrom(embed)
 
     api
     apiImplementation.extendsFrom(api)
 
     compile
     apiCompileOnly.extendsFrom(compile)
-    backend_0_3_26CompileOnly.extendsFrom(compile)
 }
+
+setupConfiguration(configurations.require, false)
+setupConfiguration(configurations.embed, false)
+setupConfiguration(configurations.compile, true)
 
 var apiVersion = "1.0.0"
 
@@ -88,13 +105,27 @@ processBackend_0_3_26Resources {
     }
 }
 
+compileApiJava {
+
+}
+
 tasks.register("buildAPI", Jar) {
     group = "buildSrc"
     from sourceSets.api.output
 
     doLast {
         GameScanner.scan(crFile)
-        GenericTransformer.transform(archiveFile.get().getAsFile(), new ApiClassTransformer())
+        GenericTransformer.process(
+                archiveFile.get().getAsFile(),
+                new ClassPreProcessor(),
+        )
+
+        GenericTransformer.transform(
+                archiveFile.get().getAsFile(),
+                new ApiClassTransformer(),
+                new RedirectClassTransformer(),
+                new RemoveClassTransformer()
+        )
 
         /* Rename & Move archive from /build/libs/api-x.y.z.jar to /lib/api.jar */
         File archive = new File(archiveFile.get().getAsFile().absolutePath);
@@ -109,6 +140,7 @@ tasks.register("buildBackend-0.3.26", ShadowJar) {
     archiveBaseName = "cosmic-api"
     archiveVersion = "v" + apiVersion + "-" + cosmic_reach_client_version
 
+    from sourceSets.common.output
     from sourceSets.backend_0_3_26.output
     from processBackend_0_3_26Resources.outputs
 }

@@ -8,6 +8,7 @@ import finalforeach.cosmicreach.savelib.crbin.CRBinDeserializer;
 import finalforeach.cosmicreach.savelib.crbin.CRBinSerializer;
 import finalforeach.cosmicreach.savelib.crbin.ICRBinSerializable;
 
+@Deprecated(since = "2.3.5", forRemoval = true)
 public class PairAttribute<A extends ICRBinSerializable, B extends ICRBinSerializable> implements DataTag.DataTagAttribute<Pair<A, B>> {
 
     Pair<A, B> pair;
