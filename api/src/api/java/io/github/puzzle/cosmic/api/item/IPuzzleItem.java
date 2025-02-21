@@ -7,6 +7,11 @@ import io.github.puzzle.cosmic.util.APISide;
 import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 import io.github.puzzle.cosmic.util.annotation.compile.SourceOnly;
 
+/**
+ *
+ * @author Mr_Zombii
+ * @since 0.3.26
+ */
 @ApiGen("Item")
 public interface IPuzzleItem {
 

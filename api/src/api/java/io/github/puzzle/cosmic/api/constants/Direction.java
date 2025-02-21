@@ -5,6 +5,11 @@ import com.badlogic.gdx.utils.Array;
 import io.github.puzzle.cosmic.util.annotation.compile.Alternative;
 import io.github.puzzle.cosmic.util.annotation.compile.SourceOnly;
 
+/**
+ *
+ * @author Mr_Zombii
+ * @since 0.3.26
+ */
 @SourceOnly
 @Alternative("Direction")
 public enum Direction {

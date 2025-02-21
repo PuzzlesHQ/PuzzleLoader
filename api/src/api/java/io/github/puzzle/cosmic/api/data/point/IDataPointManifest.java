@@ -1,5 +1,10 @@
 package io.github.puzzle.cosmic.api.data.point;
 
+/**
+ *
+ * @author Mr_Zombii
+ * @since 0.3.26
+ */
 public interface IDataPointManifest {
 
     <T> ITaggedDataPoint<T> put(ITaggedDataPoint<T> point);

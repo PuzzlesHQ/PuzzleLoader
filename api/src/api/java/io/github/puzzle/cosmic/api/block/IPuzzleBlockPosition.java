@@ -7,6 +7,11 @@ import io.github.puzzle.cosmic.api.world.IPuzzleZone;
 import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 import org.jetbrains.annotations.Nullable;
 
+/**
+ *
+ * @author Mr_Zombii
+ * @since 0.3.26
+ */
 @ApiGen("BlockPosition")
 public interface IPuzzleBlockPosition {
 

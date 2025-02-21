@@ -4,7 +4,6 @@ import io.github.puzzle.cosmic.api.entity.player.IPuzzlePlayer;
 import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 
 /**
- * An api overlay for the CosmicReach Account file.
  *
  * @author Mr_Zombii
  * @since 0.3.26
@@ -51,9 +50,20 @@ public interface IPuzzleAccount {
      * Checks the ability to save the account.
      */
     boolean _canSave();
+
+    /**
+     * Checks if the type of account is allowed on a server.
+     */
     boolean _isAllowed();
+
+    /**
+     * Checks if an operator player owns this account.
+     */
     boolean _isOperator();
 
+    /**
+     * Gets the player who owns this account.
+     */
     IPuzzlePlayer _getPlayer();
 
 }
