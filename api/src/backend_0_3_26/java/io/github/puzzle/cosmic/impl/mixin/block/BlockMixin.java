@@ -5,9 +5,11 @@ import finalforeach.cosmicreach.util.Identifier;
 import io.github.puzzle.cosmic.api.block.IPuzzleBlock;
 import io.github.puzzle.cosmic.api.block.IPuzzleBlockState;
 import io.github.puzzle.cosmic.api.util.IPuzzleIdentifier;
+import io.github.puzzle.cosmic.util.Internal;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 
+@Internal
 @Mixin(Block.class)
 public class BlockMixin implements IPuzzleBlock {
 

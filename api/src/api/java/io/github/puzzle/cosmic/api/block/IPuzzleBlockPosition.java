@@ -4,7 +4,7 @@ import io.github.puzzle.cosmic.api.constants.Direction;
 import io.github.puzzle.cosmic.api.event.IBlockEntityEvent;
 import io.github.puzzle.cosmic.api.world.IPuzzleChunk;
 import io.github.puzzle.cosmic.api.world.IPuzzleZone;
-import io.github.puzzle.cosmic.util.ApiGen;
+import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 import org.jetbrains.annotations.Nullable;
 
 @ApiGen("BlockPosition")

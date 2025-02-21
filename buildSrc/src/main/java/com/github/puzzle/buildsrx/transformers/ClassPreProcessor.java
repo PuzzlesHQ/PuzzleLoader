@@ -1,9 +1,9 @@
 package com.github.puzzle.buildsrx.transformers;
 
 import com.github.puzzle.buildsrx.GameScanner;
-import io.github.puzzle.cosmic.util.Alternative;
-import io.github.puzzle.cosmic.util.ApiGen;
-import io.github.puzzle.cosmic.util.SourceOnly;
+import io.github.puzzle.cosmic.util.annotation.compile.Alternative;
+import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
+import io.github.puzzle.cosmic.util.annotation.compile.SourceOnly;
 import org.objectweb.asm.*;
 
 import java.util.Objects;

@@ -5,9 +5,11 @@ import io.github.puzzle.cosmic.api.item.IPuzzleItem;
 import io.github.puzzle.cosmic.api.item.IPuzzleItemSlot;
 import io.github.puzzle.cosmic.api.item.IPuzzleItemStack;
 import io.github.puzzle.cosmic.api.item.container.IPuzzleSlotContainer;
+import io.github.puzzle.cosmic.util.Internal;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 
+@Internal
 @Mixin(ItemSlot.class)
 public class ItemSlotMixin implements IPuzzleItemSlot {
 

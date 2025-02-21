@@ -3,7 +3,7 @@ package io.github.puzzle.cosmic.api.entity;
 import com.badlogic.gdx.math.Vector3;
 import io.github.puzzle.cosmic.api.data.point.IDataPointManifest;
 import io.github.puzzle.cosmic.api.util.IPuzzleIdentifier;
-import io.github.puzzle.cosmic.util.ApiGen;
+import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 
 @ApiGen("Entity")
 public interface IPuzzleEntity {

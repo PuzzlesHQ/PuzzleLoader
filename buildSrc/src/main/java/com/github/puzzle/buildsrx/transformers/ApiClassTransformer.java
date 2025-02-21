@@ -26,7 +26,6 @@ public class ApiClassTransformer extends AbstractClassTransformer {
                 "()L" + implClass + ";",
                 null, new String[0]);
         implementDefault(as, implClass);
-//        implementDefault(as, "L" + impl + ";");
 
         MethodVisitor convert0 = super.visitMethod(
                 Opcodes.ACC_PUBLIC | Constants.ACC_STATIC,
@@ -34,7 +33,6 @@ public class ApiClassTransformer extends AbstractClassTransformer {
                 "(L" + implClass + ";)L" + className + ";",
                 null, new String[0]
         );
-//        implementStatic(convert0, implName, "L" + api + ";");
 
         implementStatic(convert0, simpleName(implClass).toLowerCase(), className);
 
@@ -43,7 +41,6 @@ public class ApiClassTransformer extends AbstractClassTransformer {
                 "as",
                 "(L" + className + ";)L" + implClass + ";",
                 null, new String[0]);
-//        implementStatic(convert1, apiName, "L" + impl + ";");
         implementStatic(convert1, simpleName(className).toLowerCase(), implClass);
 
         super.visitEnd();

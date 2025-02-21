@@ -1,8 +1,9 @@
-package io.github.puzzle.cosmic.util;
+package io.github.puzzle.cosmic.util.annotation;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
+@Internal
 @Retention(RetentionPolicy.CLASS)
-public @interface PackageInfo {
+public @interface Internal {
 }

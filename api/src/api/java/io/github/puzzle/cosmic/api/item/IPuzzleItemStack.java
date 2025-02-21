@@ -7,7 +7,7 @@ import io.github.puzzle.cosmic.api.data.point.IDataPointManifest;
 import io.github.puzzle.cosmic.api.entity.IPuzzleEntity;
 import io.github.puzzle.cosmic.api.entity.player.IPuzzlePlayer;
 import io.github.puzzle.cosmic.api.world.IPuzzleZone;
-import io.github.puzzle.cosmic.util.ApiGen;
+import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 
 @ApiGen("ItemStack")
 public interface IPuzzleItemStack {

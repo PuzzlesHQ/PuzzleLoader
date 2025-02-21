@@ -4,10 +4,12 @@ import finalforeach.cosmicreach.blockentities.BlockEntity;
 import finalforeach.cosmicreach.entities.EntityUniqueId;
 import io.github.puzzle.cosmic.api.block.IPuzzleBlockEntity;
 import io.github.puzzle.cosmic.api.entity.IPuzzleEntityUniqueId;
+import io.github.puzzle.cosmic.util.Internal;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 
+@Internal
 @Mixin(EntityUniqueId.class)
 public abstract class EntityUniqueIdMixin implements IPuzzleEntityUniqueId {
 

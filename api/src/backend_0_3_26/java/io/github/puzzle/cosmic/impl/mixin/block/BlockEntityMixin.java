@@ -12,9 +12,11 @@ import io.github.puzzle.cosmic.api.util.IPuzzleIdentifier;
 import io.github.puzzle.cosmic.api.world.IPuzzleChunk;
 import io.github.puzzle.cosmic.api.world.IPuzzleZone;
 import io.github.puzzle.cosmic.impl.event.BlockEntityEvent;
+import io.github.puzzle.cosmic.util.Internal;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 
+@Internal
 @Mixin(BlockEntity.class)
 public abstract class BlockEntityMixin implements IPuzzleBlockEntity {
 

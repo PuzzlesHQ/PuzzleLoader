@@ -4,8 +4,8 @@ import io.github.puzzle.cosmic.api.block.IPuzzleBlockPosition;
 import io.github.puzzle.cosmic.api.entity.player.IPuzzlePlayer;
 import io.github.puzzle.cosmic.api.util.IPuzzleIdentifier;
 import io.github.puzzle.cosmic.util.APISide;
-import io.github.puzzle.cosmic.util.ApiGen;
-import io.github.puzzle.cosmic.util.SourceOnly;
+import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
+import io.github.puzzle.cosmic.util.annotation.compile.SourceOnly;
 
 @ApiGen("Item")
 public interface IPuzzleItem {

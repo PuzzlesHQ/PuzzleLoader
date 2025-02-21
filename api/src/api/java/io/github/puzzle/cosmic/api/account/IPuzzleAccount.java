@@ -1,7 +1,7 @@
 package io.github.puzzle.cosmic.api.account;
 
 import io.github.puzzle.cosmic.api.entity.player.IPuzzlePlayer;
-import io.github.puzzle.cosmic.util.ApiGen;
+import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 
 /**
  * An api overlay for the CosmicReach Account file.

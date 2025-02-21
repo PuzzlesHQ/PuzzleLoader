@@ -1,7 +1,7 @@
 package io.github.puzzle.cosmic.api.block;
 
 import io.github.puzzle.cosmic.api.util.IPuzzleIdentifier;
-import io.github.puzzle.cosmic.util.ApiGen;
+import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 
 @ApiGen("Block")
 public interface IPuzzleBlock {

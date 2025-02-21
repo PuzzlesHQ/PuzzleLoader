@@ -6,9 +6,11 @@ import io.github.puzzle.cosmic.api.block.IPuzzleBlock;
 import io.github.puzzle.cosmic.api.block.IPuzzleBlockState;
 import io.github.puzzle.cosmic.api.item.IPuzzleItem;
 import io.github.puzzle.cosmic.api.util.IPuzzleIdentifier;
+import io.github.puzzle.cosmic.util.Internal;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 
+@Internal
 @Mixin(BlockState.class)
 public abstract class BlockStateMixin implements IPuzzleBlockState {
 
