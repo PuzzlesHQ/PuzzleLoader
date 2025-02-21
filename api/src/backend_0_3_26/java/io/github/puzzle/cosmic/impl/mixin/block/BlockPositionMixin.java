@@ -11,7 +11,7 @@ import io.github.puzzle.cosmic.api.block.IPuzzleBlockState;
 import io.github.puzzle.cosmic.api.event.IBlockEntityEvent;
 import io.github.puzzle.cosmic.api.world.IPuzzleChunk;
 import io.github.puzzle.cosmic.api.world.IPuzzleZone;
-import io.github.puzzle.cosmic.util.Internal;
+import io.github.puzzle.cosmic.util.annotation.Internal;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;

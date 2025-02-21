@@ -1,5 +1,9 @@
 package io.github.puzzle.cosmic.api.block;
 
+import finalforeach.cosmicreach.savelib.crbin.CRBinDeserializer;
+import finalforeach.cosmicreach.savelib.crbin.CRBinSerializer;
+import finalforeach.cosmicreach.savelib.crbin.ICRBinSerializable;
+import io.github.puzzle.cosmic.api.data.point.IDataPointManifest;
 import io.github.puzzle.cosmic.api.entity.player.IPuzzlePlayer;
 import io.github.puzzle.cosmic.api.event.IBlockEntityEvent;
 import io.github.puzzle.cosmic.api.world.IPuzzleChunk;
@@ -14,7 +18,7 @@ import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
  * @since 0.3.26
  */
 @ApiGen("BlockEntity")
-public interface IPuzzleBlockEntity {
+public interface IPuzzleBlockEntity extends ICRBinSerializable {
 
     int _getGlobalX();
     int _getGlobalY();
@@ -62,5 +66,16 @@ public interface IPuzzleBlockEntity {
     void _updateNeighbors(IBlockEntityEvent event);
 
     void _onNeighborUpdate(IBlockEntityEvent event);
+
+    IDataPointManifest _getPointManifest();
+    void _setPointManifest(IDataPointManifest manifest);
+
+    // ICRBinSerializable.java methods
+
+    @Override
+    void read(CRBinDeserializer deserial);
+
+    @Override
+    void write(CRBinSerializer serial);
 
 }

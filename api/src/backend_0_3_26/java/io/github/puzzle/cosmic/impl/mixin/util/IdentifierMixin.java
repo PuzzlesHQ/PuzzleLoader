@@ -2,7 +2,7 @@ package io.github.puzzle.cosmic.impl.mixin.util;
 
 import finalforeach.cosmicreach.util.Identifier;
 import io.github.puzzle.cosmic.api.util.IPuzzleIdentifier;
-import io.github.puzzle.cosmic.util.Internal;
+import io.github.puzzle.cosmic.util.annotation.Internal;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 

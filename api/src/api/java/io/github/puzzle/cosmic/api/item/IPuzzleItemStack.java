@@ -1,6 +1,9 @@
 package io.github.puzzle.cosmic.api.item;
 
 import com.badlogic.gdx.math.Vector3;
+import finalforeach.cosmicreach.savelib.crbin.CRBinDeserializer;
+import finalforeach.cosmicreach.savelib.crbin.CRBinSerializer;
+import finalforeach.cosmicreach.savelib.crbin.ICRBinSerializable;
 import io.github.puzzle.cosmic.api.block.IPuzzleBlockPosition;
 import io.github.puzzle.cosmic.api.block.IPuzzleBlockState;
 import io.github.puzzle.cosmic.api.data.point.IDataPointManifest;
@@ -15,7 +18,7 @@ import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
  * @since 0.3.26
  */
 @ApiGen("ItemStack")
-public interface IPuzzleItemStack {
+public interface IPuzzleItemStack extends ICRBinSerializable {
 
     IPuzzleItemStack _copy();
     IPuzzleItem _getItem();
@@ -43,4 +46,13 @@ public interface IPuzzleItemStack {
     String _getName();
 
     IDataPointManifest _getPointManifest();
+    void _setPointManifest(IDataPointManifest manifest);
+
+    // ICRBinSerializable.java methods
+
+    @Override
+    void read(CRBinDeserializer crBinDeserializer);
+
+    @Override
+    void write(CRBinSerializer crBinSerializer);
 }

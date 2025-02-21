@@ -2,7 +2,7 @@ package io.github.puzzle.cosmic.impl.mixin.world;
 
 import finalforeach.cosmicreach.world.Chunk;
 import io.github.puzzle.cosmic.api.world.IPuzzleChunk;
-import io.github.puzzle.cosmic.util.Internal;
+import io.github.puzzle.cosmic.util.annotation.Internal;
 import org.spongepowered.asm.mixin.Mixin;
 
 @Internal

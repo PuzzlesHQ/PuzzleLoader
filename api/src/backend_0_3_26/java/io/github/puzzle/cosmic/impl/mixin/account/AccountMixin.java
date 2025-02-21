@@ -5,7 +5,7 @@ import finalforeach.cosmicreach.accounts.Account;
 import finalforeach.cosmicreach.networking.server.ServerSingletons;
 import io.github.puzzle.cosmic.api.account.IPuzzleAccount;
 import io.github.puzzle.cosmic.api.entity.player.IPuzzlePlayer;
-import io.github.puzzle.cosmic.util.Internal;
+import io.github.puzzle.cosmic.util.annotation.Internal;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 

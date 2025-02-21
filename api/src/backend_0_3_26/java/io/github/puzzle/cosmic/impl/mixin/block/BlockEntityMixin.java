@@ -2,26 +2,36 @@ package io.github.puzzle.cosmic.impl.mixin.block;
 
 import finalforeach.cosmicreach.blockentities.BlockEntity;
 import finalforeach.cosmicreach.blocks.BlockPosition;
+import finalforeach.cosmicreach.savelib.crbin.CRBinDeserializer;
+import finalforeach.cosmicreach.savelib.crbin.CRBinSerializer;
 import finalforeach.cosmicreach.util.Identifier;
 import io.github.puzzle.cosmic.api.block.IPuzzleBlockEntity;
 import io.github.puzzle.cosmic.api.block.IPuzzleBlockPosition;
 import io.github.puzzle.cosmic.api.block.IPuzzleBlockState;
+import io.github.puzzle.cosmic.api.data.point.IDataPointManifest;
 import io.github.puzzle.cosmic.api.entity.player.IPuzzlePlayer;
 import io.github.puzzle.cosmic.api.event.IBlockEntityEvent;
 import io.github.puzzle.cosmic.api.util.IPuzzleIdentifier;
 import io.github.puzzle.cosmic.api.world.IPuzzleChunk;
 import io.github.puzzle.cosmic.api.world.IPuzzleZone;
+import io.github.puzzle.cosmic.impl.data.point.DataPointManifest;
 import io.github.puzzle.cosmic.impl.event.BlockEntityEvent;
-import io.github.puzzle.cosmic.util.Internal;
+import io.github.puzzle.cosmic.util.annotation.Internal;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Internal
 @Mixin(BlockEntity.class)
-public abstract class BlockEntityMixin implements IPuzzleBlockEntity {
+public class BlockEntityMixin implements IPuzzleBlockEntity {
 
     @Unique
     private final transient BlockEntity puzzleLoader$entity = IPuzzleBlockEntity.as(this);
+
+    @Unique
+    private transient IDataPointManifest puzzleLoader$manifest = new DataPointManifest();
 
     @Override
     public int _getGlobalX() {
@@ -130,5 +140,29 @@ public abstract class BlockEntityMixin implements IPuzzleBlockEntity {
     @Override
     public BlockEntity as() {
         return puzzleLoader$entity;
+    }
+
+
+    protected transient IDataPointManifest puzzleLoader$pointManifest = new DataPointManifest();
+
+    @Inject(method = "read", at = @At("TAIL"), remap = false)
+    private void write(CRBinDeserializer crbd, CallbackInfo ci) {
+        IDataPointManifest manifest = crbd.readObj("point_manifest", DataPointManifest.class);
+        if (manifest != null) _setPointManifest(manifest);
+    }
+
+    @Inject(method = "write", at = @At("TAIL"), remap = false)
+    private void write(CRBinSerializer crbs, CallbackInfo ci) {
+        crbs.writeObj("point_manifest", puzzleLoader$manifest);
+    }
+
+    @Override
+    public IDataPointManifest _getPointManifest() {
+        return puzzleLoader$manifest;
+    }
+
+    @Override
+    public void _setPointManifest(IDataPointManifest iDataPointManifest) {
+        puzzleLoader$manifest = iDataPointManifest;
     }
 }
