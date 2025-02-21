@@ -52,7 +52,9 @@ public interface IPuzzleBlockEntity {
 
     IPuzzleBlockState _getBlockState();
 
-    void _onNeighborUpdate(IBlockEntityEvent event);
+    void _updateNeighbors();
     void _updateNeighbors(IBlockEntityEvent event);
+
+    void _onNeighborUpdate(IBlockEntityEvent event);
 
 }

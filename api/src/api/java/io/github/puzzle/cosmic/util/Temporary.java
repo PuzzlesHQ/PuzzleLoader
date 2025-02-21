@@ -7,7 +7,7 @@ import java.lang.annotation.Target;
 
 import static java.lang.Void.TYPE;
 
-@Target(ElementType.TYPE)
+@Target({ElementType.TYPE, ElementType.FIELD, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Temporary {
 }

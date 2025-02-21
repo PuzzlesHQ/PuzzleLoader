@@ -2,6 +2,7 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import com.github.puzzle.buildsrx.GameScanner
 import com.github.puzzle.buildsrx.GenericTransformer
 import com.github.puzzle.buildsrx.transformers.ApiClassTransformer
+import com.github.puzzle.buildsrx.transformers.DefaultClassTransformer
 import com.github.puzzle.buildsrx.transformers.RedirectClassTransformer
 import com.github.puzzle.buildsrx.transformers.ClassPreProcessor
 import com.github.puzzle.buildsrx.transformers.RemoveClassTransformer
@@ -31,10 +32,22 @@ repositories {
 
 def setupConfiguration(Configuration configuration, boolean isCompile) {
     configurations.getAsMap().keySet().forEach {
-        if (it.contains("backend_") || it.contains("backendCommon")) {
-            if (!isCompile && it.contains("Implementation")) {
+        if (it.contains("backend_") || it.contains("commonBackend")) {
+            if (!isCompile && !it.contains("Compile")) {
                 configurations.getByName((String) it).extendsFrom(configuration)
-            } else {
+            } else if (isCompile && !it.contains("Implementation")) {
+                configurations.getByName((String) it).extendsFrom(configuration)
+            }
+        }
+    }
+}
+
+def setupConfiguration2(Configuration configuration, boolean isCompile) {
+    configurations.getAsMap().keySet().forEach {
+        if (it.contains("backend_")) {
+            if (!isCompile && !it.contains("Compile")) {
+                configurations.getByName((String) it).extendsFrom(configuration)
+            } else if (isCompile && !it.contains("Implementation")) {
                 configurations.getByName((String) it).extendsFrom(configuration)
             }
         }
@@ -42,6 +55,7 @@ def setupConfiguration(Configuration configuration, boolean isCompile) {
 }
 
 configurations {
+    loneRequire
     require
     embed
 
@@ -55,6 +69,7 @@ configurations {
 setupConfiguration(configurations.require, false)
 setupConfiguration(configurations.embed, false)
 setupConfiguration(configurations.compile, true)
+setupConfiguration2(configurations.loneRequire, false)
 
 var apiVersion = "1.0.0"
 
@@ -86,6 +101,8 @@ dependencies {
     require "com.github.PuzzlesHQ:PuzzleLoader:${puzzleVersion}:client"
     embed files("./lib/api.jar")
     require files(crFile)
+
+    loneRequire sourceSets.commonBackend.output
 }
 
 processBackend_0_3_26Resources {
@@ -122,9 +139,10 @@ tasks.register("buildAPI", Jar) {
 
         GenericTransformer.transform(
                 archiveFile.get().getAsFile(),
+                new DefaultClassTransformer(),
                 new ApiClassTransformer(),
                 new RedirectClassTransformer(),
-                new RemoveClassTransformer()
+                new RemoveClassTransformer(),
         )
 
         /* Rename & Move archive from /build/libs/api-x.y.z.jar to /lib/api.jar */
@@ -140,7 +158,7 @@ tasks.register("buildBackend-0.3.26", ShadowJar) {
     archiveBaseName = "cosmic-api"
     archiveVersion = "v" + apiVersion + "-" + cosmic_reach_client_version
 
-    from sourceSets.common.output
+    from sourceSets.commonBackend.output
     from sourceSets.backend_0_3_26.output
     from processBackend_0_3_26Resources.outputs
 }

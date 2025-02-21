@@ -26,8 +26,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(ItemStack.class)
 public abstract class ItemStackMixin implements IPuzzleItemStack {
 
-    @Shadow public abstract ItemEntity spawnItemEntityAt(Zone zone, Vector3 position);
-
     @Unique
     private transient DataPointManifest puzzleLoader$manifest = new DataPointManifest();
 
@@ -56,7 +54,7 @@ public abstract class ItemStackMixin implements IPuzzleItemStack {
 
     @Override
     public IPuzzleEntity _spawnItemEntityAt(IPuzzleZone iPuzzleZone, Vector3 vector3) {
-        return IPuzzleEntity.as(spawnItemEntityAt(iPuzzleZone.as(), vector3));
+        return IPuzzleEntity.as(puzzleLoader$stack.spawnItemEntityAt(iPuzzleZone.as(), vector3));
     }
 
     @Override
@@ -119,12 +117,12 @@ public abstract class ItemStackMixin implements IPuzzleItemStack {
         return puzzleLoader$stack.getName();
     }
 
-    @Inject(method = "read", at = @At("TAIL"))
+    @Inject(method = "read", at = @At("TAIL"), remap = false)
     private void write(CRBinDeserializer crbd, CallbackInfo ci) {
         puzzleLoader$manifest = crbd.readObj("data_point_manifest", DataPointManifest.class);
     }
 
-    @Inject(method = "write", at = @At("TAIL"))
+    @Inject(method = "write", at = @At("TAIL"), remap = false)
     private void write(CRBinSerializer crbs, CallbackInfo ci) {
         crbs.writeObj("data_point_manifest", puzzleLoader$manifest);
     }

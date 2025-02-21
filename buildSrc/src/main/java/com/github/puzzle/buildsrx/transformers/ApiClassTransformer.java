@@ -20,12 +20,6 @@ public class ApiClassTransformer extends AbstractClassTransformer {
             return;
         }
 
-        String[] parts = implClass.split("/");
-        String implName = parts[parts.length - 1].toLowerCase();
-
-        parts = implClass.split("/");
-        String apiName = parts[parts.length - 1].toLowerCase();
-
         MethodVisitor as = super.visitMethod(
                 Opcodes.ACC_PUBLIC,
                 "as",
@@ -42,7 +36,7 @@ public class ApiClassTransformer extends AbstractClassTransformer {
         );
 //        implementStatic(convert0, implName, "L" + api + ";");
 
-        implementStatic(convert0, implName, className);
+        implementStatic(convert0, simpleName(implClass).toLowerCase(), className);
 
         MethodVisitor convert1 = super.visitMethod(
                 Opcodes.ACC_PUBLIC | Constants.ACC_STATIC,
@@ -50,7 +44,7 @@ public class ApiClassTransformer extends AbstractClassTransformer {
                 "(L" + className + ";)L" + implClass + ";",
                 null, new String[0]);
 //        implementStatic(convert1, apiName, "L" + impl + ";");
-        implementStatic(convert1, apiName, implClass);
+        implementStatic(convert1, simpleName(className).toLowerCase(), implClass);
 
         super.visitEnd();
     }

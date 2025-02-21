@@ -7,8 +7,4 @@ public interface IBlockEntityEvent {
     IPuzzleBlockEntity getSourceEntity();
     Object getObject();
 
-    static void sendEventToNeighbors(IBlockEntityEvent event) {
-//        event.getSourceEntity()._getBlockPosition().offs
-    }
-
 }

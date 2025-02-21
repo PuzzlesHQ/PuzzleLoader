@@ -23,4 +23,9 @@ public class AbstractClassTransformer extends ClassVisitor {
     public boolean keepClass() {
         return true;
     }
+
+    protected String simpleName(String className) {
+        String[] parts = className.split("/");
+        return parts[parts.length - 1];
+    }
 }

@@ -6,6 +6,4 @@ public interface IPacketSerializer {
 
     ByteArray getBackingArray();
 
-
-
 }

@@ -1,29 +1,29 @@
 package io.github.puzzle.cosmic.impl.mixin.entity;
 
+import finalforeach.cosmicreach.blockentities.BlockEntity;
 import finalforeach.cosmicreach.entities.EntityUniqueId;
+import io.github.puzzle.cosmic.api.block.IPuzzleBlockEntity;
 import io.github.puzzle.cosmic.api.entity.IPuzzleEntityUniqueId;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 
 @Mixin(EntityUniqueId.class)
 public abstract class EntityUniqueIdMixin implements IPuzzleEntityUniqueId {
 
-    @Shadow private long time;
-
-    @Shadow private int rand;
-
-    @Shadow private int number;
+    @Unique
+    private final transient EntityUniqueId puzzleLoader$uid = IPuzzleEntityUniqueId.as(this);
 
     public long _getTime() {
-        return time;
+        return puzzleLoader$uid.getTime();
     }
 
     public int _getRand() {
-        return rand;
+        return puzzleLoader$uid.getRand();
     }
 
     public int _getNumber() {
-        return number;
+        return puzzleLoader$uid.getNumber();
     }
 
 }

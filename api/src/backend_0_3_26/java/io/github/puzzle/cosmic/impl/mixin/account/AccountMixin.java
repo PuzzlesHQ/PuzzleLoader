@@ -2,27 +2,28 @@ package io.github.puzzle.cosmic.impl.mixin.account;
 
 import finalforeach.cosmicreach.GameSingletons;
 import finalforeach.cosmicreach.accounts.Account;
+import finalforeach.cosmicreach.entities.Entity;
 import finalforeach.cosmicreach.networking.server.ServerSingletons;
 import io.github.puzzle.cosmic.api.account.IPuzzleAccount;
+import io.github.puzzle.cosmic.api.entity.IPuzzleEntity;
 import io.github.puzzle.cosmic.api.entity.player.IPuzzlePlayer;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 
 @Mixin(Account.class)
 public abstract class AccountMixin implements IPuzzleAccount {
 
-    @Shadow private String username;
-
-    @Shadow private String uniqueId;
+    @Unique
+    private final transient Account puzzleLoader$account = IPuzzleAccount.as(this);
 
     @Override
     public String _getUsername() {
-        return username;
+        return puzzleLoader$account.getUsername();
     }
 
     @Override
     public String _getUniqueId() {
-        return uniqueId;
+        return puzzleLoader$account.getUniqueId();
     }
 
     public IPuzzlePlayer _getPlayer() {

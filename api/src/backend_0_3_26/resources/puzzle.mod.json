@@ -1,8 +1,8 @@
 {
   "formatVersion": 2,
-  "name": "Cosmic API",
+  "name": "Cosmic API - ${crVersion}",
   "id": "cosmic-api",
-  "version": "${version} - ${crVersion}",
+  "version": "${version}",
   "description": "This is the cosmic-api module of the Puzzle Loader.",
   "authors": [ "Mr_Zombii" ],
   "meta": {

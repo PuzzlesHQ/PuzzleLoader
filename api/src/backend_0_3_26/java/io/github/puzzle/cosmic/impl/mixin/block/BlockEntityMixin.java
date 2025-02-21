@@ -11,18 +11,12 @@ import io.github.puzzle.cosmic.api.event.IBlockEntityEvent;
 import io.github.puzzle.cosmic.api.util.IPuzzleIdentifier;
 import io.github.puzzle.cosmic.api.world.IPuzzleChunk;
 import io.github.puzzle.cosmic.api.world.IPuzzleZone;
+import io.github.puzzle.cosmic.impl.event.BlockEntityEvent;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 
 @Mixin(BlockEntity.class)
 public abstract class BlockEntityMixin implements IPuzzleBlockEntity {
-
-    @Shadow public abstract int getGlobalX();
-
-    @Shadow public abstract int getGlobalY();
-
-    @Shadow public abstract int getGlobalZ();
 
     @Unique
     private final transient BlockEntity puzzleLoader$entity = IPuzzleBlockEntity.as(this);
@@ -54,7 +48,11 @@ public abstract class BlockEntityMixin implements IPuzzleBlockEntity {
 
     @Override
     public IPuzzleChunk _getChunk() {
-        return IPuzzleChunk.as(puzzleLoader$entity.getZone().getChunkAtBlock(getGlobalX(), getGlobalY(), getGlobalZ()));
+        return IPuzzleChunk.as(puzzleLoader$entity.getZone().getChunkAtBlock(
+                _getGlobalX(),
+                _getGlobalY(),
+                _getGlobalZ()
+        ));
     }
 
     @Override
@@ -120,6 +118,11 @@ public abstract class BlockEntityMixin implements IPuzzleBlockEntity {
     @Override
     public void _updateNeighbors(IBlockEntityEvent iBlockEntityEvent) {
         _getBlockPosition()._updateNeighboringBlockEntities(iBlockEntityEvent);
+    }
+
+    @Override
+    public void _updateNeighbors() {
+        _getBlockPosition()._updateNeighboringBlockEntities(BlockEntityEvent.of(this));
     }
 
     @Override

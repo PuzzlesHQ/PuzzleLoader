@@ -47,7 +47,6 @@ public class GenericTransformer {
             while (entry != null) {
                 String entryName = entry.getName();
 
-                System.out.println(entryName);
                 if (entryName.contains("module-info") || entryName.contains("package-info")) {
                     output.putNextEntry(entry);
                     output.write(input.readAllBytes());
