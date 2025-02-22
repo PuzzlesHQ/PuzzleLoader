@@ -1,15 +1,22 @@
 package io.github.puzzle.cosmic.impl.mixin.world;
 
+import finalforeach.cosmicreach.blocks.BlockPosition;
+import finalforeach.cosmicreach.blocks.BlockState;
 import finalforeach.cosmicreach.rendering.IChunkMeshGroup;
+import finalforeach.cosmicreach.savelib.blocks.IBlockState;
 import finalforeach.cosmicreach.world.Chunk;
-import io.github.puzzle.cosmic.api.block.IPuzzleBlock;
 import io.github.puzzle.cosmic.api.block.IPuzzleBlockEntity;
+import io.github.puzzle.cosmic.api.block.IPuzzleBlockPosition;
 import io.github.puzzle.cosmic.api.block.IPuzzleBlockState;
 import io.github.puzzle.cosmic.api.world.IPuzzleChunk;
 import io.github.puzzle.cosmic.api.world.IPuzzleZone;
+import io.github.puzzle.cosmic.impl.event.BlockUpdateEvent;
 import io.github.puzzle.cosmic.util.annotation.Internal;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.function.Consumer;
 
@@ -19,6 +26,19 @@ public class ChunkMixin implements IPuzzleChunk {
 
     @Unique
     private final transient Chunk puzzleLoader$chunk = IPuzzleChunk.as(this);
+
+    @Unique
+    private final transient IPuzzleBlockPosition puzzleLoader$tmp = IPuzzleBlockPosition.as(new BlockPosition(puzzleLoader$chunk, 0, 0, 0));
+
+    @Inject(method = "setBlockState(Lfinalforeach/cosmicreach/blocks/BlockState;III)V", at = @At("TAIL"))
+    private void updateBlockEntities(BlockState blockState, int x, int y, int z, CallbackInfo ci) {
+        puzzleLoader$tmp._set(this, x, y, z)._updateNeighbors(new BlockUpdateEvent());
+    }
+
+    @Inject(method = "setBlockState(Lfinalforeach/cosmicreach/savelib/blocks/IBlockState;III)V", at = @At("TAIL"))
+    private void updateBlockEntities(IBlockState blockState, int x, int y, int z, CallbackInfo ci) {
+        puzzleLoader$tmp._set(this, x, y, z)._updateNeighbors(new BlockUpdateEvent());
+    }
 
     @Unique
     private final transient IMeshingController puzzleLoader$meshingController = new IMeshingController() {
@@ -161,7 +181,7 @@ public class ChunkMixin implements IPuzzleChunk {
 
     @Override
     public IBlockEntityController _getBlockEntityController() {
-        return IPuzzleChunk.super._getBlockEntityController();
+        return puzzleLoader$blockEntityController;
     }
 
     @Override

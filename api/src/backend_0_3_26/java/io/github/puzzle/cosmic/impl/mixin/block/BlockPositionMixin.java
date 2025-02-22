@@ -10,9 +10,13 @@ import io.github.puzzle.cosmic.api.block.IPuzzleBlockState;
 import io.github.puzzle.cosmic.api.event.IBlockUpdateEvent;
 import io.github.puzzle.cosmic.api.world.IPuzzleChunk;
 import io.github.puzzle.cosmic.api.world.IPuzzleZone;
+import io.github.puzzle.cosmic.impl.event.BlockUpdateEvent;
 import io.github.puzzle.cosmic.util.annotation.Internal;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Internal
 @Mixin(BlockPosition.class)
@@ -20,6 +24,11 @@ public class BlockPositionMixin implements IPuzzleBlockPosition {
 
     @Unique
     private final transient BlockPosition puzzleLoader$blockPosition = IPuzzleBlockPosition.as(this);
+
+    @Inject(method = "setBlockState*", at = @At("TAIL"))
+    private void updateBlockEntities(BlockState targetBlockState, CallbackInfo ci) {
+        _updateNeighbors(new BlockUpdateEvent());
+    }
 
     @Override
     public int _getLocalX() {

@@ -16,6 +16,10 @@ public interface IPuzzleBlockState extends IBlockState {
     IPuzzleBlock _getBlock();
     IPuzzleItem _getAsItem();
 
+    void _setTags(String[] tags);
+    void _addTags(String... tags);
+    void _removeTags(String... tags);
+
     IPuzzleIdentifier _getBlockID();
     String _getSaveKey();
 
