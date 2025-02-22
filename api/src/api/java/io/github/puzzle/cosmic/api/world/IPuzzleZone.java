@@ -2,10 +2,10 @@ package io.github.puzzle.cosmic.api.world;
 
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.Disposable;
 import finalforeach.cosmicreach.savelib.blocks.IBlockDataFactory;
 import io.github.puzzle.cosmic.api.block.IPuzzleBlockEntity;
 import io.github.puzzle.cosmic.api.block.IPuzzleBlockState;
+import io.github.puzzle.cosmic.api.block.IPuzzleBlockPosition;
 import io.github.puzzle.cosmic.api.constants.BlockStateTmpClass;
 import io.github.puzzle.cosmic.api.constants.EntityTmpClass;
 import io.github.puzzle.cosmic.api.constants.PlayerTmpClass;
@@ -79,6 +79,7 @@ public interface IPuzzleZone {
     IPuzzleBlockEntity _getBlockEntity(IPuzzleChunk candidateChunk, int x, int y, int z);
     IPuzzleBlockState _getBlockState(float x, float y, float z);
     IPuzzleBlockState _getBlockState(int x, int y, int z);
+    IPuzzleBlockState _getBlockState(IPuzzleBlockPosition bp);
 
     IPuzzleBlockState _getBlockState(IPuzzleChunk candidateChunk, int x, int y, int z);
     IPuzzleBlockState _getBlockState(IPuzzleChunk candidateChunk, IPuzzleChunk candidateChunkB, int x, int y, int z);

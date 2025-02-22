@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Vector3;
 import io.github.puzzle.cosmic.api.account.IPuzzleAccount;
 import io.github.puzzle.cosmic.api.entity.IPuzzleEntity;
 import io.github.puzzle.cosmic.api.item.IPuzzleItemStack;
+import io.github.puzzle.cosmic.api.block.IPuzzleBlockPosition;
 import io.github.puzzle.cosmic.api.util.IPuzzleIdentifier;
 import io.github.puzzle.cosmic.api.world.IPuzzleChunk;
 import io.github.puzzle.cosmic.api.world.IPuzzleWorld;
@@ -36,19 +37,20 @@ public interface IPuzzlePlayer {
 
     void _spawnDroppedItem(IPuzzleWorld world, IPuzzleItemStack itemStack);
 
+    IPuzzleBlockPosition _getBlockPosition();
     Vector3 _getPosition();
 
     boolean _isLoading();
 
-    default void setZone(IPuzzleZone zone) {
-        setZone(zone._getId());
+    default void _setZone(IPuzzleZone zone) {
+        _setZone(zone._getId());
     }
 
-    default void setZone(IPuzzleIdentifier zoneId) {
-        setZone(zoneId.asString());
+    default void _setZone(IPuzzleIdentifier zoneId) {
+        _setZone(zoneId.asString());
     }
 
-    void setZone(String zoneId);
+    void _setZone(String zoneId);
 
     boolean _isDead();
 

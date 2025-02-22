@@ -1,8 +1,11 @@
 package io.github.puzzle.cosmic.impl.mixin.entity.player;
 
+import com.badlogic.gdx.math.Vector3;
 import finalforeach.cosmicreach.GameSingletons;
+import finalforeach.cosmicreach.blocks.BlockPosition;
 import finalforeach.cosmicreach.entities.player.Player;
 import io.github.puzzle.cosmic.api.account.IPuzzleAccount;
+import io.github.puzzle.cosmic.api.block.IPuzzleBlockPosition;
 import io.github.puzzle.cosmic.api.entity.IPuzzleEntity;
 import io.github.puzzle.cosmic.api.entity.player.IPuzzlePlayer;
 import io.github.puzzle.cosmic.api.item.IPuzzleItemStack;
@@ -15,7 +18,7 @@ import org.spongepowered.asm.mixin.Unique;
 
 @Internal
 @Mixin(Player.class)
-public abstract class PlayerMixin implements IPuzzlePlayer {
+public class PlayerMixin implements IPuzzlePlayer {
 
     @Unique
     private final transient Player puzzleLoader$player = IPuzzlePlayer.as(this);
@@ -85,4 +88,33 @@ public abstract class PlayerMixin implements IPuzzlePlayer {
         return IPuzzleAccount.as(GameSingletons.getAccountFromPlayer(as()));
     }
 
+    @Override
+    public IPuzzleBlockPosition _getBlockPosition() {
+        return IPuzzleBlockPosition.as(BlockPosition.ofGlobal(
+                puzzleLoader$player.getZone(),
+                (int) puzzleLoader$player.getPosition().x,
+                (int) puzzleLoader$player.getPosition().y,
+                (int) puzzleLoader$player.getPosition().z
+        ));
+    }
+
+    @Override
+    public boolean _isDead() {
+        return puzzleLoader$player.isDead();
+    }
+
+    @Override
+    public String _getUsername() {
+        return puzzleLoader$player.getUsername();
+    }
+
+    @Override
+    public Vector3 _getPosition() {
+        return puzzleLoader$player.getPosition();
+    }
+
+    @Override
+    public void _setZone(String s) {
+        puzzleLoader$player.setZone(s);
+    }
 }

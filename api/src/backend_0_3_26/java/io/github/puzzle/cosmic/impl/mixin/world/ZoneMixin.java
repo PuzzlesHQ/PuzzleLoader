@@ -9,6 +9,7 @@ import finalforeach.cosmicreach.savelib.blocks.IBlockDataFactory;
 import finalforeach.cosmicreach.util.Identifier;
 import finalforeach.cosmicreach.world.Zone;
 import io.github.puzzle.cosmic.api.block.IPuzzleBlockEntity;
+import io.github.puzzle.cosmic.api.block.IPuzzleBlockPosition;
 import io.github.puzzle.cosmic.api.block.IPuzzleBlockState;
 import io.github.puzzle.cosmic.api.entity.IPuzzleEntity;
 import io.github.puzzle.cosmic.api.entity.IPuzzleEntityUniqueId;
@@ -161,6 +162,11 @@ public class ZoneMixin implements IPuzzleZone {
             return puzzleLoader$zone.getPlayers();
         }
     };
+
+    @Override
+    public IPuzzleBlockState _getBlockState(IPuzzleBlockPosition iPuzzleBlockPosition) {
+        return iPuzzleBlockPosition._getBlockState();
+    }
 
     public IPuzzleBlockState _getBlockState(Vector3 position) {
         return IPuzzleBlockState.as(puzzleLoader$zone.getBlockState(position));
