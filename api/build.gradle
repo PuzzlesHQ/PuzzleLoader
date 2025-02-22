@@ -71,7 +71,7 @@ setupConfiguration(configurations.embed, false)
 setupConfiguration(configurations.compile, true)
 setupConfiguration2(configurations.loneRequire, false)
 
-var apiVersion = "0.0.1-alpha"
+var apiVersion = "0.0.2-alpha"
 
 var gdxVersion = "1.13.0"
 var saveLibVersion = "244b61a8d9";

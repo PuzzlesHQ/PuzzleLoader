@@ -25,7 +25,7 @@ public class BlockPositionMixin implements IPuzzleBlockPosition {
     @Unique
     private final transient BlockPosition puzzleLoader$blockPosition = IPuzzleBlockPosition.as(this);
 
-    @Inject(method = "setBlockState*", at = @At("TAIL"))
+    @Inject(method = "setBlockState", at = @At("TAIL"), remap = false)
     private void updateBlockEntities(BlockState targetBlockState, CallbackInfo ci) {
         _updateNeighbors(new BlockUpdateEvent());
     }

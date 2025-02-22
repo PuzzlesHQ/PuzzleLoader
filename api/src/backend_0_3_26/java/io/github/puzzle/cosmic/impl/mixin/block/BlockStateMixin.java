@@ -20,7 +20,6 @@ import java.util.Set;
 @Mixin(BlockState.class)
 public abstract class BlockStateMixin implements IPuzzleBlockState {
 
-    @Shadow public String[] tags;
     @Unique
     private final transient BlockState puzzleLoader$state = IPuzzleBlockState.as(this);
 

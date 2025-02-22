@@ -30,12 +30,12 @@ public class ChunkMixin implements IPuzzleChunk {
     @Unique
     private final transient IPuzzleBlockPosition puzzleLoader$tmp = IPuzzleBlockPosition.as(new BlockPosition(puzzleLoader$chunk, 0, 0, 0));
 
-    @Inject(method = "setBlockState(Lfinalforeach/cosmicreach/blocks/BlockState;III)V", at = @At("TAIL"))
+    @Inject(method = "setBlockState(Lfinalforeach/cosmicreach/blocks/BlockState;III)V", at = @At("TAIL"), remap = false)
     private void updateBlockEntities(BlockState blockState, int x, int y, int z, CallbackInfo ci) {
         puzzleLoader$tmp._set(this, x, y, z)._updateNeighbors(new BlockUpdateEvent());
     }
 
-    @Inject(method = "setBlockState(Lfinalforeach/cosmicreach/savelib/blocks/IBlockState;III)V", at = @At("TAIL"))
+    @Inject(method = "setBlockState(Lfinalforeach/cosmicreach/savelib/blocks/IBlockState;III)V", at = @At("TAIL"), remap = false)
     private void updateBlockEntities(IBlockState blockState, int x, int y, int z, CallbackInfo ci) {
         puzzleLoader$tmp._set(this, x, y, z)._updateNeighbors(new BlockUpdateEvent());
     }
