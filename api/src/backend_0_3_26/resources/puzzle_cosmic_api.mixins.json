@@ -21,6 +21,7 @@
     "item.container.SlotContainerMixin",
     "util.IdentifierMixin",
     "world.ChunkMixin",
+    "world.WorldMixin",
     "world.ZoneMixin"
   ]
 }

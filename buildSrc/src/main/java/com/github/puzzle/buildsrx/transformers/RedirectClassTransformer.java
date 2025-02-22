@@ -18,6 +18,20 @@ public class RedirectClassTransformer extends AbstractClassTransformer {
             }
         }
 
+        if (superName != null) {
+            for (String key : RedirectClassTransformer.redirections.keySet()) {
+                if (superName.contains(key)) superName = superName.replaceAll(key, RedirectClassTransformer.redirections.get(key));
+            }
+        }
+
+        if (interfaces != null && interfaces.length != 0) {
+            for (int i = 0; i < interfaces.length; i++) {
+                for (String key : RedirectClassTransformer.redirections.keySet()) {
+                    if (interfaces[i].contains(key)) interfaces[i] = interfaces[i].replaceAll(key, RedirectClassTransformer.redirections.get(key));
+                }
+            }
+        }
+
         super.visit(version, access, name, signature, superName, interfaces);
     }
 

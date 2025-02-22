@@ -41,7 +41,7 @@ public interface IPuzzlePlayer {
     boolean _isLoading();
 
     default void setZone(IPuzzleZone zone) {
-        setZone(zone.getId());
+        setZone(zone._getId());
     }
 
     default void setZone(IPuzzleIdentifier zoneId) {
