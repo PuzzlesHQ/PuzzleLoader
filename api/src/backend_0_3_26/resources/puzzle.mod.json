@@ -1,6 +1,6 @@
 {
   "formatVersion": 2,
-  "name": "Cosmic API - ${crVersion}",
+  "name": "Cosmic API",
   "id": "cosmic-api",
   "version": "${version}",
   "description": "This is the cosmic-api module of the Puzzle Loader.",

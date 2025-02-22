@@ -71,7 +71,7 @@ setupConfiguration(configurations.embed, false)
 setupConfiguration(configurations.compile, true)
 setupConfiguration2(configurations.loneRequire, false)
 
-var apiVersion = "1.0.0"
+var apiVersion = "0.0.1-alpha"
 
 var gdxVersion = "1.13.0"
 var saveLibVersion = "244b61a8d9";
@@ -156,7 +156,7 @@ tasks.register("buildBackend-0.3.26", ShadowJar) {
     configurations = [ project.configurations.embed ]
 
     archiveBaseName = "cosmic-api"
-    archiveVersion = "v" + apiVersion + "-" + cosmic_reach_client_version
+    archiveVersion = "v" + apiVersion + "_cr" + cosmic_reach_client_version
 
     from sourceSets.commonBackend.output
     from sourceSets.backend_0_3_26.output
