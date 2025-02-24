@@ -27,6 +27,11 @@ public field finalforeach/cosmicreach/items/loot/LootStack item
 public field finalforeach/cosmicreach/items/loot/LootStack minAmount
 public field finalforeach/cosmicreach/items/loot/LootStack maxAmount
 
+public field finalforeach/cosmicreach/rendering/items/HeldItemRenderParams popUpTimer
+public field finalforeach/cosmicreach/rendering/items/HeldItemRenderParams maxPopUpTimer
+public field finalforeach/cosmicreach/rendering/items/HeldItemRenderParams swingTimer
+public field finalforeach/cosmicreach/rendering/items/HeldItemRenderParams maxSwingTimer
+
 public field finalforeach/cosmicreach/io/CRBinDeserializer altSchemas
 public field finalforeach/cosmicreach/io/CRBinDeserializer strings
 public method finalforeach/cosmicreach/io/CRBinDeserializer readDataFromSchema (Lfinalforeach/cosmicreach/savelib/crbin/CRBinSchema;Ljava/nio/ByteBuffer;)V

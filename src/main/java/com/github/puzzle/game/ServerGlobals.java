@@ -6,7 +6,7 @@ import com.github.puzzle.core.loader.meta.EnvType;
 import com.github.puzzle.core.loader.util.ModLocator;
 import com.github.puzzle.game.engine.blocks.models.IModelGenerator;
 import com.github.puzzle.game.engine.blocks.models.ServerModelGenerator;
-import finalforeach.cosmicreach.settings.BooleanSetting;
+import finalforeach.cosmicreach.settings.types.BooleanSetting;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import finalforeach.cosmicreach.items.Item;
 import finalforeach.cosmicreach.items.ItemStack;
+import finalforeach.cosmicreach.rendering.items.HeldItemRenderParams;
 import finalforeach.cosmicreach.rendering.items.ItemModel;
 import finalforeach.cosmicreach.ui.UI;
 
@@ -38,9 +39,9 @@ public class ItemModelWrapper extends ItemModel implements IPuzzleItemModel {
     }
 
     @Override
-    public void renderAsHeldItem(Vector3 vector3, Camera camera, float v, float v1, float v2, float v3) {
+    public void renderAsHeldItem(Vector3 vector3, Camera camera, HeldItemRenderParams heldItemRenderParams) {
         ItemStack stack = UI.hotbar.getSelectedItemStack();
-        renderAsHeldItem(vector3, stack, camera, v, v1, v2, v3);
+        renderAsHeldItem(vector3, stack, camera, heldItemRenderParams.popUpTimer, heldItemRenderParams.maxPopUpTimer, heldItemRenderParams.swingTimer, heldItemRenderParams.maxSwingTimer);
     }
 
     @Override

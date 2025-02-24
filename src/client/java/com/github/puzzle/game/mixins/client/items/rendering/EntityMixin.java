@@ -24,9 +24,8 @@ public class EntityMixin {
     @Shadow @Final protected static Matrix4 tmpModelMatrix;
 
     @Shadow public Vector3 position;
-
-    @Inject(method = "renderModelAfterMatrixSet", at = @At(value = "INVOKE", target = "Lfinalforeach/cosmicreach/rendering/entities/IEntityModelInstance;render(Lfinalforeach/cosmicreach/entities/Entity;Lcom/badlogic/gdx/graphics/Camera;Lcom/badlogic/gdx/math/Matrix4;)V", shift = At.Shift.BEFORE), cancellable = true)
-    private void render(Camera worldCamera, CallbackInfo ci) {
+    @Inject(method = "renderModelAfterMatrixSet", at = @At(value = "INVOKE", target = "Lfinalforeach/cosmicreach/rendering/entities/IEntityModelInstance;render(Lfinalforeach/cosmicreach/entities/Entity;Lcom/badlogic/gdx/graphics/Camera;Lcom/badlogic/gdx/math/Matrix4;Z)V", shift = At.Shift.BEFORE), cancellable = true)
+    private void render(Camera worldCamera, boolean shouldRender, CallbackInfo ci) {
         if (modelInstance instanceof ItemEntityModel) {
             if (Reflection.getFieldContents(modelInstance, "model") instanceof ItemModelWrapper m) {
                 ItemStack stack = Reflection.getFieldContents(this, "itemStack");

@@ -3,8 +3,8 @@ package com.github.puzzle.game.keybindings;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import finalforeach.cosmicreach.lang.Lang;
-import finalforeach.cosmicreach.settings.CharSetting;
-import finalforeach.cosmicreach.settings.IntSetting;
+import finalforeach.cosmicreach.settings.types.CharSetting;
+import finalforeach.cosmicreach.settings.types.IntSetting;
 
 import java.util.HashMap;
 
