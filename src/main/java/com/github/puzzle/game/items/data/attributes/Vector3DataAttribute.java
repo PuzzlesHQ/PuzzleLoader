@@ -5,7 +5,7 @@ import com.github.puzzle.game.items.data.DataTag;
 import finalforeach.cosmicreach.savelib.crbin.CRBinDeserializer;
 import finalforeach.cosmicreach.savelib.crbin.CRBinSerializer;
 
-@Deprecated(forRemoval = true, since = "2.3.5")
+//@Deprecated(forRemoval = true, since = "2.3.5")
 public class Vector3DataAttribute implements DataTag.DataTagAttribute<Vector3> {
 
     Vector3 data;

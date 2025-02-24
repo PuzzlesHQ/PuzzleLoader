@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@Deprecated(since = "2.3.5", forRemoval = true)
+//@Deprecated(since = "2.3.5", forRemoval = true)
 public class ListDataAttribute<T extends ICRBinSerializable> implements DataTag.DataTagAttribute<List<T>> {
 
     List<T> data;
