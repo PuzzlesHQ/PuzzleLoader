@@ -1,7 +1,7 @@
 package com.github.puzzle.game.keybindings;
 
-import finalforeach.cosmicreach.settings.BooleanSetting;
-import finalforeach.cosmicreach.settings.FloatSetting;
+import finalforeach.cosmicreach.settings.types.BooleanSetting;
+import finalforeach.cosmicreach.settings.types.FloatSetting;
 
 public class PuzzleControlSettings {
     public static final BooleanSetting invertedMouse = new BooleanSetting("invertMouse", false);

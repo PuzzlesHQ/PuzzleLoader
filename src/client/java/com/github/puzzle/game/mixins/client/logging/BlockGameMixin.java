@@ -22,17 +22,14 @@ public class BlockGameMixin {
     @Unique
     private static final Logger LOGGER = LoggerFactory.getLogger("CosmicReach | BlockGame");
 
-    @Redirect(method = "dispose", at = @At(value = "INVOKE", target = "Ljava/io/PrintStream;println(Ljava/lang/String;)V"), require = 0)
-    private void print1(PrintStream instance, String x) {
-        LOGGER.info(AnsiColours.CYAN + "{}" + AnsiColours.WHITE, x);
+    @Redirect(method = "dispose", at = @At(value = "INVOKE", target = "Lfinalforeach/cosmicreach/util/logging/Logger;info(Ljava/lang/Object;)V"), require = 0)
+    private void print1(Object message) {
+        LOGGER.info("{}", message);
     }
 
-    @Redirect(method = "printGLInfo", at = @At(value = "INVOKE", target = "Ljava/io/PrintStream;println(Ljava/lang/String;)V"), require = 0)
-    private static void print2(PrintStream instance, String x) {
-        List<String> lines = x.lines().toList();
-        for(String line : lines) {
-            LOGGER.info(AnsiColours.CYAN + "{}" + AnsiColours.WHITE, line);
-        }
+    @Redirect(method = "printGLInfo", at = @At(value = "INVOKE", target = "Lfinalforeach/cosmicreach/util/logging/Logger;info(Ljava/lang/Object;)V"), require = 0)
+    private static void print2(Object message) {
+        LOGGER.info("{}", message);
     }
 
     @Inject(method = "dispose", at = @At(value = "INVOKE", target = "Lfinalforeach/cosmicreach/audio/SoundManager;dispose()V", shift = At.Shift.BEFORE), require = 0)
