@@ -36,7 +36,7 @@ public interface IModBlock {
         BlockActionReplaceBlockState replace = BlockEventActionFactory.createReplaceBlockEvent("self", 0 ,0, 0);
         replace.act(args);
         BlockActionPlaySound3D sound3D = BlockEventActionFactory.createPlaySound3D(
-                "base:sounds/blocks/block-place.ogg", 1, 1,
+                "base:sounds/blocks/block-place.ogg", 1, 0.9F, 1.1F,
                 new Vector3(args.blockPos.getGlobalX(), args.blockPos.getGlobalY(), args.blockPos.getGlobalZ())
         );
         Threads.runOnMainThread(()-> sound3D.act(args));
@@ -50,7 +50,7 @@ public interface IModBlock {
         BlockActionReplaceBlockState replace = BlockEventActionFactory.createReplaceBlockEvent("base:air[default]", 0 ,0, 0);
         replace.act(args);
         BlockActionPlaySound3D sound3D = BlockEventActionFactory.createPlaySound3D(
-                "base:sounds/blocks/block-break.ogg", 1, 1,
+                "base:sounds/blocks/block-break.ogg", 1, 0.9F, 1.1F,
                 new Vector3(args.blockPos.getGlobalX(), args.blockPos.getGlobalY(), args.blockPos.getGlobalZ())
         );
         Threads.runOnMainThread(()-> sound3D.act(args));

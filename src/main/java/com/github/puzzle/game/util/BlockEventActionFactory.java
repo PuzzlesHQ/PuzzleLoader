@@ -25,12 +25,13 @@ public class BlockEventActionFactory {
         return replace;
     }
 
-    public static BlockActionPlaySound3D createPlaySound3D(String sound, float volume, float pitch, Vector3 position) {
+    public static BlockActionPlaySound3D createPlaySound3D(String sound, float volume, float minPitch, float maxPitch, Vector3 position) {
         BlockActionPlaySound3D sound3D = new BlockActionPlaySound3D();
         try {
             Reflection.setFieldContents(sound3D, "sound", sound);
             Reflection.setFieldContents(sound3D, "volume", volume);
-            Reflection.setFieldContents(sound3D, "pitch", pitch);
+            Reflection.setFieldContents(sound3D, "minPitch", minPitch);
+            Reflection.setFieldContents(sound3D, "maxPitch", maxPitch);
             Reflection.setFieldContents(sound3D, "position", position);
         } catch (RuntimeException e) {
             LOGGER.error("createPlaySound3D failed", e);

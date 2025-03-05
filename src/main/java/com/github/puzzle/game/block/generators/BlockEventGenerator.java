@@ -2,6 +2,7 @@ package com.github.puzzle.game.block.generators;
 
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
+import com.badlogic.gdx.utils.JsonWriter;
 import com.badlogic.gdx.utils.OrderedMap;
 import com.github.puzzle.game.engine.blocks.IBlockLoader;
 import com.github.puzzle.game.factories.IGenerator;
@@ -70,6 +71,7 @@ public class BlockEventGenerator implements IGenerator {
     @Override
     public String generateJson() {
         Json json = new Json();
+        json.setOutputType(JsonWriter.OutputType.json);
         json.setTypeName(null);
         OrderedMap<String, Trigger[]> triggers = new OrderedMap<>();
         for(String triggerName : this.triggers.keySet()) {
