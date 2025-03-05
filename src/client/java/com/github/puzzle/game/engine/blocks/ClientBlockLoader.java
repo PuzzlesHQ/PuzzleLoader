@@ -51,9 +51,7 @@ public class ClientBlockLoader implements IBlockLoader {
      * @param modelJson regular json model from DataMods
      */
     public void registerBlockModel(String modelName, int rotXZ, String modelJson) {
-        Threads.runOnMainThread(() -> {
-            factory.createFromJson(modelName, rotXZ, modelJson);
-        });
+        factory.createFromJson(modelName, rotXZ, modelJson);
     }
 
     /**
