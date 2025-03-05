@@ -49,7 +49,7 @@ public class ServerModelGenerator implements IModelGenerator {
                     if (j < c.faces.length - 1) b.append(",");
                 }
                 b.append("}");
-                if (i < generator.cuboids.size() - 1) b.append(",");
+                if (i < generator.cuboids.size() - 1) b.append("},");
 
             }
             b.append("}");
