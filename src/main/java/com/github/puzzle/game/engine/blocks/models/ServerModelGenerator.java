@@ -19,8 +19,8 @@ public class ServerModelGenerator implements IModelGenerator {
             for (int i = 0; i < strings.length; i++) {
                 String name = strings[i];
                 Identifier tex = generator.vanillaTextures.get(name);
-                b.append("\"" + name + "\":");
-                b.append("\"fileName\": {");
+                b.append("\"" + name + "\": {");
+                b.append("\"fileName\": ");
                 b.append("\"" + tex.toString() + "\"");
                 b.append("}");
 
@@ -46,10 +46,13 @@ public class ServerModelGenerator implements IModelGenerator {
                     b.append("\"cullFace\": " + f.cullFace + ",");
                     b.append("\"texture\": \"" + f.texture + "\"");
                     b.append("}");
+                    if (j < c.faces.length - 1) b.append(",");
                 }
-
+                b.append("}");
                 if (i < generator.cuboids.size() - 1) b.append(",");
+
             }
+            b.append("}");
             b.append("]");
         }
 
