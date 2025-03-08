@@ -57,7 +57,7 @@ public class LootTableMixin {
         RegistryObject.register(PuzzleRegistries.LOOT_TABLES, table.getLeft(), table::getRight);
     }
 
-    @Inject(method = "loadLoot", at = @At("TAIL"))
+    @Inject(method = "loadLoot()V", at = @At("TAIL"))
     private static void loadLootTables(CallbackInfo ci) {
         for (Loot loot : lootMap.values()) {
             Pair<Identifier, PuzzleLootTable> table = PuzzleLootTable.fromVanillaTable(loot);
