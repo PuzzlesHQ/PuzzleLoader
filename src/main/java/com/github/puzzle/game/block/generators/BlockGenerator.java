@@ -4,10 +4,10 @@ import com.badlogic.gdx.utils.*;
 import com.github.puzzle.game.engine.blocks.IBlockLoader;
 import com.github.puzzle.game.factories.IGenerator;
 import com.github.puzzle.game.oredict.tags.Tag;
-import finalforeach.cosmicreach.blocks.BlockPlaceCheck;
+import finalforeach.cosmicreach.blocks.BlockPosition;
 import finalforeach.cosmicreach.util.Identifier;
 import finalforeach.cosmicreach.util.predicates.GamePredicate;
-import finalforeach.cosmicreach.util.predicates.GamePredicateBlockPlaceCheck;
+import finalforeach.cosmicreach.util.predicates.GamePredicateBlockPos;
 import org.hjson.JsonObject;
 import org.hjson.Stringify;
 
@@ -63,7 +63,7 @@ public class BlockGenerator implements IGenerator {
         public String swapGroupId;
         public String dropId;
         public float hardness = 1.5F;
-        public Predicate<BlockPlaceCheck> canPlaceCheck = GamePredicate.getAlwaysTrue();
+        public Predicate<BlockPosition> canPlaceCheck = GamePredicate.getAlwaysTrue();
         int rotXZ = 0;
         public OrderedMap<String, ?> dropParams;
         ObjectIntMap<String> intProperties = new ObjectIntMap();
@@ -72,8 +72,7 @@ public class BlockGenerator implements IGenerator {
 
         public void read(Json json, JsonValue jsonData) {
             if (jsonData.has("canPlace")) {
-                JsonValue jsonvalue = jsonData.get("canPlace");
-                this.canPlaceCheck = json.readValue(GamePredicateBlockPlaceCheck.class, jsonvalue.child);
+                this.canPlaceCheck = json.readValue(GamePredicateBlockPos.class, jsonData.get("canPlace").child);
             }
 
             this.langKey = jsonData.getString("langKey", null);

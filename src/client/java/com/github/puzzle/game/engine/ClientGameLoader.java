@@ -105,9 +105,9 @@ public class ClientGameLoader extends GameState implements IGameLoader {
     public void create() {
         super.create();
 
-        Threads.runOnMainThread(() -> {
-            LOGGER.info("Shared Indices are {}", BlockModelJson.useIndices ? "off" : "on");
-        });
+//        Threads.runOnMainThread(() -> {
+//            LOGGER.info("Shared Indices are {}", BlockModelJson.useIndices ? "off" : "on");
+//        });
 
         ClientGlobals.initRenderers();
 

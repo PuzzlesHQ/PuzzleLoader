@@ -4,14 +4,16 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.Vector4;
 import com.badlogic.gdx.utils.Queue;
+import com.github.puzzle.core.loader.meta.Env;
+import com.github.puzzle.core.loader.meta.EnvType;
 import finalforeach.cosmicreach.GameSingletons;
 import finalforeach.cosmicreach.blocks.BlockPosition;
 import finalforeach.cosmicreach.blocks.BlockState;
-import finalforeach.cosmicreach.constants.Direction;
 import finalforeach.cosmicreach.lighting.BlockLightPropagator;
 import finalforeach.cosmicreach.networking.packets.blocks.BlockReplacePacket;
 import finalforeach.cosmicreach.networking.packets.blocks.PlaceBlockPacket;
 import finalforeach.cosmicreach.networking.server.ServerSingletons;
+import finalforeach.cosmicreach.util.constants.Direction;
 import finalforeach.cosmicreach.world.BlockSetter;
 import finalforeach.cosmicreach.world.Chunk;
 import finalforeach.cosmicreach.world.Zone;
@@ -52,11 +54,8 @@ public class BlockUtil {
 
     private static final Queue<BlockPosition> tmpQueue = new Queue<>();
 
+    @Env(EnvType.SERVER)
     public static void setBlockAt(Zone zone, BlockState state, BlockPosition pos, BlockReplaceSettings settings) {
-        if (IClientNetworkManager.isConnected()) {
-            IClientNetworkManager.sendAsClient(new PlaceBlockPacket(zone, pos, state));
-        }
-
         getChunkAtVec(zone, pos.getGlobalX(), pos.getGlobalY(), pos.getGlobalZ());
 
         BlockState oldBlockState = pos.getBlockState();
@@ -78,6 +77,8 @@ public class BlockUtil {
         }
     }
 
+    static BlockLightPropagator p = new BlockLightPropagator();
+
     private static void adjustLightsAfterReplace(Zone zone, BlockState oldBlockState, BlockState targetBlockState, BlockPosition blockPos, Queue<BlockPosition> tmpQueue) {
         int oldSkylightAttenuation = 0;
         if (oldBlockState != null) {
@@ -88,10 +89,10 @@ public class BlockUtil {
         int skylightAttenuation = targetBlockState.lightAttenuation;
         tmpQueue.clear();
         tmpQueue.addFirst(blockPos);
-        BlockLightPropagator.propagateBlockDarkness(zone, tmpQueue);
+        p.propagateBlockDarkness(zone, tmpQueue);
         tmpQueue.clear();
         tmpQueue.addFirst(blockPos);
-        BlockLightPropagator.propagateBlockLights(zone, tmpQueue);
+        p.propagateBlockLights(zone, tmpQueue);
         boolean propagateShade = currentSkylight > 0 && skylightAttenuation > oldSkylightAttenuation;
         boolean propagateSkylight = currentSkylight != 15 && skylightAttenuation < oldSkylightAttenuation;
         if (propagateShade || propagateSkylight) {
@@ -112,10 +113,8 @@ public class BlockUtil {
 
     }
 
+    @Env(EnvType.SERVER)
     public static void setBlockAt(Zone zone, BlockState state, BlockPosition pos) {
-        if (IClientNetworkManager.isConnected()) {
-            IClientNetworkManager.sendAsClient(new PlaceBlockPacket(zone, pos, state));
-        }
         setBlockAt(zone, state, pos, BlockReplaceSettings.DEFAULT);
     }
 

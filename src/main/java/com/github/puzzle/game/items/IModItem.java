@@ -8,6 +8,7 @@ import com.github.puzzle.game.items.data.DataTagManifest;
 import com.github.puzzle.game.items.data.DataTagPreset;
 import com.github.puzzle.game.items.data.attributes.*;
 import com.github.puzzle.game.util.DataTagUtil;
+import finalforeach.cosmicreach.GameTag;
 import finalforeach.cosmicreach.blockentities.BlockEntity;
 import finalforeach.cosmicreach.blockentities.BlockEntityFurnace;
 import finalforeach.cosmicreach.blocks.BlockPosition;
@@ -368,11 +369,6 @@ public interface IModItem extends Item {
         return false;
     }
 
-    @Override
-    default boolean hasTag(String s) {
-        return false;
-    }
-
     default boolean isDebug() {
         return getTagManifest().hasTag(IS_DEBUG_ATTRIBUTE) ? getTagManifest().getTag(IS_DEBUG_ATTRIBUTE).getValue() : false;
     }
@@ -409,5 +405,15 @@ public interface IModItem extends Item {
      */
     default boolean canInteractWithBlockEntity(BlockEntity blockEntity) {
         return true;
+    }
+
+    @Override
+    default boolean hasTag(GameTag gameTag) {
+        return false;
+    }
+
+    @Override
+    default float getBounciness() {
+        return 0;
     }
 }

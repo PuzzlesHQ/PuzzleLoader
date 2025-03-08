@@ -21,8 +21,8 @@ public class BaseGDXScreen extends BasePuzzleScreen implements IGDXGameState {
     public Stage gdxStage;
     public Color bgColor;
 
-    public BaseGDXScreen(ISlotContainerParent parent) {
-        super(parent);
+    public BaseGDXScreen(int windowId, ISlotContainerParent parent) {
+        super(windowId, parent);
 
         gdxStage = new Stage(InGame.IN_GAME.ui.uiViewport, UI.batch);
     }

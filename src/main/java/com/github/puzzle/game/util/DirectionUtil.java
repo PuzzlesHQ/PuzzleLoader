@@ -1,6 +1,6 @@
 package com.github.puzzle.game.util;
 
-import finalforeach.cosmicreach.constants.Direction;
+import finalforeach.cosmicreach.util.constants.Direction;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 

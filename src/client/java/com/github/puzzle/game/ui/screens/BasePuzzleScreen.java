@@ -5,8 +5,8 @@ import finalforeach.cosmicreach.items.screens.BaseItemScreen;
 
 public class BasePuzzleScreen extends BaseItemScreen {
 
-    public BasePuzzleScreen(ISlotContainerParent parent) {
-        super(parent);
+    public BasePuzzleScreen(int windowId, ISlotContainerParent parent) {
+        super(windowId, parent);
     }
 
     @Override

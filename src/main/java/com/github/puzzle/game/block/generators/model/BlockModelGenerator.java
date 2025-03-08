@@ -6,8 +6,8 @@ import com.github.puzzle.core.loader.meta.EnvType;
 import com.github.puzzle.game.ServerGlobals;
 import com.github.puzzle.game.engine.blocks.IBlockLoader;
 import com.github.puzzle.game.engine.blocks.model.IBlockModelGenerator;
-import finalforeach.cosmicreach.constants.Direction;
 import finalforeach.cosmicreach.util.Identifier;
+import finalforeach.cosmicreach.util.constants.Direction;
 
 import java.util.ArrayList;
 import java.util.HashMap;

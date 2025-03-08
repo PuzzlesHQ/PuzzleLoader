@@ -280,15 +280,15 @@ public class ClientBlockLoader implements IBlockLoader {
         setBlockStaticFinalField.accept("STONE_BASALT", Block.getInstance("base:stone_basalt"));
         setBlockStaticFinalField.accept("DIRT", Block.getInstance("base:dirt"));
         setBlockStaticFinalField.accept("WOODPLANKS", Block.getInstance("base:wood_planks"));
-        setBlockStaticFinalField.accept("CRATE_WOOD", Block.getInstance("base:crate_wooden"));
-        setBlockStaticFinalField.accept("HAZARD", Block.getInstance("base:hazard"));
+//        setBlockStaticFinalField.accept("CRATE_WOOD", Block.getInstance("base:crate_wooden"));
+//        setBlockStaticFinalField.accept("HAZARD", Block.getInstance("base:hazard"));
         setBlockStaticFinalField.accept("SAND", Block.getInstance("base:sand"));
         setBlockStaticFinalField.accept("TREELOG", Block.getInstance("base:tree_log"));
-        setBlockStaticFinalField.accept("LEAVES", Block.getInstance("base:leaves"));
-        setBlockStaticFinalField.accept("COCONUT", Block.getInstance("base:coconut"));
+//        setBlockStaticFinalField.accept("LEAVES", Block.getInstance("base:leaves"));
+//        setBlockStaticFinalField.accept("COCONUT", Block.getInstance("base:coconut"));
         setBlockStaticFinalField.accept("SNOW", Block.getInstance("base:snow"));
         setBlockStaticFinalField.accept("WATER", Block.getInstance("base:water"));
-        setBlockStaticFinalField.accept("LUNAR_SOIL", Block.getInstance("base:lunar_soil"));
+//        setBlockStaticFinalField.accept("LUNAR_SOIL", Block.getInstance("base:lunar_soil"));
     }
 
 }
