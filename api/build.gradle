@@ -77,8 +77,8 @@ var gdxVersion = "1.13.0"
 var saveLibVersion = "244b61a8d9";
 var puzzleVersion = "9276247"
 
-var crClientUrl = "https://github.com/CRModders/CosmicArchive/raw/refs/heads/main/versions/pre-alpha/${cosmic_reach_client_version}/client/Cosmic%20Reach-${cosmic_reach_client_version}.jar"
-var crServerUrl = "https://github.com/CRModders/CosmicArchive/raw/refs/heads/main/versions/pre-alpha/${cosmic_reach_client_version}/server/Cosmic%20Reach-Server-${cosmic_reach_client_version}.jar"
+var crClientUrl = "https://github.com/CRModders/CosmicArchive/raw/refs/heads/main/versions/alpha/${cosmic_reach_client_version}/client/Cosmic%20Reach-${cosmic_reach_client_version}.jar"
+var crServerUrl = "https://github.com/CRModders/CosmicArchive/raw/refs/heads/main/versions/alpha/${cosmic_reach_client_version}/server/Cosmic%20Reach-Server-${cosmic_reach_client_version}.jar"
 
 File libFolder = file("lib")
 if (!libFolder.exists()) libFolder.mkdir()

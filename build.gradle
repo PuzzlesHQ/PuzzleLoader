@@ -58,7 +58,7 @@ dependencies {
     compileOnly('org.jetbrains:annotations:24.0.0')
     loaderCompileOnly('org.jetbrains:annotations:24.0.0')
 
-    cosmicReach("finalforeach:cosmicreach:${cosmic_reach_client_version}")
+    cosmicReach("finalforeach:cosmicreach-alpha:${cosmic_reach_client_version}")
     allBundle(annotationProcessor("io.github.llamalad7:mixinextras-fabric:$mixinExtrasVersion"))
 
     allBundle("com.google.guava:guava:$guavaVersion")
