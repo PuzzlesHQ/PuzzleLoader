@@ -29,7 +29,7 @@ public class MainMenuMixin extends GameState {
      * @author replet
      * @reason Change size of the options button
      */
-    @ModifyArg(method = "create",at = @At(value = "INVOKE", target = "Lfinalforeach/cosmicreach/gamestates/MainMenu$4;setSize(FF)V"),index = 0)
+    @ModifyArg(method = "create",at = @At(value = "INVOKE", target = "Lfinalforeach/cosmicreach/gamestates/MainMenu$6;setSize(FF)V"),index = 0)
     float resizeOptions(float x){
        return (275.0F/2)-5;
     }
@@ -37,7 +37,7 @@ public class MainMenuMixin extends GameState {
      * @author replet
      * @reason Change pos of the options button
      */
-    @ModifyArg(method = "create",at= @At(value = "INVOKE", target = "Lfinalforeach/cosmicreach/gamestates/MainMenu$4;addAction(Lcom/badlogic/gdx/scenes/scene2d/Action;)V",ordinal = 0),index = 0)
+    @ModifyArg(method = "create",at= @At(value = "INVOKE", target = "Lfinalforeach/cosmicreach/gamestates/MainMenu$6;addAction(Lcom/badlogic/gdx/scenes/scene2d/Action;)V",ordinal = 0),index = 0)
     Action moveOptions(Action unused){
         return new AlignXAction(1,0.5f, -(275.0F/4)-2 );
     }

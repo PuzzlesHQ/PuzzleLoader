@@ -5,7 +5,7 @@ import finalforeach.cosmicreach.gamestates.GameState;
 import finalforeach.cosmicreach.ui.widgets.CRButton;
 import org.spongepowered.asm.mixin.Mixin;
 
-@Mixin(targets = {"finalforeach/cosmicreach/gamestates/MainMenu$5"})
+@Mixin(targets = {"finalforeach/cosmicreach/gamestates/MainMenu$7"})
 public class CreditsButtonMixin extends CRButton {
 
     public CreditsButtonMixin(String labelText) {
