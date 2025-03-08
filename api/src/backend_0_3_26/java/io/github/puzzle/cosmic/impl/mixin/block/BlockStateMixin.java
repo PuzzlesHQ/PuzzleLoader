@@ -1,5 +1,7 @@
 package io.github.puzzle.cosmic.impl.mixin.block;
 
+import finalforeach.cosmicreach.GameTag;
+import finalforeach.cosmicreach.GameTagList;
 import finalforeach.cosmicreach.blocks.BlockState;
 import finalforeach.cosmicreach.util.Identifier;
 import io.github.puzzle.cosmic.api.block.IPuzzleBlock;
@@ -11,10 +13,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Internal
 @Mixin(BlockState.class)
@@ -44,26 +43,29 @@ public abstract class BlockStateMixin implements IPuzzleBlockState {
     }
 
     @Override
-    public void _setTags(String[] strings) {
-        puzzleLoader$state.tags = strings;
+    public void _setTags(GameTagList list) {
+        puzzleLoader$state.tags = list;
     }
 
     @Override
-    public void _addTags(String... strings) {
-        String[] tags = new String[puzzleLoader$state.tags.length + strings.length];
-        System.arraycopy(puzzleLoader$state.tags, 0, tags, 0, puzzleLoader$state.tags.length);
-        System.arraycopy(strings, 0, tags, puzzleLoader$state.tags.length - 1, strings.length);
-        puzzleLoader$state.tags = tags;
+    public void _addTags(GameTag... tagz) {
+        for (GameTag t : tagz) puzzleLoader$state.tags.add(t);
     }
 
     @Override
-    public void _removeTags(String... strings) {
-        Set<String> tags = new HashSet<>();
-        for (String tag : puzzleLoader$state.tags) {
-            for (String bTag : strings) {
-                if (!tag.equals(bTag)) tags.add(tag);
-            }
-        }
-        puzzleLoader$state.tags = tags.toArray(new String[0]);
+    public void _removeTags(GameTag... tagz) {
+        for (GameTag t : tagz) puzzleLoader$state.tags.remove(t);
     }
+
+    @Override
+    public void _addTags(Collection<GameTag> collection) {
+        puzzleLoader$state.tags.addAll(collection);
+    }
+
+    @SafeVarargs
+    @Override
+    public final void _removeTags(Collection<GameTag>... collection) {
+        puzzleLoader$state.tags.removeAll((Collection<?>) (Object) collection);
+    }
+
 }

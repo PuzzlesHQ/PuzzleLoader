@@ -13,6 +13,7 @@ import com.github.puzzle.game.block.generators.BlockEventGenerator;
 import com.github.puzzle.game.block.generators.BlockGenerator;
 import com.github.puzzle.game.block.generators.model.BlockModelGenerator;
 import com.github.puzzle.game.factories.IFactory;
+import finalforeach.cosmicreach.GameTagList;
 import finalforeach.cosmicreach.blockevents.BlockEvents;
 import finalforeach.cosmicreach.blocks.Block;
 import finalforeach.cosmicreach.blocks.BlockState;
@@ -114,6 +115,7 @@ public class ServerBlockLoader implements IBlockLoader {
 
         Block block;
         try {
+            json.setSerializer(GameTagList.class, GameTagList.GAME_TAG_JSON_SERIALIZER);
             block = json.fromJson(Block.class, blockJson);
         } catch (Exception e) {
             throw new BlockLoadException(modBlock, blockGenerator.blockId, blockJson, null, e);
