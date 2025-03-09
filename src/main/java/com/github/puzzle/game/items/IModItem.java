@@ -174,7 +174,7 @@ public interface IModItem extends Item {
      */
     default void clientUse(ItemSlot slot, Player player, BlockPosition targetPlaceBlockPos, BlockPosition targetBreakBlockPos, boolean isLeftClick) {
         if (!isLeftClick) {
-            this.use(slot, player, targetPlaceBlockPos, targetBreakBlockPos);
+            this.clientUse(slot, player, targetPlaceBlockPos, targetBreakBlockPos);
         }
     }
 
