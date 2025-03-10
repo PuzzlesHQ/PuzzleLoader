@@ -54,8 +54,10 @@ public interface IModBlock {
                 new Vector3(args.blockPos.getGlobalX(), args.blockPos.getGlobalY(), args.blockPos.getGlobalZ())
         );
         Threads.runOnMainThread(()-> sound3D.act(args));
-        BlockActionItemDrop drop = new BlockActionItemDrop();
-        drop.act(args);
+        if (args.srcPlayer.gamemode.doItemsDropOnBreak()){
+            BlockActionItemDrop drop = new BlockActionItemDrop();
+            drop.act(args);
+        }
     }
 
     /**
