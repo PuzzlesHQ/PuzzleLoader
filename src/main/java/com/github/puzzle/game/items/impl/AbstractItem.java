@@ -7,6 +7,7 @@ import finalforeach.cosmicreach.util.GameTagList;
 import finalforeach.cosmicreach.util.IGameTagged;
 import finalforeach.cosmicreach.util.Identifier;
 
+@Deprecated(forRemoval = true, since = "2.3.9")
 public abstract class AbstractItem implements IGameTagged, Item, IModItem {
 
     public final Identifier id;

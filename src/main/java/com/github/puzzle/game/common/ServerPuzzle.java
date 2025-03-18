@@ -1,8 +1,6 @@
 package com.github.puzzle.game.common;
 
 import com.github.puzzle.core.loader.provider.mod.entrypoint.impls.ModInitializer;
-import com.github.puzzle.game.items.IModItem;
-import com.github.puzzle.game.items.puzzle.BuilderWand;
 
 public class ServerPuzzle implements ModInitializer {
 
@@ -13,6 +11,5 @@ public class ServerPuzzle implements ModInitializer {
 
     @Override
     public void onInit() {
-        IModItem.registerItem(new BuilderWand());
     }
 }
