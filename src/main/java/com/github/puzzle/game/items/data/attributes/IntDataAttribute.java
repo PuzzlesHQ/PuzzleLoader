@@ -4,7 +4,7 @@ import com.github.puzzle.game.items.data.DataTag;
 import finalforeach.cosmicreach.savelib.crbin.CRBinDeserializer;
 import finalforeach.cosmicreach.savelib.crbin.CRBinSerializer;
 
-//@Deprecated(since = "2.3.5", forRemoval = true)
+@Deprecated(forRemoval = true, since = "2.3.9")
 public class IntDataAttribute implements DataTag.DataTagAttribute<Integer> {
 
     int data;

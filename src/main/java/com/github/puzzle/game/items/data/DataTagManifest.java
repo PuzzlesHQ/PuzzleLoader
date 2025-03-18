@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-//@Deprecated(forRemoval = true, since = "2.3.5")
+@Deprecated(forRemoval = true, since = "2.3.9")
 public class DataTagManifest implements ICRBinSerializable {
 
     Map<String, DataTag<?>> tagMap = new HashMap<>();

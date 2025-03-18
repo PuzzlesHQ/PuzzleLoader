@@ -13,15 +13,24 @@ import java.util.Objects;
 import java.util.function.Consumer;
 
 public class EntrypointContainer {
-    private final ImmutableMap<String, ImmutableCollection<AdapterPathPair>> entrypointClasses;
-    private final ModContainer container;
+    public final ImmutableMap<String, ImmutableCollection<AdapterPathPair>> entrypointClasses;
+    public final ModContainer container;
 
     public <T> void invokeClasses(String key, Class<T> type, Consumer<? super T> invoker) throws Exception {
-        if (!ILangProvider.PROVDERS.containsKey("java")) ILangProvider.PROVDERS.put("java", ILangProvider.JAVA_INSTANCE);
-        if (entrypointClasses.get(key) != null) {
-            for (AdapterPathPair pair : Objects.requireNonNull(entrypointClasses.get(key))){
-                if (ILangProvider.PROVDERS.get(pair.getAdapter()) == null) throw new ProviderException("LangProvider \"" + pair.getAdapter() + "\" does not exist.");
-                T inst = ILangProvider.PROVDERS.get(pair.getAdapter()).create(container.INFO, pair.getValue(), type);
+        if (!ILangProvider.PROVDERS.containsKey("java"))
+            ILangProvider.PROVDERS.put("java", ILangProvider.JAVA_INSTANCE);
+
+        ImmutableCollection<AdapterPathPair> pairImmutableCollection = entrypointClasses.get(key);
+        if (pairImmutableCollection != null) {
+            for (AdapterPathPair pair : pairImmutableCollection){
+                if (ILangProvider.PROVDERS.get(pair.getAdapter()) == null)
+                    throw new ProviderException("LangProvider \"" + pair.getAdapter() + "\" does not exist.");
+
+                T inst = (T) pair.getInstance();
+                if (inst == null) {
+                    inst = ILangProvider.PROVDERS.get(pair.getAdapter()).create(container.INFO, pair.getValue(), type);
+                    pair.setInstance(inst);
+                }
                 invoker.accept(inst);
             }
         }

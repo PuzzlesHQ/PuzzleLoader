@@ -10,7 +10,7 @@ import java.util.zip.ZipFile;
 
 public class ModContainer {
     public ModInfo INFO;
-    private final EntrypointContainer entrypointContainer;
+    public final EntrypointContainer entrypointContainer;
 
     public final String NAME;
     public final String ID;

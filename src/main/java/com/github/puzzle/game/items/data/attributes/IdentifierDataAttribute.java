@@ -5,7 +5,7 @@ import finalforeach.cosmicreach.savelib.crbin.CRBinDeserializer;
 import finalforeach.cosmicreach.savelib.crbin.CRBinSerializer;
 import finalforeach.cosmicreach.util.Identifier;
 
-//@Deprecated(since = "2.3.5", forRemoval = true)
+@Deprecated(forRemoval = true, since = "2.3.9")
 public class IdentifierDataAttribute implements DataTag.DataTagAttribute<Identifier> {
 
     Identifier value;

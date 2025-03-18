@@ -154,7 +154,7 @@ public class ClientCosmicReachProvider implements IGameProvider {
             meta.put("icon", JsonObject.valueOf("puzzle-loader:icons/PuzzleLoaderIconx160.png"));
             puzzleLoaderInfo.setMeta(meta);
             puzzleLoaderInfo.setAuthors(new String[]{
-                    "Mr-Zombii", "repletsin5", "SinfullySoul", "tympanicblock61"
+                    "Mr-Zombii", "crabking", "repletsin5", "SinfullySoul", "tympanicblock61"
             });
 
             puzzleLoaderInfo.setVersion(Constants.getPuzzleVersion());

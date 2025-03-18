@@ -26,6 +26,7 @@ import java.util.List;
 
 import static com.github.puzzle.core.Constants.MOD_ID;
 
+@SuppressWarnings("all")
 public interface IModItem extends Item {
 
     /**

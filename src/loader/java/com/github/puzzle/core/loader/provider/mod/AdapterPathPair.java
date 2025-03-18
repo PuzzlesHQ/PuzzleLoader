@@ -4,6 +4,7 @@ public class AdapterPathPair {
 
     String adapter;
     String value;
+    Object instance;
 
     public AdapterPathPair(String adapter, String value) {
         this.adapter = adapter;
@@ -16,5 +17,14 @@ public class AdapterPathPair {
 
     public String getValue() {
         return value;
+    }
+
+    public Object getInstance() {
+        return instance;
+    }
+
+    public void setInstance(Object instance) {
+        if (instance == null)
+            this.instance = instance;
     }
 }
