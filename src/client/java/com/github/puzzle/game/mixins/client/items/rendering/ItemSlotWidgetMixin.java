@@ -8,21 +8,25 @@ import com.llamalad7.mixinextras.sugar.Local;
 import finalforeach.cosmicreach.items.ItemStack;
 import finalforeach.cosmicreach.rendering.items.ItemModel;
 import finalforeach.cosmicreach.rendering.items.ItemRenderer;
-import finalforeach.cosmicreach.ui.widgets.ItemSlotWidget;
+import finalforeach.cosmicreach.ui.widgets.ContainerSlotWidget;
+import finalforeach.cosmicreach.ui.widgets.ItemStackWidget;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(ItemSlotWidget.class)
+@Mixin(ItemStackWidget.class)
 public class ItemSlotWidgetMixin {
 
+    @Shadow
+    ItemStack itemStack;
     @Unique
     private static final Matrix4 identMat4 = new Matrix4();
 
     @Inject(method = "drawItem", at = @At(value = "INVOKE", target = "Lfinalforeach/cosmicreach/rendering/items/ItemRenderer;drawItem(Lcom/badlogic/gdx/graphics/Camera;Lfinalforeach/cosmicreach/items/Item;)V", shift = At.Shift.BEFORE), cancellable = true)
-    private void drawItem(Viewport itemViewport, CallbackInfo ci, @Local ItemStack itemStack, @Local Camera itemCam) {
+    private void drawItem(Viewport itemViewport, CallbackInfo ci, @Local Camera itemCam) {
         ItemModel model = ItemRenderer.getModel(itemStack.getItem(), true);
         if (model instanceof ItemModelWrapper itemModel) {
             itemModel.renderInSlot(null, itemStack, itemCam, identMat4, false);

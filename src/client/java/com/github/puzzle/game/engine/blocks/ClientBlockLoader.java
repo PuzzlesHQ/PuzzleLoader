@@ -13,13 +13,13 @@ import com.github.puzzle.game.block.generators.BlockGenerator;
 import com.github.puzzle.game.block.generators.model.BlockModelGenerator;
 import com.github.puzzle.game.factories.IFactory;
 import com.github.puzzle.game.resources.PuzzleGameAssetLoader;
-import finalforeach.cosmicreach.GameTagList;
 import finalforeach.cosmicreach.Threads;
 import finalforeach.cosmicreach.blockevents.BlockEvents;
 import finalforeach.cosmicreach.blocks.Block;
 import finalforeach.cosmicreach.blocks.BlockState;
 import finalforeach.cosmicreach.blocks.BlockStateGenerator;
 import finalforeach.cosmicreach.items.ItemBlock;
+import finalforeach.cosmicreach.util.GameTagList;
 import finalforeach.cosmicreach.util.Identifier;
 import sun.misc.Unsafe;
 
@@ -51,8 +51,8 @@ public class ClientBlockLoader implements IBlockLoader {
      * @param rotXZ how to rotate the model valid values: 0, 90, 180, 270
      * @param modelJson regular json model from DataMods
      */
-    public void registerBlockModel(String modelName, int rotXZ, String modelJson) {
-        factory.createFromJson(modelName, rotXZ, modelJson);
+    public void registerBlockModel(String modelName, float[] rotation, String modelJson) {
+        factory.createFromJson(modelName, rotation, modelJson);
     }
 
     /**
@@ -156,6 +156,7 @@ public class ClientBlockLoader implements IBlockLoader {
         Block block;
         try {
             json.setSerializer(GameTagList.class, GameTagList.GAME_TAG_JSON_SERIALIZER);
+
             block = json.fromJson(Block.class, blockJson);
         } catch (Exception e) {
             throw new BlockLoadException(modBlock, blockGenerator.blockId, blockJson, null, e);
@@ -165,9 +166,9 @@ public class ClientBlockLoader implements IBlockLoader {
             for(BlockModelGenerator modelGenerator : modBlock.getBlockModelGenerators(blockGenerator.blockId)) {
                 modelGenerator.register(this);
                 String modelName = modelGenerator.getModelName();
-                int rotXZ = 0;
+                float[] rotation = new float[]{0, 0, 0};
                 String modelJson = modelGenerator.generateJson();
-                registerBlockModel(modelName, rotXZ, modelJson);
+                registerBlockModel(modelName, rotation, modelJson);
             }
 
             List<BlockEventGenerator> eventGenerators = modBlock.getBlockEventGenerators(blockGenerator.blockId);
@@ -184,6 +185,11 @@ public class ClientBlockLoader implements IBlockLoader {
                 String eventName = eventGenerator.getEventName();
                 String eventJson = eventGenerator.generateJson();
                 registerEvent(eventName, eventJson);
+            }
+
+            if (block.blockStates.containsKey("default")) {
+                block.blockStates.put("", block.blockStates.get("default"));
+                block.blockStates.remove("default");
             }
 
             for (String stateKey : block.blockStates.keys().toArray()) {

@@ -65,8 +65,8 @@ public interface IModBlock {
     default BlockGenerator getBlockGenerator() {
         Identifier identifier = getIdentifier();
         BlockGenerator generator = new BlockGenerator(identifier);
-        BlockGenerator.State state = generator.createBlockState("default", "model", true);
-        state.dropId = identifier.getNamespace() + ":" + identifier.getName() + "[default]";
+        BlockGenerator.State state = generator.createBlockState("", "model", true);
+        state.dropId = identifier.getNamespace() + ":" + identifier.getName();
         state.blockEventsId = "base:block_events_default";
         return generator;
     }

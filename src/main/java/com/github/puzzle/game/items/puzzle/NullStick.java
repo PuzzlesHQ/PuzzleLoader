@@ -6,6 +6,7 @@ import com.github.puzzle.game.items.data.DataTag;
 import com.github.puzzle.game.items.data.DataTagManifest;
 import com.github.puzzle.game.items.data.attributes.IntDataAttribute;
 import com.github.puzzle.game.items.data.attributes.ListDataAttribute;
+import com.github.puzzle.game.items.impl.AbstractItem;
 import com.github.puzzle.game.util.BlockSelectionUtil;
 import com.github.puzzle.game.util.DataTagUtil;
 import finalforeach.cosmicreach.blocks.BlockPosition;
@@ -19,14 +20,14 @@ import finalforeach.cosmicreach.world.Zone;
 
 import static com.github.puzzle.core.Constants.MOD_ID;
 
-public class NullStick implements IModItem, ITickingItem {
+public class NullStick extends AbstractItem implements ITickingItem {
 
-    Identifier id = Identifier.of(MOD_ID, "null_stick");
     DataTagManifest tagManifest = new DataTagManifest();
 
     int texture_count = 0;
 
     public NullStick() {
+        super(Identifier.of(MOD_ID, "null_stick"));
         tagManifest.addTag(IModItem.IS_DEBUG_ATTRIBUTE.createTag(true));
 
         addTexture(
@@ -84,16 +85,6 @@ public class NullStick implements IModItem, ITickingItem {
     }
 
     @Override
-    public String toString() {
-        return "Item: " + getID();
-    }
-
-    @Override
-    public Identifier getIdentifier() {
-        return id;
-    }
-
-    @Override
     public boolean isTool() {
         return true;
     }
@@ -101,11 +92,6 @@ public class NullStick implements IModItem, ITickingItem {
     @Override
     public int getMaxStackSize() {
         return 1;
-    }
-
-    @Override
-    public DataTagManifest getTagManifest() {
-        return tagManifest;
     }
 
     @Override
@@ -132,6 +118,6 @@ public class NullStick implements IModItem, ITickingItem {
 
     @Override
     public String getName() {
-        return "Null Stick";
+        return "Debug | Null Stick";
     }
 }

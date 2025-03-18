@@ -1,10 +1,7 @@
 package com.github.puzzle.game.items.puzzle;
 
-import com.github.puzzle.core.Constants;
-import com.github.puzzle.game.ServerGlobals;
 import com.github.puzzle.game.items.IModItem;
-import com.github.puzzle.game.items.data.DataTagManifest;
-import com.github.puzzle.game.util.BlockSelectionUtil;
+import com.github.puzzle.game.items.impl.AbstractItem;
 import com.github.puzzle.game.util.BlockUtil;
 import finalforeach.cosmicreach.blockentities.BlockEntity;
 import finalforeach.cosmicreach.blocks.BlockPosition;
@@ -16,14 +13,12 @@ import finalforeach.cosmicreach.util.Identifier;
 
 import static com.github.puzzle.core.Constants.MOD_ID;
 
-public class BlockWrench implements IModItem {
-
-    Identifier id = Identifier.of(MOD_ID, "block_wrench");
-    DataTagManifest tagManifest = new DataTagManifest();
+public class BlockWrench extends AbstractItem {
 
     public BlockWrench() {
-        tagManifest.addTag(IModItem.MODEL_ID_PRESET.createTag(IModItem.MODEL_2_5D_ITEM));
-        tagManifest.addTag(IModItem.TEXTURE_LOCATION_PRESET.createTag(Identifier.of(MOD_ID, "block_wrench.png")));
+        super(Identifier.of(MOD_ID, "block_wrench"));
+        manifest.addTag(IModItem.MODEL_ID_PRESET.createTag(IModItem.MODEL_2_5D_ITEM));
+        manifest.addTag(IModItem.TEXTURE_LOCATION_PRESET.createTag(Identifier.of(MOD_ID, "block_wrench.png")));
     }
 
     @Override
@@ -35,16 +30,6 @@ public class BlockWrench implements IModItem {
     }
 
     @Override
-    public String toString() {
-        return "Item: " + getID();
-    }
-
-    @Override
-    public Identifier getIdentifier() {
-        return id;
-    }
-
-    @Override
     public boolean isTool() {
         return true;
     }
@@ -52,11 +37,6 @@ public class BlockWrench implements IModItem {
     @Override
     public int getMaxStackSize() {
         return 1;
-    }
-
-    @Override
-    public DataTagManifest getTagManifest() {
-        return tagManifest;
     }
 
     @Override

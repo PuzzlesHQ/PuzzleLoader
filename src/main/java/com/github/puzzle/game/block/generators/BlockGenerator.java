@@ -4,9 +4,9 @@ import com.badlogic.gdx.utils.*;
 import com.github.puzzle.game.engine.blocks.IBlockLoader;
 import com.github.puzzle.game.factories.IGenerator;
 import com.github.puzzle.game.oredict.tags.Tag;
-import finalforeach.cosmicreach.GameTagList;
 import finalforeach.cosmicreach.blocks.BlockPosition;
 import finalforeach.cosmicreach.blocks.placementrules.PlacementRules;
+import finalforeach.cosmicreach.util.GameTagList;
 import finalforeach.cosmicreach.util.Identifier;
 import finalforeach.cosmicreach.util.predicates.GamePredicate;
 import finalforeach.cosmicreach.util.predicates.GamePredicateBlockPos;
@@ -21,7 +21,7 @@ import java.util.function.Predicate;
 
 public class BlockGenerator implements IGenerator {
 
-    public State defaultProperties;
+    public JsonValue defaultProperties;
 
     public static class State implements Json.Serializable {
         /**
@@ -51,7 +51,7 @@ public class BlockGenerator implements IGenerator {
         public float refractiveIndex = 1.0F;
         @Deprecated
         public boolean generateSlabs = false;
-        public String[] stateGenerators = null;
+        public String[] stateGenerators = new String[0];
         public boolean catalogHidden = false;
         public boolean isOpaque = true;
         public boolean walkThrough = false;
@@ -66,15 +66,42 @@ public class BlockGenerator implements IGenerator {
         public String dropId;
         public float hardness = 1.5F;
         public Predicate<BlockPosition> canPlaceCheck = GamePredicate.getAlwaysTrue();
-        int rotXZ = 0;
+        float[] rotation = new float[]{0, 0, 0};
         public OrderedMap<String, ?> dropParams;
         ObjectIntMap<String> intProperties = new ObjectIntMap();
         private PlacementRules placementRules = PlacementRules.DEFAULT_RULES;
         private boolean canDrop = true;
+        private boolean stopsLasers;
 
         public State() {}
 
         public void read(Json json, JsonValue jsonData) {
+            json.setSerializer(GameTagList.class, GameTagList.GAME_TAG_JSON_SERIALIZER);
+
+            JsonValue blockStatesJson = jsonData.parent;
+            JsonValue blockJson = blockStatesJson != null ? blockStatesJson.parent : null;
+            JsonValue defaultProperties = blockJson != null ? blockJson.get("defaultProperties") : null;
+            if (defaultProperties != null) {
+                this.readData(json, defaultProperties);
+            }
+
+            this.readData(json, jsonData);
+            this.stopsLasers = this.isOpaque;
+            if (defaultProperties != null) {
+                this.readDataAfter(json, defaultProperties);
+            }
+
+            this.readDataAfter(json, jsonData);
+        }
+
+        private void readDataAfter(Json json, JsonValue jsonData) {
+            if (jsonData.has("stopsLasers")) {
+                this.stopsLasers = jsonData.getBoolean("stopsLasers");
+            }
+
+        }
+
+        private void readData(Json json, JsonValue jsonData) {
             if (jsonData.has("canPlace")) {
                 JsonValue canPlaceRoot = jsonData.get("canPlace");
                 this.canPlaceCheck = (Predicate)json.readValue(GamePredicateBlockPos.class, canPlaceRoot.child);
@@ -99,7 +126,24 @@ public class BlockGenerator implements IGenerator {
             this.lightLevelRed = jsonData.getInt("lightLevelRed", this.lightLevelRed);
             this.lightLevelGreen = jsonData.getInt("lightLevelGreen", this.lightLevelGreen);
             this.lightLevelBlue = jsonData.getInt("lightLevelBlue", this.lightLevelBlue);
-            this.rotXZ = jsonData.getInt("rotXZ", this.rotXZ);
+            if (jsonData.has("rotXZ")) {
+                if (this.rotation == null) {
+                    this.rotation = new float[3];
+                }
+
+                this.rotation[1] = (float)jsonData.getInt("rotXZ");
+            }
+
+            if (jsonData.has("rotation")) {
+                this.rotation = jsonData.get("rotation").asFloatArray();
+            }
+
+            if (this.rotation != null) {
+                this.rotation[0] = (this.rotation[0] % 360.0F + 360.0F) % 360.0F;
+                this.rotation[1] = (this.rotation[1] % 360.0F + 360.0F) % 360.0F;
+                this.rotation[2] = (this.rotation[2] % 360.0F + 360.0F) % 360.0F;
+            }
+
             this.hardness = jsonData.getFloat("hardness", this.hardness);
             this.blastResistance = jsonData.getFloat("blastResistance", this.blastResistance);
             this.friction = jsonData.getFloat("friction", this.friction);
@@ -124,9 +168,12 @@ public class BlockGenerator implements IGenerator {
             if (jsonData.has("placementRules")) {
                 this.placementRules = PlacementRules.get(jsonData.getString("placementRules"));
             }
+
         }
 
         public void write(Json json) {
+            json.setSerializer(GameTagList.class, GameTagList.GAME_TAG_JSON_SERIALIZER);
+
             json.writeField(this, "langKey");
             json.writeField(this, "modelName");
             json.writeField(this, "swapGroupId");
@@ -145,7 +192,7 @@ public class BlockGenerator implements IGenerator {
             json.writeField(this, "lightLevelRed");
             json.writeField(this, "lightLevelGreen");
             json.writeField(this, "lightLevelBlue");
-            json.writeField(this, "rotXZ");
+            json.writeField(this, "rotation");
             json.writeField(this, "hardness");
             json.writeField(this, "friction");
             json.writeField(this, "bounciness");
@@ -161,20 +208,20 @@ public class BlockGenerator implements IGenerator {
 
     public Identifier blockId;
     public String blockEntityId;
-    public Map<String, ?> blockEntityParams;
+    public OrderedMap<String, ?> blockEntityParams;
 
-    public Map<String, String> defaultParams;
-    public Map<String, State> blockStates;
+    public OrderedMap<String, String> defaultParams;
+    public OrderedMap<String, State> blockStates;
     public List<Tag> itemTags;
 
     public BlockGenerator(Identifier blockId) {
         this.blockId = blockId;
-        this.defaultParams = new LinkedHashMap<>();
-        this.blockStates = new LinkedHashMap<>();
-        this.blockEntityParams = new LinkedHashMap<>();
+        this.defaultParams = new OrderedMap<>();
+        this.blockStates = new OrderedMap<>();
+        this.blockEntityParams = new OrderedMap<>();
     }
 
-    public void addBlockEntity(String blockEntityId, Map<String, ?> parameters) {
+    public void addBlockEntity(String blockEntityId, OrderedMap<String, ?> parameters) {
         this.blockEntityId = blockEntityId;
         this.blockEntityParams = parameters;
     }
@@ -215,8 +262,8 @@ public class BlockGenerator implements IGenerator {
             out += "\"blockEntityId\": \"" + blockEntityId + "\", ";
         if (blockEntityParams != null)
             out += "\"blockEntityParams\": " + json2.toJson(blockEntityParams) + ", ";
-        if (defaultProperties != null)
-            out += "\"defaultProperties\": " + json2.toJson(defaultProperties) + ", ";
+//        if (defaultProperties != null)
+//            out += "\"defaultProperties\": " + json2.toJson(defaultProperties) + ", ";
         out += "\"blockStates\": " + json.toJson(blockStates);
         out += "}";
 

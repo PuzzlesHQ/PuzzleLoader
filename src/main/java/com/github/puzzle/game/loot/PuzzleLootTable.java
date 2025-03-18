@@ -54,8 +54,8 @@ public class PuzzleLootTable {
                 JsonObject drop = object.get("drop").asObject();
 
                 String type = drop.getString("type", "blockstate");
-                String dropId = drop.getString("id", "base:debug[default]").strip();
-                dropId = dropId.isEmpty() ? "base:debug[default]" : dropId;
+                String dropId = drop.getString("id", "base:debug").strip();
+                dropId = dropId.isEmpty() ? "base:debug" : dropId;
                 dropId = type.equals("item") ? "base:medkit" : dropId;
 
                 Identifier id = Identifier.of(dropId);
@@ -70,8 +70,8 @@ public class PuzzleLootTable {
                     JsonObject drop = value1.asObject();
 
                     String type = drop.getString("type", "blockstate");
-                    String dropId = drop.getString("id", "base:debug[default]").strip();
-                    dropId = dropId.isEmpty() ? "base:debug[default]" : dropId;
+                    String dropId = drop.getString("id", "base:debug").strip();
+                    dropId = dropId.isEmpty() ? "base:debug" : dropId;
                     dropId = type.equals("item") ? "base:medkit" : dropId;
 
                     Identifier id = Identifier.of(dropId);

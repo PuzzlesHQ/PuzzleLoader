@@ -2,6 +2,7 @@ package com.github.puzzle.game.block;
 
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
+import com.badlogic.gdx.utils.OrderedMap;
 import com.github.puzzle.game.block.generators.BlockGenerator;
 import com.github.puzzle.game.block.generators.PassThroughBlockGenerator;
 import com.github.puzzle.game.items.data.DataTag;
@@ -13,6 +14,7 @@ import finalforeach.cosmicreach.items.ItemStack;
 import finalforeach.cosmicreach.util.Identifier;
 
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * @see IModBlock
@@ -23,15 +25,31 @@ public class DataModBlock implements IModBlock {
 
     public static class JsonBlock implements Json.Serializable {
         public String stringId;
+        public String blockEntityId;
+        public OrderedMap<String, ?> blockEntityParams;
+        public OrderedMap<String, String> defaultParams;
+        public OrderedMap<String, BlockGenerator.State> blockStates;
+        public JsonValue defaultProperties;
 
         @Override
         public void write(Json json) {
-            json.writeField(this, "stringId");
         }
 
         @Override
-        public void read(Json json, JsonValue jsonValue) {
-            json.readField(this, "stringId", jsonValue);
+        public void read(Json json, JsonValue jsonData) {
+            this.stringId = jsonData.getString("stringId");
+            this.blockEntityId = jsonData.getString("blockEntityId", null);
+            if (jsonData.has("defaultParams")) {
+                json.readField(this, "defaultParams", jsonData);
+            }
+
+            if (jsonData.has("blockStates")) {
+                json.readField(this, "blockStates", jsonData);
+            }
+
+            if (jsonData.has("blockEntityParams")) {
+                json.readField(this, "blockEntityParams", jsonData);
+            }
         }
     }
 
@@ -67,7 +85,6 @@ public class DataModBlock implements IModBlock {
 //        generator.defaultProperties = block.defaultProperties;
 //        System.out.println(generator.generateJson());
 //        return generator;
-//        return ExperimentalBlockGenerator.fromJson(blockJson);
         return new PassThroughBlockGenerator(identifier, blockJson);
     }
 

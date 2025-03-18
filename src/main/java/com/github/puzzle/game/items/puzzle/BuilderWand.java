@@ -5,6 +5,7 @@ import com.github.puzzle.core.Constants;
 import com.github.puzzle.core.loader.meta.EnvType;
 import com.github.puzzle.game.items.IModItem;
 import com.github.puzzle.game.items.data.DataTagManifest;
+import com.github.puzzle.game.items.impl.AbstractItem;
 import com.github.puzzle.game.keybindings.PuzzleControlSettings;
 import com.github.puzzle.game.util.BlockSelectionUtil;
 import com.github.puzzle.game.worldgen.schematics.Schematic;
@@ -17,20 +18,19 @@ import finalforeach.cosmicreach.util.Identifier;
 
 import static com.github.puzzle.core.Constants.MOD_ID;
 
-public class BuilderWand implements IModItem {
+public class BuilderWand extends AbstractItem {
 
     WANDMODES wandmodes = WANDMODES.SELECTPOS;
-    Identifier id = Identifier.of(MOD_ID, "builder_wand");
-    DataTagManifest tagManifest = new DataTagManifest();
     public static Vector3 pos1 = null;
     public static Vector3 pos2 = null;
     public static Schematic clipBoard;
     boolean nextPos = false;
 
     public BuilderWand() {
-        tagManifest.addTag(IModItem.MODEL_ID_PRESET.createTag(IModItem.MODEL_2_5D_ITEM));
-        tagManifest.addTag(IModItem.TEXTURE_LOCATION_PRESET.createTag(Identifier.of(MOD_ID, "baby_wand.png")));
-        tagManifest.addTag(IModItem.IS_DEBUG_ATTRIBUTE.createTag(true));
+        super(Identifier.of(MOD_ID, "builder_wand"));
+        manifest.addTag(IModItem.MODEL_ID_PRESET.createTag(IModItem.MODEL_2_5D_ITEM));
+        manifest.addTag(IModItem.TEXTURE_LOCATION_PRESET.createTag(Identifier.of(MOD_ID, "baby_wand.png")));
+        manifest.addTag(IModItem.IS_DEBUG_ATTRIBUTE.createTag(true));
     }
 
     @Override
@@ -84,16 +84,6 @@ public class BuilderWand implements IModItem {
     }
 
     @Override
-    public Identifier getIdentifier() {
-        return id;
-    }
-
-    @Override
-    public String toString() {
-        return "Item: " + getID();
-    }
-
-    @Override
     public boolean isTool() {
         return true;
     }
@@ -101,11 +91,6 @@ public class BuilderWand implements IModItem {
     @Override
     public int getMaxStackSize() {
         return 1;
-    }
-
-    @Override
-    public DataTagManifest getTagManifest() {
-        return tagManifest;
     }
 
     @Override

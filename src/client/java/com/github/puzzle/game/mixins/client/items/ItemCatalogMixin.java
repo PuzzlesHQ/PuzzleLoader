@@ -1,26 +1,22 @@
 package com.github.puzzle.game.mixins.client.items;
 
+import com.badlogic.gdx.utils.Array;
 import com.github.puzzle.game.items.IModItem;
-import finalforeach.cosmicreach.items.ItemCatalog;
+import finalforeach.cosmicreach.items.Item;
 import finalforeach.cosmicreach.items.ItemStack;
-import finalforeach.cosmicreach.items.containers.SlotContainer;
+import finalforeach.cosmicreach.ui.widgets.ItemCatalogWidget;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
-@Mixin(ItemCatalog.class)
-public class ItemCatalogMixin extends SlotContainer {
+@Mixin(ItemCatalogWidget.class)
+public class ItemCatalogMixin {
 
-    public ItemCatalogMixin(int numSlots) {
-        super(numSlots);
-    }
-
-    @Redirect(method = "<init>", at = @At(value = "INVOKE", target = "Lfinalforeach/cosmicreach/items/ItemCatalog;addItemStack(Lfinalforeach/cosmicreach/items/ItemStack;)Z"))
-    private boolean nuhUh(ItemCatalog instance, ItemStack itemStack) {
-        if (itemStack.getItem() instanceof IModItem item) {
-            if (!item.isDebug()) addItemStack(item.getDefaultItemStack());
-        } else addItemStack(itemStack);
-        return false;
+    @Redirect(method = "getItems", at = @At(value = "INVOKE", target = "Lcom/badlogic/gdx/utils/Array;add(Ljava/lang/Object;)V"))
+    private <T> void nuhUh(Array instance, T value) {
+        if (value instanceof IModItem item) {
+            if (!item.isDebug()) instance.add(item);
+        } else instance.add(value);
     }
 
 }

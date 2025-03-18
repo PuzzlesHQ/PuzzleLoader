@@ -8,6 +8,7 @@ import finalforeach.cosmicreach.Threads;
 import finalforeach.cosmicreach.blocks.BlockState;
 import finalforeach.cosmicreach.rendering.blockmodels.BlockModel;
 import finalforeach.cosmicreach.rendering.blockmodels.BlockModelJson;
+import finalforeach.cosmicreach.rendering.blockmodels.DummyBlockModel;
 import finalforeach.cosmicreach.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +21,7 @@ import java.util.Map;
 
 public class BlockModelFactory extends DummyBlockModelFactory implements IBlockModelFactory {
 
-    public record InstanceKey(String modelName, int rotXZ) {}
+    public record InstanceKey(String modelName, float x, float y, float z) {}
 
     public final Map<InstanceKey, BlockModel> models = new LinkedHashMap<>();
 
@@ -33,27 +34,27 @@ public class BlockModelFactory extends DummyBlockModelFactory implements IBlockM
         return modelName;
     }
 
-    public void registerBlockModel(String modelName, int rotXZ, BlockModel model) {
+    public void registerBlockModel(String modelName, float[] rotation, BlockModel model) {
         modelName = getNotShitModelName(modelName);
-        final InstanceKey key = new InstanceKey(modelName, rotXZ);
+        final InstanceKey key = new InstanceKey(modelName, rotation[0], rotation[1], rotation[2]);
         if (models.containsKey(key)) {
             return;
         }
         models.put(key, model);
     }
 
-    public BlockModel createFromJson(String modelName, int rotXZ, String modelJson) {
+    public BlockModel createFromJson(String modelName, float[] rotation, String modelJson) {
         modelName = getNotShitModelName(modelName);
-        final InstanceKey key = new InstanceKey(modelName, rotXZ);
+        final InstanceKey key = new InstanceKey(modelName, rotation[0], rotation[1], rotation[2]);
         if (models.containsKey(key)) {
             return models.get(key);
         }
 
-        BlockModelJson model = BlockModelJson.getInstanceFromJsonStr(modelName, modelJson, rotXZ);
+        BlockModelJson model = BlockModelJson.getInstanceFromJsonStr(modelName, modelJson, rotation);
         addInit(model);
         String parent = getModelParent(model);
         if (parent != null) {
-            getInstance(parent, rotXZ);
+            getInstance(parent, rotation);
         }
 
         models.put(key, model);
@@ -61,20 +62,20 @@ public class BlockModelFactory extends DummyBlockModelFactory implements IBlockM
     }
 
     @Override
-    public BlockModel getInstance(String modelName, int rotXZ) {
+    public BlockModel getInstance(String modelName, float[] rotation) {
         modelName = getNotShitModelName(modelName);
-        final InstanceKey key = new InstanceKey(modelName, rotXZ);
+        final InstanceKey key = new InstanceKey(modelName, rotation[0], rotation[1], rotation[2]);
         if (models.containsKey(key)) {
             return models.get(key);
         }
 
         String modelJson = PuzzleGameAssetLoader.locateAsset(VanillaAssetLocations.getBlockModel(modelName)).readString();
-        BlockModelJson model = BlockModelJson.getInstanceFromJsonStr(modelName, modelJson, rotXZ);
+        BlockModelJson model = BlockModelJson.getInstanceFromJsonStr(modelName, modelJson, rotation);
         addInit(model);
 
         String parent = getModelParent(model);
         if (parent != null) {
-            getInstance(parent, rotXZ);
+            getInstance(parent, rotation);
         }
 
         models.put(key, model);
@@ -92,9 +93,9 @@ public class BlockModelFactory extends DummyBlockModelFactory implements IBlockM
     }
 
     @Override
-    public void createGeneratedModelInstance(BlockState blockState, BlockModel parentModel, String parentModelName, String modelName, int rotXZ) {
+    public void createGeneratedModelInstance(BlockState blockState, BlockModel parentModel, String parentModelName, String modelName, float[] rotation) {
         modelName = getNotShitModelName(modelName);
-        final InstanceKey key = new InstanceKey(modelName, rotXZ);
+        final InstanceKey key = new InstanceKey(modelName, rotation[0], rotation[1], rotation[2]);
         if (models.containsKey(key)) {
             return;
         }
@@ -105,13 +106,13 @@ public class BlockModelFactory extends DummyBlockModelFactory implements IBlockM
         String modelJson;
         modelJson = "{\"parent\": \"" + parentModelName + "\", \"textures\":" + json.toJson(((BlockModelJson) parentModel).getTextures()) + "}";
 
-        BlockModelJson model = BlockModelJson.getInstanceFromJsonStr(modelName, modelJson, rotXZ);
+        BlockModelJson model = BlockModelJson.getInstanceFromJsonStr(modelName, modelJson, rotation);
         addInit(model);
         String parent = getModelParent(model);
         if (parent != null) {
             model.cullsSelf = parentModel.cullsSelf;
             model.isTransparent = parentModel.isTransparent;
-            getInstance(parent, rotXZ);
+            getInstance(parent, rotation);
         }
 
         models.put(key, model);
@@ -130,17 +131,19 @@ public class BlockModelFactory extends DummyBlockModelFactory implements IBlockM
             BlockModelJson parentModel = null;
 
             InstanceKey parentKey;
-            if (models.containsKey(parentKey = new InstanceKey(parent, 0)))
-                parentModel = (BlockModelJson) models.get(parentKey);
-            else if (models.containsKey(parentKey = new InstanceKey(parent, 90)))
-                parentModel = (BlockModelJson) models.get(parentKey);
-            else if (models.containsKey(parentKey = new InstanceKey(parent, 180)))
-                parentModel = (BlockModelJson) models.get(parentKey);
-            else if (models.containsKey(parentKey = new InstanceKey(parent, 270))) {
-                parentModel = (BlockModelJson) models.get(parentKey);
+            for (int x = 0; x < 360; x += 90) {
+                for (int y = 0; y < 360; y += 90) {
+                    for (int z = 0; z < 360; z += 90) {
+                        if (models.containsKey(parentKey = new InstanceKey(parent, x, y, z))) {
+                            parent = parentModel == null ? null : getModelParent(parentModel);
+                            n++;
+                            return n;
+                        }
+                    }
+                }
             }
 
-            parent = parentModel == null ? null : getModelParent(parentModel);
+            parent = null;
             n++;
         }
         return n;

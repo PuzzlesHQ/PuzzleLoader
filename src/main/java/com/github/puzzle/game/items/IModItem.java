@@ -8,7 +8,6 @@ import com.github.puzzle.game.items.data.DataTagManifest;
 import com.github.puzzle.game.items.data.DataTagPreset;
 import com.github.puzzle.game.items.data.attributes.*;
 import com.github.puzzle.game.util.DataTagUtil;
-import finalforeach.cosmicreach.GameTag;
 import finalforeach.cosmicreach.blockentities.BlockEntity;
 import finalforeach.cosmicreach.blockentities.BlockEntityFurnace;
 import finalforeach.cosmicreach.blocks.BlockPosition;
@@ -17,6 +16,7 @@ import finalforeach.cosmicreach.entities.player.Player;
 import finalforeach.cosmicreach.items.Item;
 import finalforeach.cosmicreach.items.ItemSlot;
 import finalforeach.cosmicreach.items.ItemStack;
+import finalforeach.cosmicreach.util.GameTag;
 import finalforeach.cosmicreach.util.Identifier;
 
 import java.lang.reflect.InvocationTargetException;
@@ -33,6 +33,8 @@ public interface IModItem extends Item {
      * @see Identifier
      */
     Identifier getIdentifier();
+
+    GameTag MODDED_ITEM_TAG = GameTag.get("puzzle_modded_item");;
 
     static <T extends IModItem> T registerItem(T item) {
         allItems.put(item.getID(), item);
