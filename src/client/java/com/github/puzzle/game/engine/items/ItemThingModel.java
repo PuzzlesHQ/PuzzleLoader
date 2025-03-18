@@ -21,6 +21,7 @@ import finalforeach.cosmicreach.world.Zone;
 
 import java.lang.ref.WeakReference;
 
+@Deprecated(forRemoval = true, since = "2.3.9")
 public class ItemThingModel implements IPuzzleItemModel {
 
     Mesh mesh;

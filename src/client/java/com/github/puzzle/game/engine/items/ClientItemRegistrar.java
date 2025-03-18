@@ -12,6 +12,7 @@ import java.util.function.Function;
 
 import static finalforeach.cosmicreach.rendering.items.ItemRenderer.registerItemModelCreator;
 
+@Deprecated(forRemoval = true, since = "2.3.9")
 public class ClientItemRegistrar {
 
     public static <T extends IModItem> T registerModel(T item) {

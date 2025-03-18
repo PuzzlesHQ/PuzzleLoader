@@ -20,7 +20,6 @@
     "items.InGameMixin",
     "items.ItemCatalogMixin",
     "items.rendering.EntityMixin",
-    "items.rendering.ItemRendererMixin",
     "items.rendering.ItemSlotWidgetMixin",
     "model.BlockModelJsonInitDisabler",
     "networking.ClientNetworkManagerMixin",

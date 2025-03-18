@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.github.puzzle.game.engine.shaders.ItemShader;
 
+@Deprecated(forRemoval = true, since = "2.3.9")
 public class ItemModelBuilder {
 
         static MeshBuilder builder = new MeshBuilder();

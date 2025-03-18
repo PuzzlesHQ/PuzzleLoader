@@ -8,6 +8,7 @@ import finalforeach.cosmicreach.world.Zone;
  * This interface allow IModItem(s) to tick as entity or in player inventory .
  * @see IModItem
  */
+@Deprecated(forRemoval = true, since = "2.3.9")
 public interface ITickingItem {
 
     /**

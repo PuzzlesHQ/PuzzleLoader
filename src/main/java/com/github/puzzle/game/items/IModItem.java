@@ -26,7 +26,7 @@ import java.util.List;
 
 import static com.github.puzzle.core.Constants.MOD_ID;
 
-@SuppressWarnings("all")
+@Deprecated(forRemoval = true, since = "2.3.9")
 public interface IModItem extends Item {
 
     /**
@@ -408,11 +408,6 @@ public interface IModItem extends Item {
      */
     default boolean canInteractWithBlockEntity(BlockEntity blockEntity) {
         return true;
-    }
-
-    @Override
-    default boolean hasTag(GameTag gameTag) {
-        return false;
     }
 
     @Override

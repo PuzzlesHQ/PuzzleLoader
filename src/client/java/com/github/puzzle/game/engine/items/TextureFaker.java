@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 
 import java.util.Random;
 
+@Deprecated(forRemoval = true, since = "2.3.9")
 public class TextureFaker {
 
     public static Random random = new Random();

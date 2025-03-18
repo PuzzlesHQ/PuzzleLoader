@@ -30,6 +30,7 @@ import finalforeach.cosmicreach.world.Zone;
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
 
+@Deprecated(forRemoval = true, since = "2.3.9")
 public class ExperimentalItemModel implements IPuzzleItemModel {
 
 //    static HashMap<String, List<Pair<Mesh, Texture>>> modelTexturePairs = new HashMap<>();

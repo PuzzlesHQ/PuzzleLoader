@@ -13,6 +13,7 @@ import finalforeach.cosmicreach.world.Zone;
 import java.io.*;
 import java.util.HashMap;
 
+@Deprecated(forRemoval = true, since = "2.3.9")
 public class Schematic {
     static HashMap<String, Schematic> schematic = new HashMap<>();
     Array<String> blockStates;
