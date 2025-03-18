@@ -144,6 +144,11 @@ public class ServerBlockLoader implements IBlockLoader {
                 registerEvent(eventName, eventJson);
             }
 
+            if (block.blockStates.containsKey("default")) {
+                block.blockStates.put("", block.blockStates.get("default"));
+                block.blockStates.remove("default");
+            }
+
             for (String stateKey : block.blockStates.keys().toArray()) {
                 BlockState blockState = block.blockStates.get(stateKey);
                 blockState.stringId = stateKey;
