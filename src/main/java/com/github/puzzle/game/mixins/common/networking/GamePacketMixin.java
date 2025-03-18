@@ -50,7 +50,7 @@ public abstract class GamePacketMixin {
         PacketInterceptor.registerReservedPacket("identification-packet", 9000, CTSIdentificationPacket.class);
         PacketInterceptor.registerReservedPacket("modlist-request-packet", 9001, STCModlistRequestPacket.class);
         PacketInterceptor.registerReservedPacket("modlist-send-packet", 9002, CTSModlistPacket.class);
-        PacketInterceptor.registerPacketLazy(UseModdedItemPacket.class);
+        PacketInterceptor.registerReservedPacket("UseModdedItemPacket", 9003, UseModdedItemPacket.class);
 
         PacketInterceptor.init();
     }
