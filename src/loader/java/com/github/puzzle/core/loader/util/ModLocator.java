@@ -191,11 +191,11 @@ public class ModLocator {
 
     private static void addMod(EnvType env, ModJson json, ZipFile jar, boolean isDevMod) {
         if (!json.allowedSides().isAllowed(env)) {
-            LOGGER.error("Discovered {}Mod \"{}\" with ID \"{}\" on the wrong side of {}, please remove this mod or fix the puzzle.mod.json", json.name(), isDevMod ? "DevMod" : " ", json.id());
+            LOGGER.error("Discovered {} Mod \"{}\" with ID \"{}\" on the wrong side of {}, please remove this mod or fix the puzzle.mod.json", json.name(), isDevMod ? "DevMod" : " ", json.id());
             return;
         }
 
-        LOGGER.info("Discovered {}Mod \"{}\" with ID \"{}\"", json.name(), isDevMod ? "DevMod" : " ", json.id());
+        LOGGER.info("Discovered {} Mod \"{}\" with ID \"{}\"", json.name(), isDevMod ? "DevMod" : " ", json.id());
         if(locatedMods.containsKey(json.id()))
             throw new RuntimeException("mod id \""+json.id()+"\" already used");
         else
@@ -227,6 +227,7 @@ public class ModLocator {
     public static void crawlModsFolder(Collection<URL> urls) {
         if (!MOD_FOLDER.exists()) {
             if (!MOD_FOLDER.mkdir()) LOGGER.warn("{} could not be created, provide access to java", MOD_FOLDER);
+            MOD_FOLDER = MOD_FOLDER.getAbsoluteFile();
             return;
         }
 

@@ -7,9 +7,11 @@ import com.github.puzzle.game.block.IModBlock;
 import com.github.puzzle.game.block.PuzzleBlockAction;
 import com.github.puzzle.game.factories.IFactory;
 import com.github.puzzle.game.loot.PuzzleLootTable;
+import finalforeach.cosmicreach.items.Item;
 import finalforeach.cosmicreach.util.Identifier;
 import meteordevelopment.orbit.EventBus;
 import meteordevelopment.orbit.IEventBus;
+import org.jetbrains.annotations.ApiStatus;
 
 import java.lang.invoke.MethodHandles;
 
@@ -26,13 +28,19 @@ public class PuzzleRegistries {
     public static final LanguageRegistry LANGUAGES = new LanguageRegistry(Identifier.of(MOD_ID, "languages"));
     public static final IRegistry<IFactory<PuzzleBlockAction>> BLOCK_EVENT_ACTION_FACTORIES = new GenericRegistry<>(Identifier.of(MOD_ID, "block_event_actions_factories"));
 
-    public static final IRegistry<IModBlock> BLOCKS = new GenericRegistry<>(Identifier.of(MOD_ID, "blocks"));
 
+    @ApiStatus.Internal
     public static final IRegistry<Runnable> BLOCK_MODEL_FINALIZERS = new GenericRegistry<>(Identifier.of(MOD_ID, "block_model_finalizers"));
+
+    @ApiStatus.Internal
     public static final IRegistry<Runnable> BLOCK_FINALIZERS = new GenericRegistry<>(Identifier.of(MOD_ID, "block_finalizers"));
 
     static {
         EVENT_BUS.registerLambdaFactory("com.github.puzzle", (lookupInMethod, klass) -> (MethodHandles.Lookup) lookupInMethod.invoke(null, klass, MethodHandles.lookup()));
     }
+
+    public static final IRegistry<IModBlock> BLOCKS = new GenericRegistry<>(Identifier.of(MOD_ID, "blocks"));
+    public static final IRegistry<Item> ITEMS = new GenericRegistry<>(Identifier.of(MOD_ID, "items"));
+    public static final IRegistry<Item> ENTITIES = new GenericRegistry<>(Identifier.of(MOD_ID, "entities"));
 
 }
