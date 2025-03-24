@@ -1,21 +1,23 @@
 package com.github.puzzle.game.mixins.client.music;
 
-import com.badlogic.gdx.utils.JsonValue;
+import com.badlogic.gdx.utils.Array;
 import com.github.puzzle.game.ClientPuzzleRegistries;
-import com.llamalad7.mixinextras.sugar.Local;
 import finalforeach.cosmicreach.audio.GameMusicManager;
 import finalforeach.cosmicreach.audio.GameSong;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(GameMusicManager.class)
 public class MusicManagerMixin {
 
-    @Inject(method = "loadSong", at = @At("TAIL"))
-    private static void loadSong(JsonValue json, CallbackInfo ci, @Local GameSong song) {
-        ClientPuzzleRegistries.SONG_REGISTRY.store(song.id, song);
+    @Shadow public static Array<GameSong> gameSongs;
+
+    @Redirect(method = "loadSong", at = @At(value = "INVOKE", target = "Lcom/badlogic/gdx/utils/Array;add(Ljava/lang/Object;)V"))
+    private static <T> void loadSong(Array instance, T value) {
+        gameSongs = null;
+        ClientPuzzleRegistries.SONGS.store(((GameSong) value).id, (GameSong) value);
     }
 
 }

@@ -7,6 +7,6 @@ public class PuzzleTransformers implements CommonTransformerInitializer {
     @Override
     public void onTransformerInit(PuzzleClassLoader classLoader) {
         classLoader.registerTransformer("com.github.puzzle.core.loader.transformers.AccessManipulatorTransformer");
-        classLoader.registerTransformer("com.github.puzzle.core.loader.transformers.ItemCatalogTransformer");
+        classLoader.registerTransformer("com.github.puzzle.core.loader.transformers.ClientASMTransformer");
     }
 }

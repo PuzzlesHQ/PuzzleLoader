@@ -6,7 +6,7 @@ import org.objectweb.asm.ClassWriter;
 
 import java.util.Objects;
 
-public class ItemCatalogTransformer implements IClassTransformer {
+public class ClientASMTransformer implements IClassTransformer {
 
     @Override
     public byte[] transform(String name, String transformedName, byte[] basicClass) {
@@ -17,6 +17,14 @@ public class ItemCatalogTransformer implements IClassTransformer {
             ClassWriter writer = new ClassWriter(reader, ClassWriter.COMPUTE_FRAMES);
 
             reader.accept(new ItemCatalogClassVisitor(writer), 2);
+            return writer.toByteArray();
+        }
+        if (Objects.equals(parts[parts.length - 1], "GameMusicManager")) {
+            System.err.println(name);
+            ClassReader reader = new ClassReader(basicClass);
+            ClassWriter writer = new ClassWriter(reader, ClassWriter.COMPUTE_FRAMES);
+
+            reader.accept(new GameMusicManagerClassVisitor(writer), 2);
             return writer.toByteArray();
         }
         return basicClass;

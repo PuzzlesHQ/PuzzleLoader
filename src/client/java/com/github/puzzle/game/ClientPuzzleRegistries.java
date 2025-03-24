@@ -9,6 +9,6 @@ import static com.github.puzzle.core.Constants.MOD_ID;
 
 public class ClientPuzzleRegistries {
 
-    public static final IRegistry<GameSong> SONG_REGISTRY = new GenericRegistry<>(Identifier.of(MOD_ID, "songs"));
+    public static final IRegistry<GameSong> SONGS = new GenericRegistry<>(Identifier.of(MOD_ID, "songs"));
 
 }
