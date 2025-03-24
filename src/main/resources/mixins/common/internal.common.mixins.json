@@ -10,8 +10,6 @@
     "blockentities.BlockEntityFurnaceMixin",
     "blockentities.BlockEntityItemContainerMixin",
     "chat.CommandMixin",
-    "items.ItemStackMixin",
-    "items.ticking.ItemEntityMixin",
     "loot.LootTableMixin",
     "networking.CommandPacketMixin",
     "networking.GamePacketMixin",

@@ -3,7 +3,6 @@ package com.github.puzzle.game.mixins.common.networking;
 import com.github.puzzle.game.networking.packet.PacketInterceptor;
 import com.github.puzzle.game.networking.packet.cts.CTSIdentificationPacket;
 import com.github.puzzle.game.networking.packet.cts.CTSModlistPacket;
-import com.github.puzzle.game.networking.packet.items.UseModdedItemPacket;
 import com.github.puzzle.game.networking.packet.stc.STCModlistRequestPacket;
 import finalforeach.cosmicreach.networking.GamePacket;
 import org.spongepowered.asm.mixin.Mixin;
@@ -50,7 +49,6 @@ public abstract class GamePacketMixin {
         PacketInterceptor.registerReservedPacket("identification-packet", 9000, CTSIdentificationPacket.class);
         PacketInterceptor.registerReservedPacket("modlist-request-packet", 9001, STCModlistRequestPacket.class);
         PacketInterceptor.registerReservedPacket("modlist-send-packet", 9002, CTSModlistPacket.class);
-        PacketInterceptor.registerReservedPacket("UseModdedItemPacket", 9003, UseModdedItemPacket.class);
 
         PacketInterceptor.init();
     }

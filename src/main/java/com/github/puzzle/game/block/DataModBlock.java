@@ -5,16 +5,8 @@ import com.badlogic.gdx.utils.JsonValue;
 import com.badlogic.gdx.utils.OrderedMap;
 import com.github.puzzle.game.block.generators.BlockGenerator;
 import com.github.puzzle.game.block.generators.PassThroughBlockGenerator;
-import com.github.puzzle.game.items.data.DataTag;
-import com.github.puzzle.game.items.data.DataTagManifest;
-import com.github.puzzle.game.items.data.attributes.IntDataAttribute;
 import com.github.puzzle.game.resources.PuzzleGameAssetLoader;
-import com.github.puzzle.game.util.DataTagUtil;
-import finalforeach.cosmicreach.items.ItemStack;
 import finalforeach.cosmicreach.util.Identifier;
-
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 /**
  * @see IModBlock

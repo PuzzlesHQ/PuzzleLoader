@@ -8,7 +8,6 @@ import com.llamalad7.mixinextras.sugar.Local;
 import finalforeach.cosmicreach.items.ItemStack;
 import finalforeach.cosmicreach.rendering.items.ItemModel;
 import finalforeach.cosmicreach.rendering.items.ItemRenderer;
-import finalforeach.cosmicreach.ui.widgets.ContainerSlotWidget;
 import finalforeach.cosmicreach.ui.widgets.ItemStackWidget;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
