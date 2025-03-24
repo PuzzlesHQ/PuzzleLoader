@@ -2,7 +2,6 @@ package com.github.puzzle.game.ui.credits;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.github.puzzle.game.resources.PuzzleGameAssetLoader;
 import com.github.puzzle.game.ui.credits.categories.ICreditElement;
@@ -16,7 +15,6 @@ import finalforeach.cosmicreach.settings.Controls;
 import finalforeach.cosmicreach.ui.HorizontalAnchor;
 import finalforeach.cosmicreach.ui.UIElement;
 import finalforeach.cosmicreach.ui.VerticalAnchor;
-import finalforeach.cosmicreach.ui.widgets.CRButton;
 
 import java.util.ArrayList;
 import java.util.List;

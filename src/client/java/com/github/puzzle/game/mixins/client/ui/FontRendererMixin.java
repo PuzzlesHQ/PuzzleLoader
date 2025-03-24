@@ -1,7 +1,6 @@
 package com.github.puzzle.game.mixins.client.ui;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.github.puzzle.game.engine.rendering.text.FormattedTextRenderer;
 import finalforeach.cosmicreach.ui.FontRenderer;

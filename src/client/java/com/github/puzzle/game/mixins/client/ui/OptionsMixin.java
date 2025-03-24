@@ -2,8 +2,6 @@ package com.github.puzzle.game.mixins.client.ui;
 
 import com.github.puzzle.game.ClientGlobals;
 import finalforeach.cosmicreach.GameSingletons;
-import finalforeach.cosmicreach.rendering.BatchedZoneRenderer;
-import finalforeach.cosmicreach.rendering.ExperimentalNaiveZoneRenderer;
 import finalforeach.cosmicreach.settings.GraphicsSettings;
 import finalforeach.cosmicreach.ui.widgets.CRButton;
 import org.spongepowered.asm.mixin.Mixin;

@@ -1,15 +1,12 @@
 package com.github.puzzle.game.engine.blocks;
 
 import com.badlogic.gdx.utils.Json;
-import com.github.puzzle.game.PuzzleRegistries;
 import com.github.puzzle.game.resources.PuzzleGameAssetLoader;
 import com.github.puzzle.game.resources.VanillaAssetLocations;
 import finalforeach.cosmicreach.Threads;
 import finalforeach.cosmicreach.blocks.BlockState;
 import finalforeach.cosmicreach.rendering.blockmodels.BlockModel;
 import finalforeach.cosmicreach.rendering.blockmodels.BlockModelJson;
-import finalforeach.cosmicreach.rendering.blockmodels.DummyBlockModel;
-import finalforeach.cosmicreach.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

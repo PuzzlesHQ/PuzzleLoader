@@ -3,7 +3,6 @@ package com.github.puzzle.game.mixins.client.ui;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Action;
-import com.badlogic.gdx.utils.Align;
 import com.github.puzzle.core.localization.LanguageManager;
 import com.github.puzzle.core.localization.TranslationKey;
 import com.github.puzzle.game.common.Puzzle;

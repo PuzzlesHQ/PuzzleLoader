@@ -2,7 +2,6 @@ package com.github.puzzle.game.mixins.client.model;
 
 import com.github.puzzle.game.engine.blocks.BlockModelJsonInitializer;
 import finalforeach.cosmicreach.rendering.blockmodels.BlockModelJson;
-import finalforeach.cosmicreach.rendering.blockmodels.BlockModelJsonCuboidFace;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;

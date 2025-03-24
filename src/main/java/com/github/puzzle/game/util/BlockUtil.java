@@ -11,7 +11,6 @@ import finalforeach.cosmicreach.blocks.BlockPosition;
 import finalforeach.cosmicreach.blocks.BlockState;
 import finalforeach.cosmicreach.lighting.BlockLightPropagator;
 import finalforeach.cosmicreach.networking.packets.blocks.BlockReplacePacket;
-import finalforeach.cosmicreach.networking.packets.blocks.PlaceBlockPacket;
 import finalforeach.cosmicreach.networking.server.ServerSingletons;
 import finalforeach.cosmicreach.util.constants.Direction;
 import finalforeach.cosmicreach.world.BlockSetter;

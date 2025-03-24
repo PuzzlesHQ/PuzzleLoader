@@ -2,7 +2,6 @@ package com.github.puzzle.game.mixins.client.logging;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.github.puzzle.core.loader.launch.Piece;
-import com.github.puzzle.core.loader.util.AnsiColours;
 import com.github.puzzle.game.resources.PuzzleGameAssetLoader;
 import finalforeach.cosmicreach.BlockGame;
 import org.slf4j.Logger;
@@ -13,9 +12,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import java.io.PrintStream;
-import java.util.List;
 
 @Mixin(BlockGame.class)
 public class BlockGameMixin {

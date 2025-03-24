@@ -1,7 +1,6 @@
 package com.github.puzzle.game.block.generators;
 
 import com.badlogic.gdx.utils.Json;
-import com.badlogic.gdx.utils.JsonValue;
 import com.badlogic.gdx.utils.JsonWriter;
 import com.google.gson.Gson;
 import finalforeach.cosmicreach.util.Identifier;
