@@ -10,6 +10,8 @@
     "BlockEventDisabler",
     "BlockStateGeneratorCopyFixer",
     "BlockStateGeneratorMixin",
+    "EntityCreatorMixin",
+    "GameSoundMixin",
     "ItemMixin",
     "LibgdxJSONFixer",
     "Point3DMapRewrite"

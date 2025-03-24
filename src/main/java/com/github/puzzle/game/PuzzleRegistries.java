@@ -5,9 +5,11 @@ import com.github.puzzle.core.registries.GenericRegistry;
 import com.github.puzzle.core.registries.IRegistry;
 import com.github.puzzle.game.block.IModBlock;
 import com.github.puzzle.game.block.PuzzleBlockAction;
+import com.github.puzzle.game.entity.EntityRegistry;
 import com.github.puzzle.game.factories.IFactory;
 import com.github.puzzle.game.loot.PuzzleLootTable;
 import finalforeach.cosmicreach.items.Item;
+import finalforeach.cosmicreach.sounds.GameSound;
 import finalforeach.cosmicreach.util.Identifier;
 import meteordevelopment.orbit.EventBus;
 import meteordevelopment.orbit.IEventBus;
@@ -41,6 +43,7 @@ public class PuzzleRegistries {
 
     public static final IRegistry<IModBlock> BLOCKS = new GenericRegistry<>(Identifier.of(MOD_ID, "blocks"));
     public static final IRegistry<Item> ITEMS = new GenericRegistry<>(Identifier.of(MOD_ID, "items"));
-    public static final IRegistry<Item> ENTITIES = new GenericRegistry<>(Identifier.of(MOD_ID, "entities"));
+    public static final EntityRegistry ENTITY_TYPE = new EntityRegistry(Identifier.of(MOD_ID, "entities"));
+    public static final IRegistry<GameSound> SOUND_REGISTRY = new GenericRegistry<>(Identifier.of(MOD_ID, "sounds"));
 
 }

@@ -35,7 +35,7 @@ public class ItemCatalogClassVisitor extends ClassVisitor {
             BiFunction<Class<?>, String, Boolean> check = (klass, field) ->
                     Objects.equals(owner, klass.getName().replaceAll("\\.", "/"))
                     && Objects.equals(name, field)
-                    && Objects.equals(descriptor, "()" + Reflection.getField(klass, field).getType().descriptorString());
+                    && Objects.equals(descriptor, Reflection.getField(klass, field).getType().descriptorString());
 
             if (
                     opcode == Opcodes.GETSTATIC && check.apply(Item.class, "allItems")
