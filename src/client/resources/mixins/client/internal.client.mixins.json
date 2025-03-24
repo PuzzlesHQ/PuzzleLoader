@@ -19,6 +19,7 @@
     "items.rendering.EntityMixin",
     "items.rendering.ItemSlotWidgetMixin",
     "model.BlockModelJsonInitDisabler",
+    "music.MusicManagerMixin",
     "networking.ClientNetworkManagerMixin",
     "networking.ConnectingScreenMixin",
     "ui.CreditsButtonMixin",
