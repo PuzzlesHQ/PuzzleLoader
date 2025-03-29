@@ -1,6 +1,7 @@
 package com.github.puzzle.game.mixins.client.logging;
 
 import com.badlogic.gdx.assets.AssetManager;
+import com.github.puzzle.core.loader.engine.GameLoader;
 import com.github.puzzle.core.loader.launch.Piece;
 import com.github.puzzle.game.resources.PuzzleGameAssetLoader;
 import finalforeach.cosmicreach.BlockGame;
@@ -30,6 +31,8 @@ public class BlockGameMixin {
 
     @Inject(method = "dispose", at = @At(value = "INVOKE", target = "Lfinalforeach/cosmicreach/audio/SoundManager;dispose()V", shift = At.Shift.BEFORE), require = 0)
     public void dispose(CallbackInfo ci) {
+        GameLoader.killAll();
+
         AssetManager manager = PuzzleGameAssetLoader.LOADER.getAssetManager();
         manager.clear();
         manager.dispose();

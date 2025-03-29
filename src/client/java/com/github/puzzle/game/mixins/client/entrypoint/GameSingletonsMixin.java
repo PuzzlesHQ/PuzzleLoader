@@ -1,21 +1,25 @@
 package com.github.puzzle.game.mixins.client.entrypoint;
 
-import com.github.puzzle.game.engine.ClientGameLoader;
-import finalforeach.cosmicreach.GameSingletons;
-import finalforeach.cosmicreach.gamestates.GameState;
+import com.github.puzzle.core.gui.Surface;
+import com.github.puzzle.core.gui.SurfaceUpdateRunner;
+import com.github.puzzle.game.engine.GameBootingScreen;
+import finalforeach.cosmicreach.ClientSingletons;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Redirect;
 
-@Mixin(GameSingletons.class)
+@Mixin(ClientSingletons.class)
 public class GameSingletonsMixin {
 
     /**
-     * @author
-     * @reason
+     * @author Mr_Zombii
+     * @reason Make the game boot.
      */
-    @Overwrite
-    public static void postCreate() {
-        GameState.switchToGameState(new ClientGameLoader());
+    @Redirect(method = "create", at = @At(value = "INVOKE", target = "Lfinalforeach/cosmicreach/GameSingletons;postCreate()V"))
+    private static void postCreate() {
+        Surface.switchToSurface(new GameBootingScreen());
+
+        SurfaceUpdateRunner.start();
     }
 
 }

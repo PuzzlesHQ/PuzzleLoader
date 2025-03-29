@@ -163,6 +163,7 @@ public class ClientCosmicReachProvider implements IGameProvider {
             puzzleLoaderInfo.addEntrypoint("client_init", Puzzle.class.getName());
             puzzleLoaderInfo.addEntrypoint("client_postInit", Puzzle.class.getName());
             puzzleLoaderInfo.addEntrypoint("init", ServerPuzzle.class.getName());
+            puzzleLoaderInfo.addEntrypoint("preInit", ServerPuzzle.class.getName());
 
             ModLocator.addMod(puzzleLoaderInfo.build().getOrCreateModContainer());
         }

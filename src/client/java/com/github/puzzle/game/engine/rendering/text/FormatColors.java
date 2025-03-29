@@ -28,7 +28,7 @@ public class FormatColors {
     }
 
     public static Color toColor(String c, Color resetColor){
-        c = c.replaceFirst(FORMAT_KEY, "");
+        c = c.replaceAll(FORMAT_KEY, "");
 
         return switch (c) {
             case "r" -> resetColor.cpy();

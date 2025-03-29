@@ -16,7 +16,7 @@ public class ClientASMTransformer implements IClassTransformer {
             ClassReader reader = new ClassReader(basicClass);
             ClassWriter writer = new ClassWriter(reader, ClassWriter.COMPUTE_FRAMES);
 
-            reader.accept(new ItemCatalogClassVisitor(writer), 2);
+            reader.accept(new ItemRegistryEnforcerClassTransformer(writer), 2);
             return writer.toByteArray();
         }
         if (Objects.equals(parts[parts.length - 1], "GameMusicManager")) {
@@ -24,7 +24,7 @@ public class ClientASMTransformer implements IClassTransformer {
             ClassReader reader = new ClassReader(basicClass);
             ClassWriter writer = new ClassWriter(reader, ClassWriter.COMPUTE_FRAMES);
 
-            reader.accept(new GameMusicManagerClassVisitor(writer), 2);
+            reader.accept(new MusicRegistryEnforcerClassTransformer(writer), 2);
             return writer.toByteArray();
         }
         return basicClass;

@@ -18,13 +18,4 @@ public class AdapterPathPair {
     public String getValue() {
         return value;
     }
-
-    public Object getInstance() {
-        return instance;
-    }
-
-    public void setInstance(Object instance) {
-        if (instance == null)
-            this.instance = instance;
-    }
 }

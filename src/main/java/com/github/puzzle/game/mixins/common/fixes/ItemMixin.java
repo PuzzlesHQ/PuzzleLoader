@@ -5,18 +5,17 @@ import finalforeach.cosmicreach.blocks.Block;
 import finalforeach.cosmicreach.blocks.BlockState;
 import finalforeach.cosmicreach.items.Item;
 import finalforeach.cosmicreach.util.Identifier;
-import finalforeach.cosmicreach.util.exceptions.DuplicateIDException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
 
 import java.util.HashMap;
 
-import static finalforeach.cosmicreach.items.Item.allItems;
-
 @Mixin(Item.class)
 public interface ItemMixin {
+
+
 
     /**
      * @author Mr_Zombii
@@ -26,6 +25,8 @@ public interface ItemMixin {
      */
     @Overwrite
     static void registerItem(Item item) {
+        Logger logger = LogManager.getLogger("ItemRegistry");
+
         String strId = item.getID();
 
         if (strId == null) throw new RuntimeException("Item id cannot be null!");
@@ -34,8 +35,11 @@ public interface ItemMixin {
 
         Identifier id = Identifier.of(strId);
 
-        if (PuzzleRegistries.ITEMS.contains(id))
-            throw new DuplicateIDException("Duplicate item for id: " + item.getID());
+        if (PuzzleRegistries.ITEMS.contains(id)) {
+            logger.warn("Duplicate item for id: {}, could cause errors.", item.getID());
+//            throw new DuplicateIDException("Duplicate item for id: " + item.getID());
+            return;
+        }
 
         PuzzleRegistries.ITEMS.store(id, item);
     }
@@ -78,7 +82,12 @@ public interface ItemMixin {
                 }
             }
         }
-        return PuzzleRegistries.ITEMS.get(Identifier.of(strId));
+
+        try {
+            return PuzzleRegistries.ITEMS.get(Identifier.of(strId));
+        } catch (Exception ignore) {
+            return null;
+        }
     }
 
 }

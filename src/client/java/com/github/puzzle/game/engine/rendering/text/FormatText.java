@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
 import static com.github.puzzle.game.engine.rendering.text.FormatColors.FORMAT_KEY;
 
 public class FormatText {
-    public static final Pattern FORMAT_PATTER = Pattern.compile("(?i)("+FORMAT_KEY+"\\[[0-9A-FR]{6}]|"+FORMAT_KEY+"[0-9A-FR])");
+    public static final Pattern FORMAT_PATTER = Pattern.compile(FORMAT_KEY + "(\\[([0-9A-Fa-f]{6})\\]|[0-9A-FR]{1})");
     public static final Pattern FORMAT_VALUE = Pattern.compile("(?i)("+FORMAT_KEY+"\\[[0-9A-FR]{6}][^"+FORMAT_KEY+"]+|"+FORMAT_KEY+"[0-9A-FR][^"+FORMAT_KEY+"]+)");
 
     final String text;
@@ -23,7 +23,13 @@ public class FormatText {
     final List<TextPart> parts;
 
     FormatText(@NonNull String text, @NonNull List<TextPart> parts) {
-        this.text = FORMAT_PATTER.matcher(text).replaceAll("");
+        String text1;
+        text1 = text;
+        for (MatchResult r : FORMAT_PATTER.matcher(text).results().toList()) {
+            text1 = text1.replaceAll(r.group().replace("[", "\\["), "");
+        }
+//        this.text = FORMAT_PATTER.matcher(text).replaceAll("");
+        this.text = text1;
         this.rawText = text;
         this.parts = parts;
     }
@@ -36,6 +42,9 @@ public class FormatText {
         List<TextPart> parts = new ArrayList<>();
 
         // Repair String if it's encoded in a broken charset
+        if (text == null)
+            return new FormatText("", new ArrayList<>());
+
         text = new String(text.getBytes());
         if (!text.startsWith(FORMAT_KEY))
             text = FORMAT_KEY + "r" + text;
@@ -50,8 +59,12 @@ public class FormatText {
                 String segment = new String(chars);
                 Matcher m = FORMAT_PATTER.matcher(segment);
 
-                String segmentText = m.replaceAll("");
-                String colourFormatter = segment.replace(segmentText, "");
+                String colourFormatter = "§r";
+                if (m.find()) {
+                    colourFormatter = m.group();
+                }
+
+                String segmentText = segment.replaceAll(colourFormatter.replace("[", "\\["), "");
 
                 parts.add(new TextPart(segmentText, FormatColors.toColor(colourFormatter, resetColor)));
             }

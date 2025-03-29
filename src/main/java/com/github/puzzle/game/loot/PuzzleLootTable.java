@@ -176,13 +176,13 @@ public class PuzzleLootTable {
         }
     }
 
-    List<Pair<Float, LootDrop[]>> lootDrops = new ArrayList<>();
+    public List<Pair<Float, LootDrop[]>> lootDrops = new ArrayList<>();
 
     public static class LootDrop {
 
-        int min;
-        int max;
-        Item item;
+        public int min;
+        public int max;
+        public Item item;
 
         public LootDrop(Item item, int min, int max) {
             this.min = min;

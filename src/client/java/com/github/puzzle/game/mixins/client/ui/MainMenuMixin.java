@@ -55,7 +55,7 @@ public class MainMenuMixin extends GameState {
     */
     @Inject(method = "create",at = @At("TAIL"))
     void addModsButton(CallbackInfo ci) {
-        CRButton modsButton = new CRButton(LanguageManager.string(new TranslationKey("puzzle-loader:menu.mods"))) {
+        CRButton modsButton = new CRButton("Mods") {
             public void onClick() {
                 super.onClick();
                 GameState.switchToGameState(new ModMenu(currentGameState));

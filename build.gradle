@@ -72,7 +72,7 @@ dependencies {
 
     allBundle("net.sf.jopt-simple:jopt-simple:$joptSimpleVersion")
     allBundle("org.reflections:reflections:$reflectionsVersion")
-    bundle("meteordevelopment:orbit:$eventbusVersion")
+    allBundle("meteordevelopment:orbit:$eventbusVersion")
 
     // ASM
     allBundle("org.ow2.asm:asm:$asmVersion")

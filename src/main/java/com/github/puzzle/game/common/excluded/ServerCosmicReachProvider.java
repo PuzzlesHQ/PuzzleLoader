@@ -160,7 +160,7 @@ public class ServerCosmicReachProvider implements IGameProvider {
             });
             puzzleLoaderInfo.setVersion(Constants.getPuzzleVersion());
             puzzleLoaderInfo.addAccessManipulator("puzzle_loader.manipulator");
-//            puzzleLoaderInfo.addEntrypoint("preInit", ServerPuzzle.class.getName());
+            puzzleLoaderInfo.addEntrypoint("preInit", ServerPuzzle.class.getName());
             puzzleLoaderInfo.addEntrypoint("init", ServerPuzzle.class.getName());
 //            puzzleLoaderInfo.addEntrypoint("postInit", ServerPuzzle.class.getName());
 

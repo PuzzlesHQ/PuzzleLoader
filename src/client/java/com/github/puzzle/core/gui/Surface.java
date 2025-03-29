@@ -1,0 +1,42 @@
+package com.github.puzzle.core.gui;
+
+import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.utils.viewport.Viewport;
+import finalforeach.cosmicreach.Threads;
+import finalforeach.cosmicreach.gamestates.GameState;
+
+import java.util.concurrent.atomic.AtomicReference;
+
+import static com.github.puzzle.core.gui.SurfaceGameState.MAIN_INSTANCE;
+
+public interface Surface {
+
+    AtomicReference<Surface> CURRENT_SURFACE = new AtomicReference<>();
+
+    static Surface switchToSurface(Surface surface) {
+        if (surface.equals(CURRENT_SURFACE.get())) return surface;
+
+        Threads.runOnMainThread(() -> {
+            if (GameState.currentGameState != MAIN_INSTANCE)
+                GameState.switchToGameState(MAIN_INSTANCE);
+
+            MAIN_INSTANCE.changeScreen(surface);
+        });
+
+        return surface;
+    }
+
+    void init();
+    boolean isInitialized();
+
+    void render();
+    void update(float delta);
+
+    Viewport getViewport();
+    Camera getCamera();
+    Batch getBatch();
+
+    void setViewport(Viewport viewport);
+    void setBatch(Batch batch);
+}

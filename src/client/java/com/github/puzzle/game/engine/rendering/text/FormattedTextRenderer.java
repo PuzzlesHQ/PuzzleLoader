@@ -43,31 +43,34 @@ public class FormattedTextRenderer {
     }
 
     public static void drawText(Batch batch, Viewport uiViewport, FormatText text, float xStart, float yStart, HorizontalAnchor hAnchor, VerticalAnchor vAnchor) {
-        Vector2 textDim = FontRenderer.getTextDimensions(uiViewport, text.getText(), new Vector2());
-        float w = textDim.x;
-        float h = textDim.y;
-        switch (hAnchor) {
-            case LEFT_ALIGNED:
-                xStart -= uiViewport.getWorldWidth() / 2.0F;
-                break;
-            case RIGHT_ALIGNED:
-                xStart = xStart + uiViewport.getWorldWidth() / 2.0F - w;
-                break;
-            case CENTERED:
-            default:
-                xStart -= w / 2.0F;
+        float w = getWidth(uiViewport, text);
+        float h = getHeight(uiViewport, text);
+        if (hAnchor != null) {
+            switch (hAnchor) {
+                case LEFT_ALIGNED:
+                    xStart -= uiViewport.getWorldWidth() / 2.0F;
+                    break;
+                case RIGHT_ALIGNED:
+                    xStart = xStart + uiViewport.getWorldWidth() / 2.0F - w;
+                    break;
+                case CENTERED:
+                default:
+                    xStart -= w / 2.0F;
+            }
         }
 
-        switch (vAnchor) {
-            case TOP_ALIGNED:
-                yStart -= uiViewport.getWorldHeight() / 2.0F;
-                break;
-            case BOTTOM_ALIGNED:
-                yStart = yStart + uiViewport.getWorldHeight() / 2.0F - h;
-                break;
-            case CENTERED:
-            default:
-                yStart -= h / 2.0F;
+        if (vAnchor != null) {
+            switch (vAnchor) {
+                case TOP_ALIGNED:
+                    yStart -= uiViewport.getWorldHeight() / 2.0F;
+                    break;
+                case BOTTOM_ALIGNED:
+                    yStart = yStart + uiViewport.getWorldHeight() / 2.0F - h;
+                    break;
+                case CENTERED:
+                default:
+                    yStart -= h / 2.0F;
+            }
         }
 
         drawText(batch, uiViewport, text, xStart, yStart);
@@ -85,6 +88,35 @@ public class FormattedTextRenderer {
             totalSize += part.getWidth(vp);
         }
         batch.setColor(resetColor);
+    }
+
+    public static float getWidth(Viewport vp, String text) {
+        return getWidth(vp, FormatText.of(text));
+    }
+
+    public static float getHeight(Viewport vp, String text) {
+        return getHeight(vp, FormatText.of(text));
+    }
+
+    public static float getWidth(Viewport vp, FormatText text) {
+        float totalSize = 0;
+        List<FormatText.TextPart> parts = text.getParts();
+
+        for (FormatText.TextPart part : parts) {
+            totalSize += part.getWidth(vp);
+        }
+        return totalSize;
+    }
+
+    public static float getHeight(Viewport vp, FormatText text) {
+        float totalSize = 0;
+        List<FormatText.TextPart> parts = text.getParts();
+
+        for (FormatText.TextPart part : parts) {
+            if (totalSize < part.getHeight(vp))
+                totalSize = part.getHeight(vp);
+        }
+        return totalSize;
     }
 
 }
