@@ -1,4 +1,4 @@
-package com.github.puzzle.game.ui.gamestate;
+package com.github.puzzle.game.ui.screens.gamestate;
 
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;

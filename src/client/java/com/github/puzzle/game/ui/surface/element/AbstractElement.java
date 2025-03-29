@@ -1,8 +1,8 @@
-package com.github.puzzle.core.gui.element;
+package com.github.puzzle.game.ui.surface.element;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
-import com.github.puzzle.core.gui.Surface;
+import com.github.puzzle.game.ui.surface.Surface;
 
 public abstract class AbstractElement implements Element {
 

@@ -1,4 +1,4 @@
-package com.github.puzzle.core.gui;
+package com.github.puzzle.game.ui.surface;
 
 import com.github.puzzle.core.Constants;
 import finalforeach.cosmicreach.Threads;

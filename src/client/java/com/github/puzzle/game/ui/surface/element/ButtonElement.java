@@ -1,9 +1,9 @@
-package com.github.puzzle.core.gui.element;
+package com.github.puzzle.game.ui.surface.element;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
-import com.github.puzzle.core.gui.Surface;
+import com.github.puzzle.game.ui.surface.Surface;
 import com.github.puzzle.game.ClientGlobals;
 import com.github.puzzle.core.input.GLFWInputProcessor;
 import com.github.puzzle.game.engine.rendering.text.FormatText;

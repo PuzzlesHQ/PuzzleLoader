@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.github.puzzle.game.ui.gamestate.IGDXGameState;
+import com.github.puzzle.game.ui.screens.gamestate.IGDXGameState;
 import finalforeach.cosmicreach.gamestates.InGame;
 import finalforeach.cosmicreach.items.ISlotContainerParent;
 import finalforeach.cosmicreach.ui.UI;

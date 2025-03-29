@@ -1,4 +1,4 @@
-package com.github.puzzle.core.gui;
+package com.github.puzzle.game.ui.surface;
 
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -8,7 +8,7 @@ import finalforeach.cosmicreach.gamestates.GameState;
 
 import java.util.concurrent.atomic.AtomicReference;
 
-import static com.github.puzzle.core.gui.SurfaceGameState.MAIN_INSTANCE;
+import static com.github.puzzle.game.ui.surface.SurfaceGameState.MAIN_INSTANCE;
 
 public interface Surface {
 

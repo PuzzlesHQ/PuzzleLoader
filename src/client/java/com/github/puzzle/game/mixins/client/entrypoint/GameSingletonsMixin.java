@@ -1,7 +1,7 @@
 package com.github.puzzle.game.mixins.client.entrypoint;
 
-import com.github.puzzle.core.gui.Surface;
-import com.github.puzzle.core.gui.SurfaceUpdateRunner;
+import com.github.puzzle.game.ui.surface.Surface;
+import com.github.puzzle.game.ui.surface.SurfaceUpdateRunner;
 import com.github.puzzle.game.engine.GameBootingScreen;
 import finalforeach.cosmicreach.ClientSingletons;
 import org.spongepowered.asm.mixin.Mixin;

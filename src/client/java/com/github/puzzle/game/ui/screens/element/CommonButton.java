@@ -1,4 +1,4 @@
-package com.github.puzzle.game.ui.element;
+package com.github.puzzle.game.ui.screens.element;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;

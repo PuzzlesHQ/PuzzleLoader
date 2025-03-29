@@ -1,4 +1,4 @@
-package com.github.puzzle.core.gui.screen;
+package com.github.puzzle.game.ui.surface;
 
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
@@ -6,14 +6,13 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.github.puzzle.core.gui.Surface;
-import com.github.puzzle.core.gui.element.Element;
+import com.github.puzzle.game.ui.surface.element.Element;
 import com.github.puzzle.core.input.GLFWInputProcessor;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ScreenImpl implements GLFWInputProcessor, Surface {
+public class SurfaceImpl implements GLFWInputProcessor, Surface {
 
     private Viewport vp;
     private Camera cam;
@@ -22,11 +21,11 @@ public class ScreenImpl implements GLFWInputProcessor, Surface {
 
     public Color bgColor;
 
-    public ScreenImpl(Viewport vp) {
+    public SurfaceImpl(Viewport vp) {
         this(vp, new SpriteBatch());
     }
 
-    public ScreenImpl(Viewport vp, Batch batch) {
+    public SurfaceImpl(Viewport vp, Batch batch) {
         if (vp != null && batch != null) {
             this.vp = vp;
             this.cam = vp.getCamera();

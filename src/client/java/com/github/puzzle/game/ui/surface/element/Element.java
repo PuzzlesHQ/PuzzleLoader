@@ -1,6 +1,6 @@
-package com.github.puzzle.core.gui.element;
+package com.github.puzzle.game.ui.surface.element;
 
-import com.github.puzzle.core.gui.Surface;
+import com.github.puzzle.game.ui.surface.Surface;
 
 public interface Element {
 

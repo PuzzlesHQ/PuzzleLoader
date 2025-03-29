@@ -1,12 +1,12 @@
 package com.github.puzzle.game.engine;
 
 import com.badlogic.gdx.graphics.Color;
-import com.github.puzzle.core.gui.Surface;
-import com.github.puzzle.core.gui.element.Element;
-import com.github.puzzle.core.gui.element.ImageElement;
-import com.github.puzzle.core.gui.element.ProgressBarElement;
-import com.github.puzzle.core.gui.element.PulsingImageElement;
-import com.github.puzzle.core.gui.screen.ScreenImpl;
+import com.github.puzzle.game.ui.surface.Surface;
+import com.github.puzzle.game.ui.surface.element.Element;
+import com.github.puzzle.game.ui.surface.element.ImageElement;
+import com.github.puzzle.game.ui.surface.element.ProgressBarElement;
+import com.github.puzzle.game.ui.surface.element.PulsingImageElement;
+import com.github.puzzle.game.ui.surface.SurfaceImpl;
 import com.github.puzzle.core.loader.engine.GameLoader;
 import finalforeach.cosmicreach.gamestates.GameState;
 import finalforeach.cosmicreach.gamestates.PrealphaPreamble;
@@ -14,7 +14,7 @@ import finalforeach.cosmicreach.util.Identifier;
 
 import javax.swing.*;
 
-public class GameBootingScreen extends ScreenImpl {
+public class GameBootingScreen extends SurfaceImpl {
 
     GameLoader loader = new GameLoader();
 

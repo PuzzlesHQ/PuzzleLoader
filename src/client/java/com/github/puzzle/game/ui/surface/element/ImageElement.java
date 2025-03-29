@@ -1,8 +1,8 @@
-package com.github.puzzle.core.gui.element;
+package com.github.puzzle.game.ui.surface.element;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.github.puzzle.core.gui.Surface;
+import com.github.puzzle.game.ui.surface.Surface;
 import com.github.puzzle.game.resources.PuzzleGameAssetLoader;
 import finalforeach.cosmicreach.util.Identifier;
 

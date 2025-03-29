@@ -1,4 +1,4 @@
-package com.github.puzzle.core.gui;
+package com.github.puzzle.game.ui.surface;
 
 import com.badlogic.gdx.Gdx;
 import com.github.puzzle.core.input.GLFWCoreInputProcessor;

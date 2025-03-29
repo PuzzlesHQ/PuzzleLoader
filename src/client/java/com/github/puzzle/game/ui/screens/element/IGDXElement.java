@@ -1,4 +1,4 @@
-package com.github.puzzle.game.ui.element;
+package com.github.puzzle.game.ui.screens.element;
 
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 
