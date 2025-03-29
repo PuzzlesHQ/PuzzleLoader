@@ -6,7 +6,9 @@ import com.github.puzzle.core.Constants;
 import com.github.puzzle.core.loader.launch.provider.mod.entrypoint.impls.ClientModInitializer;
 import com.github.puzzle.core.loader.launch.provider.mod.entrypoint.impls.ClientPostModInitializer;
 import com.github.puzzle.core.loader.launch.provider.mod.entrypoint.impls.ClientPreModInitializer;
+import com.github.puzzle.core.loader.meta.EnvType;
 import com.github.puzzle.core.loader.provider.mod.AdapterPathPair;
+import com.github.puzzle.core.loader.provider.mod.entrypoint.impls.ModInitializer;
 import com.github.puzzle.core.loader.util.ModLocator;
 import com.github.puzzle.core.loader.util.PuzzleEntrypointUtil;
 import com.github.puzzle.core.localization.ILanguageFile;
@@ -14,6 +16,7 @@ import com.github.puzzle.core.localization.LanguageManager;
 import com.github.puzzle.core.localization.files.LanguageFileVersion1;
 import com.github.puzzle.game.ClientGlobals;
 import com.github.puzzle.game.PuzzleRegistries;
+import com.github.puzzle.game.engine.stages.RunModInitialize;
 import com.github.puzzle.game.events.OnLoadAssetsEvent;
 import com.github.puzzle.game.events.OnLoadAssetsFinishedEvent;
 import com.github.puzzle.game.events.OnPreLoadAssetsEvent;
@@ -157,6 +160,11 @@ public class Puzzle implements ClientPreModInitializer, ClientModInitializer, Cl
 
     @Override
     public void onPreInit() {
-
+        RunModInitialize.initializers.add(new RunModInitialize.Initializer<>(
+                EnvType.CLIENT,
+                ClientModInitializer.ENTRYPOINT_KEY,
+                ClientModInitializer.class,
+                ClientModInitializer::onInit
+        ));
     }
 }
