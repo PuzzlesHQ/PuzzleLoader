@@ -7,8 +7,6 @@
   "mixins": [
     "account.AccountUtilMixin",
     "assets.AssetLoaderMixin",
-    "blockentities.BlockEntityFurnaceMixin",
-    "blockentities.BlockEntityItemContainerMixin",
     "chat.CommandMixin",
     "loot.LootTableMixin",
     "networking.CommandPacketMixin",
