@@ -93,7 +93,7 @@ public class ProgressBarElement extends AbstractElement implements GameLoader.Pr
         this.step = (100f / (max * ((float) max / width)) * /* scale */ (max / 100f));
     }
 
-    private static float getVisualX(Viewport viewport, ProgressBarElement element) {
+    protected static float getVisualX(Viewport viewport, ProgressBarElement element) {
         return switch (element.anchorX) {
             case NONE -> element.x;
             case RIGHT -> element.x + (viewport.getWorldWidth() * .5f) - (element.width + 4);
@@ -102,7 +102,7 @@ public class ProgressBarElement extends AbstractElement implements GameLoader.Pr
         };
     }
 
-    private static float getVisualY(Viewport viewport, ProgressBarElement element) {
+    protected static float getVisualY(Viewport viewport, ProgressBarElement element) {
         return switch (element.anchorY) {
             case NONE -> element.y;
             case TOP -> element.y - (viewport.getWorldHeight() * .5f);

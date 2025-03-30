@@ -1,6 +1,8 @@
 package com.github.puzzle.game.mixins.client.ui;
 
 import com.github.puzzle.game.ui.credits.PuzzleCreditsMenu;
+import com.github.puzzle.game.ui.credits.PuzzleCreditsScreen;
+import com.github.puzzle.game.ui.surface.Surface;
 import finalforeach.cosmicreach.gamestates.GameState;
 import finalforeach.cosmicreach.ui.widgets.CRButton;
 import org.spongepowered.asm.mixin.Mixin;
@@ -15,6 +17,7 @@ public class CreditsButtonMixin extends CRButton {
     @Override
     public void onClick() {
         super.onClick();
+//        Surface.switchToSurface(new PuzzleCreditsScreen());
         GameState.switchToGameState(new PuzzleCreditsMenu());
     }
 

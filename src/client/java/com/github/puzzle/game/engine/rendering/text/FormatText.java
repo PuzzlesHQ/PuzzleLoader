@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
 import static com.github.puzzle.game.engine.rendering.text.FormatColors.FORMAT_KEY;
 
 public class FormatText {
-    public static final Pattern FORMAT_PATTER = Pattern.compile(FORMAT_KEY + "(\\[([0-9A-Fa-f]{6})\\]|[0-9A-FR]{1})");
+    public static final Pattern FORMAT_PATTER = Pattern.compile(FORMAT_KEY + "(\\[([0-9A-Fa-f]{6})\\]|[0-9A-FRa-fr]{1})");
     public static final Pattern FORMAT_VALUE = Pattern.compile("(?i)("+FORMAT_KEY+"\\[[0-9A-FR]{6}][^"+FORMAT_KEY+"]+|"+FORMAT_KEY+"[0-9A-FR][^"+FORMAT_KEY+"]+)");
 
     final String text;

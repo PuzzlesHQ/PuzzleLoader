@@ -68,6 +68,11 @@ public class SurfaceGameState extends GameState {
             GLFWCoreInputProcessor.setProcessor((GLFWInputProcessor) surface);
     }
 
+    @Override
+    public void switchAwayTo(GameState gameState) {
+        SurfaceUpdateRunner.currentSurface = null;
+    }
+
     public Surface getSurface() {
         return surface;
     }

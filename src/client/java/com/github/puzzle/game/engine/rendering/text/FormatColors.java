@@ -28,7 +28,7 @@ public class FormatColors {
     }
 
     public static Color toColor(String c, Color resetColor){
-        c = c.replaceAll(FORMAT_KEY, "");
+        c = c.replaceAll(FORMAT_KEY, "").toLowerCase();
 
         return switch (c) {
             case "r" -> resetColor.cpy();

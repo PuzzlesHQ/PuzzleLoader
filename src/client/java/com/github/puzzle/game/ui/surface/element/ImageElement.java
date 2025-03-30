@@ -45,7 +45,7 @@ public class ImageElement extends AbstractElement {
         );
     }
 
-    private static float getVisualX(Viewport viewport, ImageElement element) {
+    protected static float getVisualX(Viewport viewport, ImageElement element) {
         float width = element.texWidth * element.scale;
 
         return switch (element.anchorX) {
@@ -56,7 +56,7 @@ public class ImageElement extends AbstractElement {
         };
     }
 
-    private static float getVisualY(Viewport viewport, ImageElement element) {
+    protected static float getVisualY(Viewport viewport, ImageElement element) {
         float height = element.texHeight * element.scale;
 
         return switch (element.anchorY) {
