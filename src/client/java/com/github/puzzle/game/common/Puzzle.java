@@ -95,8 +95,6 @@ public class Puzzle implements ClientPreModInitializer, ClientModInitializer, Cl
         ICreditElement.TYPE_TO_ELEMENT.put("image", ImageCredit.class);
         ICreditElement.TYPE_TO_ELEMENT.put("list", ListCredit.class);
 
-        System.out.println("HOLA");
-
         PuzzleEntrypointUtil.invoke("modmenu", ConfigScreenFactory.class, (configScreen) -> {
             ModLocator.locatedMods.values().forEach(modContainer -> {
                 ImmutableCollection<AdapterPathPair> collection = modContainer.INFO.Entrypoints.getOrDefault("modmenu", null);
@@ -159,8 +157,6 @@ public class Puzzle implements ClientPreModInitializer, ClientModInitializer, Cl
         Threads.runOnMainThread(() -> {
             PuzzleCreditsMenu.addFile(CreditFile.fromJson(PuzzleGameAssetLoader.locateAsset("puzzle-loader:credits/credits.json").readString()));
         });
-
-        System.out.println("POST INIT YOU NIGG");
     }
 
     @Override
