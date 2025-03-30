@@ -50,7 +50,7 @@ public class MapRegistry<T> implements IRegistry<T> {
     @Override
     public RegistryObject<T> store(Identifier id, T value) {
         if(writable) {
-            Constants.EVENT_BUS.post(new OnRegisterEvent<>(this, id, value));
+            Constants.EVENT_BUS.post(new OnRegisterEvent(this, id, value));
             values.put(id, value);
             return new RegistryObject<>(this, id);
         } else throw new NotWritableException(this);
