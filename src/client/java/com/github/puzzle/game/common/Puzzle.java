@@ -21,6 +21,7 @@ import com.github.puzzle.game.engine.stages.RunModPostInitialize;
 import com.github.puzzle.game.events.OnLoadAssetsEvent;
 import com.github.puzzle.game.events.OnLoadAssetsFinishedEvent;
 import com.github.puzzle.game.events.OnPreLoadAssetsEvent;
+import com.github.puzzle.game.events.OnRegisterEvent;
 import com.github.puzzle.game.resources.PuzzleGameAssetLoader;
 import com.github.puzzle.game.resources.VanillaAssetLocations;
 import com.github.puzzle.game.ui.credits.CreditFile;
@@ -34,6 +35,8 @@ import com.google.common.collect.ImmutableCollection;
 import de.pottgames.tuningfork.SoundBuffer;
 import finalforeach.cosmicreach.GameAssetLoader;
 import finalforeach.cosmicreach.Threads;
+import finalforeach.cosmicreach.items.Item;
+import finalforeach.cosmicreach.sounds.GameSound;
 import finalforeach.cosmicreach.util.Identifier;
 import meteordevelopment.orbit.EventHandler;
 
@@ -57,6 +60,16 @@ public class Puzzle implements ClientPreModInitializer, ClientModInitializer, Cl
             LanguageManager.registerLanguageFile(lang);
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    @EventHandler
+    public void onEvent(OnRegisterEvent event) {
+        if (event.obj instanceof Item) {
+
+        }
+        if (event.obj instanceof GameSound) {
+
         }
     }
 

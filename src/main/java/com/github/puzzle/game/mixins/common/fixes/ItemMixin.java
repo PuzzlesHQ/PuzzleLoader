@@ -15,8 +15,6 @@ import java.util.HashMap;
 @Mixin(Item.class)
 public interface ItemMixin {
 
-
-
     /**
      * @author Mr_Zombii
      * @reason Force registering items in the Item Registry

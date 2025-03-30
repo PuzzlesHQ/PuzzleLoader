@@ -1,9 +1,11 @@
 package com.github.puzzle.core.registries;
 
+import com.github.puzzle.core.Constants;
 import com.github.puzzle.core.registries.exception.AlreadyFrozenException;
 import com.github.puzzle.core.registries.exception.MissingEntryException;
 import com.github.puzzle.core.registries.exception.NotReadableException;
 import com.github.puzzle.core.registries.exception.NotWritableException;
+import com.github.puzzle.game.events.OnRegisterEvent;
 import finalforeach.cosmicreach.util.Identifier;
 import org.jetbrains.annotations.NotNull;
 
@@ -46,10 +48,11 @@ public class MapRegistry<T> implements IRegistry<T> {
     }
 
     @Override
-    public RegistryObject<T> store(Identifier name, T value) {
+    public RegistryObject<T> store(Identifier id, T value) {
         if(writable) {
-            values.put(name, value);
-            return new RegistryObject<>(this, name);
+            Constants.EVENT_BUS.post(new OnRegisterEvent<>(this, id, value));
+            values.put(id, value);
+            return new RegistryObject<>(this, id);
         } else throw new NotWritableException(this);
     }
 
