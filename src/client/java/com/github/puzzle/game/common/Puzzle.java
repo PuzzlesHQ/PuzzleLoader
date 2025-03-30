@@ -17,6 +17,7 @@ import com.github.puzzle.core.localization.files.LanguageFileVersion1;
 import com.github.puzzle.game.ClientGlobals;
 import com.github.puzzle.game.PuzzleRegistries;
 import com.github.puzzle.game.engine.stages.RunModInitialize;
+import com.github.puzzle.game.engine.stages.RunModPostInitialize;
 import com.github.puzzle.game.events.OnLoadAssetsEvent;
 import com.github.puzzle.game.events.OnLoadAssetsFinishedEvent;
 import com.github.puzzle.game.events.OnPreLoadAssetsEvent;
@@ -94,6 +95,8 @@ public class Puzzle implements ClientPreModInitializer, ClientModInitializer, Cl
         ICreditElement.TYPE_TO_ELEMENT.put("image", ImageCredit.class);
         ICreditElement.TYPE_TO_ELEMENT.put("list", ListCredit.class);
 
+        System.out.println("HOLA");
+
         PuzzleEntrypointUtil.invoke("modmenu", ConfigScreenFactory.class, (configScreen) -> {
             ModLocator.locatedMods.values().forEach(modContainer -> {
                 ImmutableCollection<AdapterPathPair> collection = modContainer.INFO.Entrypoints.getOrDefault("modmenu", null);
@@ -156,6 +159,8 @@ public class Puzzle implements ClientPreModInitializer, ClientModInitializer, Cl
         Threads.runOnMainThread(() -> {
             PuzzleCreditsMenu.addFile(CreditFile.fromJson(PuzzleGameAssetLoader.locateAsset("puzzle-loader:credits/credits.json").readString()));
         });
+
+        System.out.println("POST INIT YOU NIGG");
     }
 
     @Override
@@ -165,6 +170,13 @@ public class Puzzle implements ClientPreModInitializer, ClientModInitializer, Cl
                 ClientModInitializer.ENTRYPOINT_KEY,
                 ClientModInitializer.class,
                 ClientModInitializer::onInit
+        ));
+
+        RunModPostInitialize.initializers.add(new RunModInitialize.Initializer<>(
+                EnvType.CLIENT,
+                ClientPostModInitializer.ENTRYPOINT_KEY,
+                ClientPostModInitializer.class,
+                ClientPostModInitializer::onPostInit
         ));
     }
 }

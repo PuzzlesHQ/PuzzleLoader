@@ -9,7 +9,7 @@ public abstract class AbstractStage implements GameLoader.Stage {
 
     protected GameLoader loader;
     protected List<Runnable> tasks = new ArrayList<>();
-    private final String name;
+    protected String name;
 
     public AbstractStage(String stageName) {
         this.name = stageName;

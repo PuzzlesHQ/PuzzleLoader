@@ -9,7 +9,6 @@ public interface ClientPostModInitializer {
     void onPostInit();
 
     static void invokeEntrypoint() {
-        PostModInitializer.invokeEntrypoint();
         PuzzleEntrypointUtil.invoke(ENTRYPOINT_KEY, ClientPostModInitializer.class, ClientPostModInitializer::onPostInit);
     }
 

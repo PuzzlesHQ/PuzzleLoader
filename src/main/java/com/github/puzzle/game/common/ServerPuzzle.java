@@ -7,6 +7,7 @@ import com.github.puzzle.game.PuzzleRegistries;
 import com.github.puzzle.game.engine.stages.RunFinishLoading;
 import com.github.puzzle.game.engine.stages.RunLoadAssets;
 import com.github.puzzle.game.engine.stages.RunModInitialize;
+import com.github.puzzle.game.engine.stages.RunModPostInitialize;
 import meteordevelopment.orbit.EventHandler;
 
 public class ServerPuzzle implements PreModInitializer, ModInitializer {
@@ -24,6 +25,7 @@ public class ServerPuzzle implements PreModInitializer, ModInitializer {
         event.register(new RunModInitialize());
         event.register(new RunLoadAssets());
         event.register(new RunFinishLoading());
+        event.register(new RunModPostInitialize());
     }
 
     @Override
