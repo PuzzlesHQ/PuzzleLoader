@@ -1,6 +1,5 @@
 package com.github.puzzle.core.loader.transformers;
 
-import finalforeach.cosmicreach.ui.widgets.CreativeCatalogWidget;
 import net.minecraft.launchwrapper.IClassTransformer;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
@@ -16,7 +15,6 @@ public class ClientASMTransformer implements IClassTransformer {
                 Objects.equals(parts[parts.length - 1], "ItemCatalogWidget") ||
                 Objects.equals(parts[parts.length - 1], "CreativeCatalogWidget")
         ) {
-            System.err.println(name);
             ClassReader reader = new ClassReader(basicClass);
             ClassWriter writer = new ClassWriter(reader, ClassWriter.COMPUTE_FRAMES);
 
@@ -24,7 +22,6 @@ public class ClientASMTransformer implements IClassTransformer {
             return writer.toByteArray();
         }
         if (Objects.equals(parts[parts.length - 1], "GameMusicManager")) {
-            System.err.println(name);
             ClassReader reader = new ClassReader(basicClass);
             ClassWriter writer = new ClassWriter(reader, ClassWriter.COMPUTE_FRAMES);
 
