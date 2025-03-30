@@ -25,6 +25,6 @@ public class PuzzleRegistries {
 
     public static final IRegistry<Item> ITEMS = new GenericRegistry<>(Identifier.of(MOD_ID, "items"));
     public static final EntityRegistry ENTITY_TYPE = new EntityRegistry(Identifier.of(MOD_ID, "entities"));
-    public static final IRegistry<GameSound> SOUND_REGISTRY = new GenericRegistry<>(Identifier.of(MOD_ID, "sounds"));
+    public static final IRegistry<GameSound> SOUNDS = new GenericRegistry<>(Identifier.of(MOD_ID, "sounds"));
 
 }

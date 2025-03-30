@@ -19,8 +19,8 @@ public class GameSoundMixin {
     @Overwrite
     public static GameSound of(String id) {
         Identifier soundId = Identifier.of(id);
-        if (PuzzleRegistries.SOUND_REGISTRY.contains(soundId)) {
-            return PuzzleRegistries.SOUND_REGISTRY.get(soundId);
+        if (PuzzleRegistries.SOUNDS.contains(soundId)) {
+            return PuzzleRegistries.SOUNDS.get(soundId);
         } else {
             GameSound sound;
             try {
@@ -31,7 +31,7 @@ public class GameSoundMixin {
                      IllegalAccessException e) {
                 throw new RuntimeException(e);
             }
-            PuzzleRegistries.SOUND_REGISTRY.store(soundId, sound);
+            PuzzleRegistries.SOUNDS.store(soundId, sound);
             return sound;
         }
     }
