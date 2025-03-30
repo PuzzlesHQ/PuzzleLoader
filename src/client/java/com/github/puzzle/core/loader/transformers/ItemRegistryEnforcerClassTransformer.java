@@ -36,7 +36,6 @@ public class ItemRegistryEnforcerClassTransformer extends ClassVisitor {
                     Objects.equals(owner, klass.getName().replaceAll("\\.", "/"))
                     && Objects.equals(name, field)
                     && Objects.equals(descriptor, Reflection.getField(klass, field).getType().descriptorString());
-
             if (
                     opcode == Opcodes.GETSTATIC && check.apply(Item.class, "allItems")
             ) {
