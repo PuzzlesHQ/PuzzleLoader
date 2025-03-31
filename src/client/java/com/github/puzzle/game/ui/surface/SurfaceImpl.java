@@ -6,8 +6,8 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.github.puzzle.game.ui.surface.element.Element;
 import com.github.puzzle.core.input.GLFWInputProcessor;
+import com.github.puzzle.game.ui.surface.element.Element;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +19,7 @@ public class SurfaceImpl implements GLFWInputProcessor, Surface {
     private Batch batch;
     private List<Element> elements;
 
+    public Element activeInPutElement;
     public Color bgColor;
 
     public SurfaceImpl(Viewport vp) {
