@@ -35,7 +35,6 @@ public class EntrypointContainer {
                 T inst = (T) INSTANCE_MAP.get(pair.getValue());
                 if (inst == null) {
                     Class<T> instClass = (Class<T>) Piece.classLoader.findClass(pair.getValue());
-                    System.out.println(instClass.getPackageName());
                     Constants.EVENT_BUS.registerLambdaFactory(
                             instClass.getPackageName(),
                             (lookupInMethod, klass) ->
