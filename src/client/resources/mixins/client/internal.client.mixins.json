@@ -25,7 +25,6 @@
     "ui.FontRendererMixin",
     "ui.GameStateMixin",
     "ui.MainMenuMixin",
-    "ui.OptionsMixin",
     "window.IconMixin",
     "window.TitleMixin"
   ]
