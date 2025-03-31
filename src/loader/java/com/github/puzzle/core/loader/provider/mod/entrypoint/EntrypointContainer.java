@@ -33,15 +33,15 @@ public class EntrypointContainer {
 
                 T inst = (T) INSTANCE_MAP.get(pair.getValue());
                 if (inst == null) {
-                    inst = ILangProvider.PROVDERS.get(pair.getAdapter()).create(container.INFO, pair.getValue(), type);
-                    INSTANCE_MAP.put(pair.getValue(), inst);
-
-                    Class<T> instClass = (Class<T>) inst.getClass();
+                    Class<T> instClass = (Class<T>) Class.forName(pair.getValue());
                     Constants.EVENT_BUS.registerLambdaFactory(
                             instClass.getPackageName(),
                             (lookupInMethod, klass) ->
-                                    (MethodHandles.Lookup) lookupInMethod.invoke(null, instClass, MethodHandles.lookup())
+                                    (MethodHandles.Lookup) lookupInMethod.invoke(null, klass, MethodHandles.lookup())
                     );
+
+                    inst = ILangProvider.PROVDERS.get(pair.getAdapter()).create(container.INFO, pair.getValue(), type);
+                    INSTANCE_MAP.put(pair.getValue(), inst);
                 }
                 invoker.accept(inst);
             }
