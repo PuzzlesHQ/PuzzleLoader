@@ -2,6 +2,7 @@ package com.github.puzzle.core.loader.provider.mod.entrypoint;
 
 
 import com.github.puzzle.core.Constants;
+import com.github.puzzle.core.loader.launch.Piece;
 import com.github.puzzle.core.loader.provider.ProviderException;
 import com.github.puzzle.core.loader.provider.lang.ILangProvider;
 import com.github.puzzle.core.loader.provider.mod.AdapterPathPair;
@@ -33,7 +34,8 @@ public class EntrypointContainer {
 
                 T inst = (T) INSTANCE_MAP.get(pair.getValue());
                 if (inst == null) {
-                    Class<T> instClass = (Class<T>) Class.forName(pair.getValue());
+                    Class<T> instClass = (Class<T>) Piece.classLoader.findClass(pair.getValue());
+                    System.out.println(instClass.getPackageName());
                     Constants.EVENT_BUS.registerLambdaFactory(
                             instClass.getPackageName(),
                             (lookupInMethod, klass) ->
