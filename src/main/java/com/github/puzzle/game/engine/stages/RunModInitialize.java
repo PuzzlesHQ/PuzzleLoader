@@ -33,35 +33,37 @@ public class RunModInitialize extends AbstractStage {
 
     @Override
     public void doStage() {
-        loader.bar2.setVisible(true);
-        while (!getInitializers().isEmpty()) {
-            Initializer initializer = getInitializers().remove();
+        tasks.add(() -> {
+            loader.bar2.setVisible(true);
+            while (!getInitializers().isEmpty()) {
+                Initializer initializer = getInitializers().remove();
 
-            if (ModLocator.locatedMods == null) ModLocator.getMods(initializer.envType);
+                if (ModLocator.locatedMods == null) ModLocator.getMods(initializer.envType);
 
-            try {
-                ModLocator.locatedMods.get(Constants.MOD_ID).invokeEntrypoint(initializer.key, initializer.clazz, initializer.invoker);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
+                try {
+                    ModLocator.locatedMods.get(Constants.MOD_ID).invokeEntrypoint(initializer.key, initializer.clazz, initializer.invoker);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+
+                AtomicInteger counter = new AtomicInteger(0);
+                loader.bar2.setProgress(0);
+                loader.bar2.setMax(ModLocator.locatedMods.size() - 2);
+                ModLocator.locatedMods.values().forEach(container -> {
+                    if (!Objects.equals(container.ID, Constants.MOD_ID)) {
+                        try {
+                            loader.bar2.setProgress(counter.incrementAndGet());
+                            container.invokeEntrypoint(initializer.key, initializer.clazz, initializer.invoker);
+                        } catch (Exception e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                });
             }
 
-            AtomicInteger counter = new AtomicInteger(0);
-            loader.bar2.setProgress(0);
-            loader.bar2.setMax(ModLocator.locatedMods.size() - 2);
-            ModLocator.locatedMods.values().forEach(container -> {
-                if (!Objects.equals(container.ID, Constants.MOD_ID)) {
-                    try {
-                        loader.bar2.setProgress(counter.incrementAndGet());
-                        container.invokeEntrypoint(initializer.key, initializer.clazz, initializer.invoker);
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-            });
-        }
-
-        PuzzleRegistries.EVENT_BUS.post(new OnRegisterLanguageEvent());
-        loader.bar2.setVisible(false);
+            PuzzleRegistries.EVENT_BUS.post(new OnRegisterLanguageEvent());
+            loader.bar2.setVisible(false);
+        });
     }
 
     protected Queue<Initializer> getInitializers() {

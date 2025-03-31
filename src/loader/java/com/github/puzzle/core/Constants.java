@@ -32,7 +32,12 @@ public class Constants {
     }
 
     static {
-        EVENT_BUS.registerLambdaFactory("com.github.puzzle", (lookupInMethod, klass) -> (MethodHandles.Lookup) lookupInMethod.invoke(null, klass, MethodHandles.lookup()));
+        String alphabet = "abcdefghijklmnopqrstuvwxyz";
+        alphabet += alphabet.toUpperCase();
+        String[] abcs = alphabet.split("");
+        for (String s : abcs) {
+            EVENT_BUS.registerLambdaFactory(s, (lookupInMethod, klass) -> (MethodHandles.Lookup) lookupInMethod.invoke(null, klass, MethodHandles.lookup()));
+        }
     }
 
     public static final MixinEnvironment.CompatibilityLevel MIXIN_COMPAT_LEVEL = MixinEnvironment.CompatibilityLevel.JAVA_17;

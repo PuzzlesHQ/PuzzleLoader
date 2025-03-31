@@ -33,14 +33,16 @@ public class EntrypointContainer {
                     throw new ProviderException("LangProvider \"" + pair.getAdapter() + "\" does not exist.");
 
                 T inst = (T) INSTANCE_MAP.get(pair.getValue());
-                if (inst == null) {
-                    Class<T> instClass = (Class<T>) Piece.classLoader.findClass(pair.getValue());
-                    Constants.EVENT_BUS.registerLambdaFactory(
-                            instClass.getPackageName(),
-                            (lookupInMethod, klass) ->
-                                    (MethodHandles.Lookup) lookupInMethod.invoke(null, klass, MethodHandles.lookup())
-                    );
 
+                if (inst == null) {
+                    Class<?> instClass = null;
+                    try {
+                        instClass = Piece.classLoader.findClass(pair.getValue());
+                    } catch (ClassNotFoundException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                    Constants.EVENT_BUS.registerLambdaFactory(instClass.getPackageName(), (lookupInMethod, klass) -> (MethodHandles.Lookup) lookupInMethod.invoke(null, klass, MethodHandles.lookup()));
                     inst = ILangProvider.PROVDERS.get(pair.getAdapter()).create(container.INFO, pair.getValue(), type);
                     INSTANCE_MAP.put(pair.getValue(), inst);
                 }
