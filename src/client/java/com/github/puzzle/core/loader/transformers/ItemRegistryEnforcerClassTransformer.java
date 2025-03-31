@@ -5,7 +5,9 @@ import com.github.puzzle.core.loader.util.Reflection;
 import com.github.puzzle.core.registries.IRegistry;
 import com.github.puzzle.game.PuzzleRegistries;
 import finalforeach.cosmicreach.items.Item;
-import org.objectweb.asm.*;
+import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.Opcodes;
 
 import java.util.Objects;
 import java.util.function.BiFunction;

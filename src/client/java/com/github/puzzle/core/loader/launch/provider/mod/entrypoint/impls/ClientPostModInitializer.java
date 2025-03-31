@@ -1,6 +1,5 @@
 package com.github.puzzle.core.loader.launch.provider.mod.entrypoint.impls;
 
-import com.github.puzzle.core.loader.provider.mod.entrypoint.impls.PostModInitializer;
 import com.github.puzzle.core.loader.util.PuzzleEntrypointUtil;
 
 public interface ClientPostModInitializer {

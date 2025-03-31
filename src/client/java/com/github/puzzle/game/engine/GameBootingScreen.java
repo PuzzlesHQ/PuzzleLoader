@@ -1,13 +1,13 @@
 package com.github.puzzle.game.engine;
 
 import com.badlogic.gdx.graphics.Color;
+import com.github.puzzle.core.loader.engine.GameLoader;
 import com.github.puzzle.game.ui.surface.Surface;
+import com.github.puzzle.game.ui.surface.SurfaceImpl;
 import com.github.puzzle.game.ui.surface.element.Element;
 import com.github.puzzle.game.ui.surface.element.ImageElement;
 import com.github.puzzle.game.ui.surface.element.ProgressBarElement;
 import com.github.puzzle.game.ui.surface.element.PulsingImageElement;
-import com.github.puzzle.game.ui.surface.SurfaceImpl;
-import com.github.puzzle.core.loader.engine.GameLoader;
 import finalforeach.cosmicreach.gamestates.GameState;
 import finalforeach.cosmicreach.gamestates.PrealphaPreamble;
 import finalforeach.cosmicreach.util.Identifier;

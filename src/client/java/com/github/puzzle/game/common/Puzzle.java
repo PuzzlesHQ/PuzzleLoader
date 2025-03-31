@@ -8,7 +8,6 @@ import com.github.puzzle.core.loader.launch.provider.mod.entrypoint.impls.Client
 import com.github.puzzle.core.loader.launch.provider.mod.entrypoint.impls.ClientPreModInitializer;
 import com.github.puzzle.core.loader.meta.EnvType;
 import com.github.puzzle.core.loader.provider.mod.AdapterPathPair;
-import com.github.puzzle.core.loader.provider.mod.entrypoint.impls.ModInitializer;
 import com.github.puzzle.core.loader.util.ModLocator;
 import com.github.puzzle.core.loader.util.PuzzleEntrypointUtil;
 import com.github.puzzle.core.localization.ILanguageFile;
