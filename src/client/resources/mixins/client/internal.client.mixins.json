@@ -23,6 +23,7 @@
     "ui.CreditsButtonMixin",
     "ui.CreditsMenuMixin",
     "ui.FontRendererMixin",
+    "ui.FontTextureMixin",
     "ui.GameStateMixin",
     "ui.MainMenuMixin",
     "window.IconMixin",
