@@ -29,7 +29,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
-@Note("You thought lol, you should see the look on your face.")
+@Note("You thought lol, you should see the look on your face. (This thing worked first try when I made it & it supports loading Mixins and Mods)")
 public class MinecraftProvider implements IGameProvider {
 
     public MinecraftProvider() {
@@ -52,8 +52,6 @@ public class MinecraftProvider implements IGameProvider {
     public Version getGameVersion() {
         return Version.parseVersion(version);
     }
-
-    Class<?> clazz;
 
     @Override
     public String getRawVersion() {
