@@ -9,7 +9,9 @@ import com.github.puzzle.core.loader.meta.ModInfo;
 import com.github.puzzle.core.loader.meta.Version;
 import com.github.puzzle.core.loader.provider.IGameProvider;
 import com.github.puzzle.core.loader.provider.mod.ModContainer;
+import com.github.puzzle.core.loader.provider.mod.entrypoint.impls.CommonTransformerInitializer;
 import com.github.puzzle.core.loader.util.ModLocator;
+import com.github.puzzle.core.loader.util.RawAssetLoader;
 import com.github.puzzle.game.ServerGlobals;
 import com.github.puzzle.game.util.MixinUtil;
 import com.llamalad7.mixinextras.lib.apache.commons.tuple.Pair;
@@ -31,6 +33,8 @@ import java.util.List;
 public class MinecraftProvider implements IGameProvider {
 
     public MinecraftProvider() {
+        Piece.provider = this;
+
         MixinUtil.start();
     }
 
@@ -58,14 +62,14 @@ public class MinecraftProvider implements IGameProvider {
 
     @Override
     public String getEntrypoint() {
-        String launcher = "net/minecraft/server/Main.class";
+        String launcher = "/net/minecraft/server/Main.class";
         if (Constants.SIDE == EnvType.SERVER) {
             try {
                 try {
-                    Piece.classLoader.findResource(launcher).getContent();
+                    PuzzleClassLoader.class.getClassLoader().getResourceAsStream(launcher);
                 } catch (Exception ignore) {
-                    launcher = "net/minecraft/server/MinecraftServer.class";
-                    Piece.classLoader.findResource(launcher).getContent();
+                    launcher = "/net/minecraft/server/MinecraftServer.class";
+                    PuzzleClassLoader.class.getClassLoader().getResourceAsStream(launcher);
                 }
                 return launcher.replaceAll("/", ".").replace(".class", "");
             } catch (Exception ignore) {
@@ -73,8 +77,8 @@ public class MinecraftProvider implements IGameProvider {
             }
         }
         try {
-            launcher = "net/minecraft/client/main/Main.class";
-            Piece.classLoader.findResource(launcher).getContent();
+            launcher = "/net/minecraft/client/main/Main.class";
+            PuzzleClassLoader.class.getClassLoader().getResourceAsStream(launcher);
         } catch (Exception ignore) {
             throw new RuntimeException("Minecraft Client Main does not exist.");
         }
@@ -93,6 +97,7 @@ public class MinecraftProvider implements IGameProvider {
     public void registerTransformers(PuzzleClassLoader classLoader) {
         ModLocator.getMods(EnvType.CLIENT, List.of(classLoader.getURLs()));
 
+        CommonTransformerInitializer.invokeTransformers(classLoader);
     }
 
     String[] args;

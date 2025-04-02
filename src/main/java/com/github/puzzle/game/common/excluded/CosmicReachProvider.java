@@ -11,6 +11,7 @@ import com.github.puzzle.core.loader.provider.mod.ModContainer;
 import com.github.puzzle.core.loader.provider.mod.entrypoint.impls.CommonTransformerInitializer;
 import com.github.puzzle.core.loader.util.ModLocator;
 import com.github.puzzle.game.ServerGlobals;
+import com.github.puzzle.game.resources.PuzzleGameAssetLoader;
 import com.github.puzzle.game.util.MixinUtil;
 import com.llamalad7.mixinextras.lib.apache.commons.tuple.Pair;
 import io.netty.util.NettyRuntime;
@@ -35,6 +36,8 @@ import java.util.List;
 public class CosmicReachProvider implements IGameProvider {
 
     public CosmicReachProvider() {
+        Piece.provider = this;
+
         MixinUtil.start();
     }
 
@@ -59,7 +62,7 @@ public class CosmicReachProvider implements IGameProvider {
     public String getRawVersion() {
         if (rawVersion != null) return rawVersion;
         try {
-            return rawVersion = new String(NettyRuntime.class.getResourceAsStream("/build_assets/version.txt").readAllBytes());
+            return rawVersion = new String(PuzzleGameAssetLoader.class.getResourceAsStream("/build_assets/version.txt").readAllBytes());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

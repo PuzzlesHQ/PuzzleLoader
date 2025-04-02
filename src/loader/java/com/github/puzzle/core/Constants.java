@@ -3,7 +3,9 @@ package com.github.puzzle.core;
 import com.github.puzzle.core.loader.launch.Piece;
 import com.github.puzzle.core.loader.launch.PuzzleClassLoader;
 import com.github.puzzle.core.loader.meta.EnvType;
+import com.github.puzzle.core.loader.util.RawAssetLoader;
 import com.github.puzzle.core.loader.util.Reflection;
+import com.github.puzzle.core.loader.util.ResourceLocation;
 import meteordevelopment.orbit.EventBus;
 import meteordevelopment.orbit.IEventBus;
 import org.spongepowered.asm.mixin.MixinEnvironment;
@@ -50,31 +52,16 @@ public class Constants {
         }
     }
 
-    public static InputStream getFile(String file) {
-        InputStream input = Constants.class.getResourceAsStream(file);
-        if (input == null) {
-            input = PuzzleClassLoader.class.getClassLoader().getResourceAsStream(file);
-        }
-        return input;
-    }
-
     private static String getPuzzleVersion() {
-        try {
-            InputStream stream = getFile("/assets/puzzle-loader/version.txt");
-            String bytez = new String(stream.readAllBytes()).strip();
-            stream.close();
-            if (!bytez.contains(".")) {
-                return "69.69.69";
-            } else return bytez;
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        RawAssetLoader.RawFileHandle handle = RawAssetLoader.getClassPathAsset(ResourceLocation.of("puzzle-loader:version.txt"));
+        String version = handle.getString();
+        handle.dispose();
+        if (!version.contains(".")) {
+            return "69.69.69";
+        } else return version;
     }
 
     private static String getGameVersion() {
-        String bytez = Piece.provider.getRawVersion();
-        if (!bytez.contains(".")) {
-            return "69.69.69";
-        } else return bytez;
+        return Piece.provider.getRawVersion();
     }
 }
