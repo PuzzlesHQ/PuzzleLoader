@@ -3,8 +3,16 @@
     "major_version": 1,
     "minor_version": 0,
     "ids": [
-        "puzzle-loader"
+        "puzzle-loader",
+        "base"
     ],
+    "base": {
+        "priority": 1000,
+        "strings": {
+            "red_stone": "Red Stone",
+            "foreshadowing": "Foreshadowing"
+        }
+    },
     "puzzle-loader": {
         "priority": 1000,
         "format_templates": {

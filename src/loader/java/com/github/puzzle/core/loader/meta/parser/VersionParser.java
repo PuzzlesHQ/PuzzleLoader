@@ -10,7 +10,7 @@ public class VersionParser {
     public static boolean hasDependencyVersion(@NotNull Version current, @NotNull String wanted){
 
         if(wanted.isEmpty() || wanted.isBlank()) {
-            throw new RuntimeException("Invalid dependency version string");
+            throw new RuntimeException("Invalid dependency version identifier");
 
         }
         if(wanted.equals("*"))

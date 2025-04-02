@@ -1,0 +1,16 @@
+{
+  "stringId": "base:foreshadowing",
+  "blockEntityId": "base:foreshadowing",
+
+  "blockStates":
+  {
+    "default":
+    {
+      "modelName": "base:models/blocks/model_foreshadowing.json",
+      "tags": [
+        "tool_pickaxe_effective"
+      ],
+      "catalogHidden": true
+    }
+  }
+}

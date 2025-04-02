@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public class OnRegisterLanguageEvent {
 
-    public void registerLanguage(Identifier location) {
+    public ILanguageFile registerLanguage(Identifier location) {
         ILanguageFile lang = null;
         try {
             lang = LanguageFileVersion1.loadLanguageFromString(PuzzleGameAssetLoader.locateAsset(location).readString());
@@ -18,6 +18,7 @@ public class OnRegisterLanguageEvent {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        return lang;
     }
 
 }

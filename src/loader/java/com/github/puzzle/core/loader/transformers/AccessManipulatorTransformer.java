@@ -2,6 +2,7 @@ package com.github.puzzle.core.loader.transformers;
 
 import com.github.puzzle.access_manipulators.AccessManipulators;
 import com.github.puzzle.access_manipulators.readers.api.IAccessModifierReader;
+import com.github.puzzle.core.Constants;
 import com.github.puzzle.core.loader.launch.Piece;
 import com.github.puzzle.core.loader.provider.mod.ModContainer;
 import com.github.puzzle.core.loader.util.ModLocator;
@@ -15,7 +16,7 @@ import static com.github.puzzle.access_manipulators.AccessManipulators.readerMap
 
 public class AccessManipulatorTransformer implements IClassTransformer {
     public AccessManipulatorTransformer() {
-        Piece.provider.addBuiltinMods();
+        ModLocator.getMods(Constants.SIDE);
 
         readAccessManipulators();
     }

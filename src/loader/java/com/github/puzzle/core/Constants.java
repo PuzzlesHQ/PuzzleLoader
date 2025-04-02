@@ -8,18 +8,28 @@ import meteordevelopment.orbit.EventBus;
 import meteordevelopment.orbit.IEventBus;
 import org.spongepowered.asm.mixin.MixinEnvironment;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.invoke.MethodHandles;
 
 public class Constants {
+
     public static final String MOD_ID = "puzzle-loader";
 
     public static final EnvType SIDE = Piece.getSide();
+    public static final String GAME_VERSION = getGameVersion();
+    public static final String PUZZLE_VERSION = getPuzzleVersion();
     public static final IEventBus EVENT_BUS = new EventBus();
+    public static final File PUZZLE_INFO_FOLDER = new File(".puzzle");
+    public static final MixinEnvironment.CompatibilityLevel MIXIN_COMPAT_LEVEL = MixinEnvironment.CompatibilityLevel.JAVA_17;
+    public static final boolean IS_PUZZLE_DEV_VERSION = getPuzzleVersion().equals("69.69.69");
+
+    static {
+        initEventBusLambda();
+    }
 
     public static boolean shouldClose() {
-
         try {
             Class<?> gdxClass = Class.forName("com.badlogic.gdx");
             Object app = Reflection.getFieldContents(gdxClass, "app");
@@ -31,7 +41,7 @@ public class Constants {
         return false;
     }
 
-    static {
+    private static void initEventBusLambda() {
         String alphabet = "abcdefghijklmnopqrstuvwxyz";
         alphabet += alphabet.toUpperCase();
         String[] abcs = alphabet.split("");
@@ -39,8 +49,6 @@ public class Constants {
             EVENT_BUS.registerLambdaFactory(s, (lookupInMethod, klass) -> (MethodHandles.Lookup) lookupInMethod.invoke(null, klass, MethodHandles.lookup()));
         }
     }
-
-    public static final MixinEnvironment.CompatibilityLevel MIXIN_COMPAT_LEVEL = MixinEnvironment.CompatibilityLevel.JAVA_17;
 
     public static InputStream getFile(String file) {
         InputStream input = Constants.class.getResourceAsStream(file);
@@ -50,24 +58,9 @@ public class Constants {
         return input;
     }
 
-    public static final boolean isDev = getPuzzleVersion().equals("69.69.69");
-
-    public static String getPuzzleVersion() {
-            try {
-                InputStream stream = getFile("/assets/puzzle-loader/version.txt");
-                String bytez = new String(stream.readAllBytes()).strip();
-                stream.close();
-                if (!bytez.contains(".")) {
-                    return "69.69.69";
-                } else return bytez;
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-    }
-
-    public static String getGameVersion() {
+    private static String getPuzzleVersion() {
         try {
-            InputStream stream = getFile("/build_assets/version.txt");
+            InputStream stream = getFile("/assets/puzzle-loader/version.txt");
             String bytez = new String(stream.readAllBytes()).strip();
             stream.close();
             if (!bytez.contains(".")) {
@@ -76,5 +69,12 @@ public class Constants {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private static String getGameVersion() {
+        String bytez = Piece.provider.getRawVersion();
+        if (!bytez.contains(".")) {
+            return "69.69.69";
+        } else return bytez;
     }
 }

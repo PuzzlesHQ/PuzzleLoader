@@ -3,6 +3,7 @@ package com.github.puzzle.game.mixins.client.ui;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Action;
+import com.github.puzzle.core.Constants;
 import com.github.puzzle.game.common.Puzzle;
 import com.github.puzzle.game.ui.modmenu.ModMenu;
 import finalforeach.cosmicreach.gamestates.GameState;
@@ -70,7 +71,7 @@ public class MainMenuMixin extends GameState {
         batch.setProjectionMatrix(this.uiCamera.combined);
         batch.begin();
 
-        String versionText = "Puzzle Loader Version: " + Puzzle.VERSION;
+        String versionText = "Puzzle Loader Version: " + Constants.PUZZLE_VERSION;
         FontRenderer.getTextDimensions(this.uiViewport, versionText, new Vector2());
 
         batch.setColor(Color.WHITE);

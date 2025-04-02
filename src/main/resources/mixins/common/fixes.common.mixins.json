@@ -12,6 +12,7 @@
     "EntityCreatorMixin",
     "GameSoundMixin",
     "ItemMixin",
+    "LangMixin",
     "LibgdxJSONFixer",
     "Point3DMapRewrite"
   ]

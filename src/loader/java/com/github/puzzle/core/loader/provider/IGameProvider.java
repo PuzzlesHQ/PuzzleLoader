@@ -24,4 +24,6 @@ public interface IGameProvider {
     void inject(PuzzleClassLoader classLoader);
 
     void addBuiltinMods();
+
+    String getDefaultNamespace();
 }

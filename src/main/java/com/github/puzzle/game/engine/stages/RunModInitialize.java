@@ -38,7 +38,7 @@ public class RunModInitialize extends AbstractStage {
             while (!getInitializers().isEmpty()) {
                 Initializer initializer = getInitializers().remove();
 
-                if (ModLocator.locatedMods == null) ModLocator.getMods(initializer.envType);
+                ModLocator.getMods(initializer.envType);
 
                 try {
                     ModLocator.locatedMods.get(Constants.MOD_ID).invokeEntrypoint(initializer.key, initializer.clazz, initializer.invoker);

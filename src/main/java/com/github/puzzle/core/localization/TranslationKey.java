@@ -4,9 +4,9 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 public class TranslationKey {
-	private final String identifier;
+	private String identifier;
 
-	private final int hashCode;
+	private int hashCode;
 
 	@Contract(pure = true)
 	public TranslationKey(@NotNull String identifier) {
@@ -31,5 +31,12 @@ public class TranslationKey {
 	@Override
 	public String toString() {
 		return identifier;
+	}
+
+	public TranslationKey set(String key) {
+		identifier = key;
+		hashCode = key.hashCode();
+
+		return this;
 	}
 }

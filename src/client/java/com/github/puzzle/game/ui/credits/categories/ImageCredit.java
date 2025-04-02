@@ -71,7 +71,7 @@ public class ImageCredit implements ICreditElement {
     public void fromJson(JsonObject object) {
         String src = object.getString("src", "puzzle-loader:icons/example.png");
         this.scale = object.getFloat("scale", 1);
-        this.rotation = Objects.equals(src, "puzzle-loader:textures/logos/credits_logo.png") && Constants.isDev ? 75 : object.getFloat("rotation", 0);
+        this.rotation = Objects.equals(src, "puzzle-loader:textures/logos/credits_logo.png") && Constants.IS_PUZZLE_DEV_VERSION ? 75 : object.getFloat("rotation", 0);
 
         JsonValue value = object.get("padding");
         if (value != null) {

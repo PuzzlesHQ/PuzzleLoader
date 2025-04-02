@@ -1,6 +1,8 @@
 package com.github.puzzle.game.engine;
 
 import com.badlogic.gdx.graphics.Color;
+import com.github.puzzle.core.Constants;
+import com.github.puzzle.game.events.OnPreLoadAssetsEvent;
 import com.github.puzzle.core.loader.engine.GameLoader;
 import com.github.puzzle.game.ui.surface.Surface;
 import com.github.puzzle.game.ui.surface.SurfaceImpl;
@@ -104,6 +106,8 @@ public class GameBootingScreen extends SurfaceImpl {
         this.add(bar1);
         this.add(bar2);
         this.add(bar3);
+
+        Constants.EVENT_BUS.post(new OnPreLoadAssetsEvent());
     }
 
     byte canCreateGameLoader = 0;

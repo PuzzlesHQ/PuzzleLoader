@@ -1,0 +1,20 @@
+{
+  "parent": "base:models/blocks/cube.json",
+
+  "textures":
+  {
+    "top":
+    {
+      "fileName": "base:textures/blocks/red_stone_block.png"
+    },
+    "bottom":
+    {
+      "fileName": "base:textures/blocks/red_stone_block.png"
+    },
+    "side":
+    {
+      "fileName": "base:textures/blocks/red_stone_block.png"
+    }
+  }
+
+}

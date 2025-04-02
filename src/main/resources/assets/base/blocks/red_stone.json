@@ -1,0 +1,15 @@
+{
+  "stringId": "base:red_stone",
+  "blockStates":
+  {
+    "default":
+    {
+      "modelName": "base:models/blocks/model_red_stone.json",
+      "stateGenerators": ["base:slabs_seamed_all"],
+      "tags": [
+        "tool_pickaxe_effective"
+      ],
+      "catalogHidden": true
+    }
+  }
+}

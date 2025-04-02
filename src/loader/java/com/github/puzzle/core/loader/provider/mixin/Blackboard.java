@@ -73,7 +73,7 @@ public class Blackboard implements IGlobalPropertyService {
     }
     
     /**
-     * Get a string from the blackboard, returns default value if not set or
+     * Get a identifier from the blackboard, returns default value if not set or
      * null.
      * 
      * @param key blackboard key

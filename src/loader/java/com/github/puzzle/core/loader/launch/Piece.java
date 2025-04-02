@@ -19,10 +19,9 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class Piece {
-    public static String CLIENT_PROVIDER = "com.github.puzzle.game.common.excluded.ClientCosmicReachProvider";
-    public static String SERVER_PROVIDER = "com.github.puzzle.game.common.excluded.ServerCosmicReachProvider";
+    public static String COSMIC_PROVIDER = "com.github.puzzle.game.common.excluded.CosmicReachProvider";
 
-    public static String DEFAULT_PROVIDER;
+    public static String DEFAULT_PROVIDER = COSMIC_PROVIDER;
     public static IGameProvider provider;
 
     public static Map<String, Object> blackboard;
@@ -35,7 +34,6 @@ public class Piece {
     public static void launch(String[] args, EnvType type) {
         Piece piece = new Piece();
         env.set(type);
-        DEFAULT_PROVIDER = env.get() == EnvType.CLIENT ? CLIENT_PROVIDER : SERVER_PROVIDER;
         piece.launch(args);
     }
 
@@ -53,7 +51,6 @@ public class Piece {
 
     public static void main(String[] args) {
         Piece piece = new Piece();
-        DEFAULT_PROVIDER = getSide() == EnvType.CLIENT ? CLIENT_PROVIDER : SERVER_PROVIDER;
         piece.launch(args);
     }
 

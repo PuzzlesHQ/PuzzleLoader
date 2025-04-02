@@ -1,5 +1,6 @@
 package com.github.puzzle.core.loader.util;
 
+import com.github.puzzle.core.loader.launch.Piece;
 import com.github.puzzle.core.loader.meta.EnvType;
 import com.github.puzzle.core.loader.meta.ModInfo;
 import com.github.puzzle.core.loader.meta.parser.ModJson;
@@ -33,7 +34,7 @@ public class ModLocator {
     public static Logger LOGGER = LogManager.getLogger("Puzzle | ModLocator");
     public static File MOD_FOLDER = new File("pmods");
 
-    public static Map<String, ModContainer> locatedMods = new HashMap<>();
+    public static Map<String, ModContainer> locatedMods = null;
 
     public static void addMod(ModContainer container) {
         ModLocator.locatedMods.put(container.ID, container);
@@ -166,6 +167,12 @@ public class ModLocator {
     }
 
     public static void getMods(EnvType env, Collection<URL> classPath) {
+        if (ModLocator.locatedMods != null) {
+            return;
+        }
+        ModLocator.locatedMods = new HashMap<>();
+
+        Piece.provider.addBuiltinMods();
         Collection<URL> urls = getUrlsOnClasspath(classPath);
 
         for (URL url : urls) {
@@ -177,7 +184,8 @@ public class ModLocator {
                         ZipEntry modJson = jar.getEntry("puzzle.mod.json");
                         if (modJson != null) {
                             ModJson json = ModJson.fromString(new String(jar.getInputStream(modJson).readAllBytes()));
-                            addMod(env, json, jar, false);
+                            if (!locatedMods.containsKey(json.id()))
+                                addMod(env, json, jar, false);
                         }
                     }
                 } catch (IOException e) {
