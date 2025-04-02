@@ -3,6 +3,7 @@ package com.github.puzzle.game.mixins.client.ui;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.IntMap;
 import com.badlogic.gdx.utils.IntSet;
+import com.github.puzzle.game.config.PuzzleConfig;
 import finalforeach.cosmicreach.CosmicReachFont;
 import finalforeach.cosmicreach.FontTexture;
 import finalforeach.cosmicreach.GameAssetLoader;
@@ -14,7 +15,6 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import static com.github.puzzle.core.Constants.MOD_ID;
 
@@ -88,7 +88,11 @@ public abstract class FontTextureMixin {
     private static void clinit(CallbackInfo ci) {
         allFontTextures.clear();
         addedFontIndices.clear();
-        createFontTexturev2(0, "standard_galactic_alphabet.png");
+        if (PuzzleConfig.isAprilFools()){
+            createFontTexturev2(0, "standard_galactic_alphabet.png");
+        } else {
+            createFontTexture(0, "cosmic-reach-font-0000-basic.png");
+        }
     }
 
 }

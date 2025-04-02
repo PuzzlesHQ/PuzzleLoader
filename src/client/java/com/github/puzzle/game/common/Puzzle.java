@@ -8,17 +8,18 @@ import com.github.puzzle.core.loader.launch.provider.mod.entrypoint.impls.Client
 import com.github.puzzle.core.loader.launch.provider.mod.entrypoint.impls.ClientPreModInitializer;
 import com.github.puzzle.core.loader.meta.EnvType;
 import com.github.puzzle.core.loader.provider.mod.AdapterPathPair;
-import com.github.puzzle.core.loader.provider.mod.entrypoint.impls.ModInitializer;
 import com.github.puzzle.core.loader.util.ModLocator;
 import com.github.puzzle.core.loader.util.PuzzleEntrypointUtil;
-import com.github.puzzle.core.localization.ILanguageFile;
 import com.github.puzzle.core.localization.LanguageManager;
-import com.github.puzzle.core.localization.files.LanguageFileVersion1;
 import com.github.puzzle.game.ClientGlobals;
 import com.github.puzzle.game.PuzzleRegistries;
+import com.github.puzzle.game.config.PuzzleConfig;
 import com.github.puzzle.game.engine.stages.RunModInitialize;
 import com.github.puzzle.game.engine.stages.RunModPostInitialize;
-import com.github.puzzle.game.events.*;
+import com.github.puzzle.game.events.OnLoadAssetsEvent;
+import com.github.puzzle.game.events.OnLoadAssetsFinishedEvent;
+import com.github.puzzle.game.events.OnRegisterEvent;
+import com.github.puzzle.game.events.OnRegisterLanguageEvent;
 import com.github.puzzle.game.resources.PuzzleGameAssetLoader;
 import com.github.puzzle.game.resources.VanillaAssetLocations;
 import com.github.puzzle.game.ui.credits.CreditFile;
@@ -37,10 +38,8 @@ import finalforeach.cosmicreach.sounds.GameSound;
 import finalforeach.cosmicreach.util.Identifier;
 import meteordevelopment.orbit.EventHandler;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Puzzle implements ClientPreModInitializer, ClientModInitializer, ClientPostModInitializer {
@@ -178,5 +177,7 @@ public class Puzzle implements ClientPreModInitializer, ClientModInitializer, Cl
                 ClientPostModInitializer.class,
                 ClientPostModInitializer::onPostInit
         ));
+
+        PuzzleConfig.loadPuzzleConfig();
     }
 }

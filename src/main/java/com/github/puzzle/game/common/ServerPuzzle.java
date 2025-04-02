@@ -6,6 +6,7 @@ import com.github.puzzle.core.loader.provider.mod.entrypoint.impls.PostModInitia
 import com.github.puzzle.core.loader.provider.mod.entrypoint.impls.PreModInitializer;
 import com.github.puzzle.game.PuzzleRegistries;
 import com.github.puzzle.game.aprilfoolsupdate.ForeshadowingBlockEntity;
+import com.github.puzzle.game.config.PuzzleConfig;
 import com.github.puzzle.game.engine.stages.RunFinishLoading;
 import com.github.puzzle.game.engine.stages.RunLoadAssets;
 import com.github.puzzle.game.engine.stages.RunModInitialize;
@@ -43,10 +44,17 @@ public class ServerPuzzle implements PreModInitializer, PostModInitializer, ModI
 
     @Override
     public void onPostInit() {
-        Block.loadBlock(PuzzleGameAssetLoader.locateAsset("base:blocks/foreshadowing.json"))
-        .getDefaultBlockState().catalogHidden = false;
-        Block.loadBlock(PuzzleGameAssetLoader.locateAsset("base:blocks/red_stone.json"))
-        .getDefaultBlockState().catalogHidden = false;
+        if (PuzzleConfig.isAprilFools()){
+            Block.loadBlock(PuzzleGameAssetLoader.locateAsset("base:blocks/foreshadowing.json"))
+                    .getDefaultBlockState().catalogHidden = false;
+            Block.loadBlock(PuzzleGameAssetLoader.locateAsset("base:blocks/red_stone.json"))
+                    .getDefaultBlockState().catalogHidden = false;
+        }else {
+            Block.loadBlock(PuzzleGameAssetLoader.locateAsset("base:blocks/foreshadowing.json"))
+                    .getDefaultBlockState().catalogHidden = true;
+            Block.loadBlock(PuzzleGameAssetLoader.locateAsset("base:blocks/red_stone.json"))
+                    .getDefaultBlockState().catalogHidden = true;
+        }
 
         ForeshadowingBlockEntity.register();
     }
