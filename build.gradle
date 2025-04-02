@@ -113,37 +113,6 @@ processResources {
     }
 }
 
-//tasks.register("createPOM") {
-//    dependsOn(buildMergedBundleJar)
-//
-//    doLast {
-//        File mvn = new File("$projectDir/maven");
-//        Util.delete(mvn)
-//        if (!mvn.exists()) mvn.mkdir();
-//
-//        File pom = new File("$projectDir/maven/pom.xml")
-//        if (!pom.exists()) pom.createNewFile()
-//        pom.setText("""<project>
-//    <modelVersion>4.0.0</modelVersion>
-//    <groupId>""" + "io.github" + """</groupId>
-//    <artifactId>${id}</artifactId>
-//    <version>${version}</version>
-//    <name>${display}</name>
-//    <url>https://github.com/PuzzlesHQ/PuzzleLoader</url>
-//</project>""")
-//
-//        Hasher.createHashes(pom);
-//
-//        File jar = new File("$projectDir/build/libs/PuzzleLoader-${version}-merged-bundle.jar");
-//        jar.renameTo("$projectDir/maven/puzzle-loader-${version}.jar")
-//
-//        Hasher.createHashes(new File("$projectDir/maven/puzzle-loader-${version}.jar"));
-//    }
-//
-////    Util.zip(mvn, new File("$projectDir/build/component.zip"))
-//
-//}
-
 publishing {
     publications {
         maven(MavenPublication) {
@@ -152,7 +121,6 @@ publishing {
 
             artifact source: buildMergedBundleJar, classifier: 'client', extension: 'jar'
             artifact source: buildServerBundleJar, classifier: 'server', extension: 'jar'
-//            artifact source: buildMergedBundleJar, extension: 'jar'
         }
     }
 }
