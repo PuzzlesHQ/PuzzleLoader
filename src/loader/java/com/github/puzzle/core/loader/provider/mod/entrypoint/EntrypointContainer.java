@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
 
+@SuppressWarnings("unchecked")
 public class EntrypointContainer {
     public final ImmutableMap<String, ImmutableCollection<AdapterPathPair>> entrypointClasses;
     public final ModContainer container;
@@ -32,7 +33,7 @@ public class EntrypointContainer {
                 if (ILangProvider.PROVDERS.get(pair.getAdapter()) == null)
                     throw new ProviderException("LangProvider \"" + pair.getAdapter() + "\" does not exist.");
 
-                T inst = (T) INSTANCE_MAP.get(pair.getValue());
+                T inst = (T) EntrypointContainer.INSTANCE_MAP.get(pair.getValue());
 
                 if (inst == null) {
                     Class<?> instClass = null;
@@ -44,7 +45,7 @@ public class EntrypointContainer {
 
                     Constants.EVENT_BUS.registerLambdaFactory(instClass.getPackageName(), (lookupInMethod, klass) -> (MethodHandles.Lookup) lookupInMethod.invoke(null, klass, MethodHandles.lookup()));
                     inst = ILangProvider.PROVDERS.get(pair.getAdapter()).create(container.INFO, pair.getValue(), type);
-                    INSTANCE_MAP.put(pair.getValue(), inst);
+                    EntrypointContainer.INSTANCE_MAP.put(pair.getValue(), inst);
                 }
                 invoker.accept(inst);
             }
