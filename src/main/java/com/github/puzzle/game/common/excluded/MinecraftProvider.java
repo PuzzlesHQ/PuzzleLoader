@@ -63,12 +63,7 @@ public class MinecraftProvider implements IGameProvider {
         String launcher = "/net/minecraft/server/Main.class";
         if (Constants.SIDE == EnvType.SERVER) {
             try {
-                try {
-                    PuzzleClassLoader.class.getClassLoader().getResourceAsStream(launcher);
-                } catch (Exception ignore) {
-                    launcher = "/net/minecraft/server/MinecraftServer.class";
-                    PuzzleClassLoader.class.getClassLoader().getResourceAsStream(launcher);
-                }
+                PuzzleClassLoader.class.getClassLoader().getResourceAsStream(launcher);
                 return launcher.replaceAll("/", ".").replace(".class", "");
             } catch (Exception ignore) {
                 throw new RuntimeException("Minecraft Server Main does not exist.");
