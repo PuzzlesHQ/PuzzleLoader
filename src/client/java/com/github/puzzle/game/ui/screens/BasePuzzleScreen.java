@@ -1,7 +1,7 @@
 package com.github.puzzle.game.ui.screens;
 
 import finalforeach.cosmicreach.items.ISlotContainerParent;
-import finalforeach.cosmicreach.items.screens.BaseItemScreen;
+import finalforeach.cosmicreach.ui.screens.BaseItemScreen;
 
 public class BasePuzzleScreen extends BaseItemScreen {
 

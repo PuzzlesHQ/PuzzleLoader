@@ -7,7 +7,7 @@ import finalforeach.cosmicreach.BlockEntityScreenInfo;
 import finalforeach.cosmicreach.GameSingletons;
 import finalforeach.cosmicreach.Threads;
 import finalforeach.cosmicreach.items.containers.SlotContainer;
-import finalforeach.cosmicreach.items.screens.BaseItemScreen;
+import finalforeach.cosmicreach.ui.screens.BaseItemScreen;
 import finalforeach.cosmicreach.ui.UI;
 import finalforeach.cosmicreach.util.Identifier;
 
