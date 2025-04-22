@@ -2,6 +2,7 @@ package com.github.puzzle.game.config;
 
 import com.github.puzzle.core.loader.util.RawAssetLoader;
 import finalforeach.cosmicreach.io.SaveLocation;
+import org.checkerframework.checker.index.qual.UpperBoundUnknown;
 import org.hjson.JsonObject;
 import org.hjson.JsonValue;
 import org.hjson.Stringify;
@@ -23,14 +24,19 @@ public class PuzzleConfig {
             puzzleConfig = JsonValue.readHjson(config.getString()).asObject();
             config.dispose();
         } else {
-            JsonObject defaultJson = getDefault();
-            try (FileWriter writer = new FileWriter(file)) {
-                writer.write(defaultJson.toString(Stringify.FORMATTED));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            puzzleConfig = defaultJson;
+            loadDefaultPuzzleConfig();
         }
+    }
+
+    public static void loadDefaultPuzzleConfig(){
+        File file = new File(SaveLocation.getSaveFolderLocation() + puzzleConfigFileName);
+        JsonObject defaultJson = getDefault();
+        try (FileWriter writer = new FileWriter(file)) {
+            writer.write(defaultJson.toString(Stringify.FORMATTED));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        puzzleConfig = defaultJson;
     }
 
     public static void savePuzzleConfig(){
@@ -57,7 +63,7 @@ public class PuzzleConfig {
         }
     }
 
-    public static boolean getBoolean(String name, boolean defaultValue){
+    public static boolean getBoolean(String name, boolean defaultValue) {
         return puzzleConfig.getBoolean(name, defaultValue);
     }
 

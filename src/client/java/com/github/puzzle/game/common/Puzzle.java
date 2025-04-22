@@ -177,7 +177,5 @@ public class Puzzle implements ClientPreModInitializer, ClientModInitializer, Cl
                 ClientPostModInitializer.class,
                 ClientPostModInitializer::onPostInit
         ));
-
-        PuzzleConfig.loadPuzzleConfig();
     }
 }

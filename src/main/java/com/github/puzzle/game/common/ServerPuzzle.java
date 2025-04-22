@@ -63,5 +63,6 @@ public class ServerPuzzle implements PreModInitializer, PostModInitializer, ModI
     public void onPreInit() {
         File saveLocation = new File(SaveLocation.getSaveFolderLocation()).getAbsoluteFile();
         File puzzleFolder = new File(saveLocation, ".puzzle");
+        PuzzleConfig.loadPuzzleConfig();
     }
 }
