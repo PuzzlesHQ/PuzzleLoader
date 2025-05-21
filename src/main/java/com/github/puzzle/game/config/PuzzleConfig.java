@@ -16,7 +16,7 @@ import java.time.LocalDate;
 
 public class PuzzleConfig {
     public static final Logger PUZZLE_CONFIG = LoggerFactory.getLogger("Puzzle | Config");
-    public static JsonObject puzzleConfig;
+    public static JsonObject puzzleConfig = new JsonObject();
     public static String puzzleConfigFileName = "/PuzzleSettings.json";
 
     public static void loadPuzzleConfig(){
@@ -27,9 +27,6 @@ public class PuzzleConfig {
             RawAssetLoader.RawFileHandle config = RawAssetLoader.getLowLevelRelativeAsset(RelativeFile, puzzleConfigFileName);
             puzzleConfig = JsonValue.readHjson(config.getString()).asObject();
             config.dispose();
-            if (puzzleConfig == null){
-                loadDefaultPuzzleConfig();
-            }
         } else {
             loadDefaultPuzzleConfig();
         }
