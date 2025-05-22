@@ -12,20 +12,27 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.time.LocalDate;
 
 public class PuzzleConfig {
-    public static final Logger PUZZLE_CONFIG = LoggerFactory.getLogger("Puzzle | Config");
+    public static final Logger LOGGER = LoggerFactory.getLogger("Puzzle | Config");
     public static JsonObject puzzleConfig = new JsonObject();
     public static String puzzleConfigFileName = "/PuzzleSettings.json";
 
     public static void loadPuzzleConfig(){
-        PUZZLE_CONFIG.info("loading puzzle config");
+        LOGGER.info("loading puzzle config");
         File file = new File(SaveLocation.getSaveFolderLocation() + puzzleConfigFileName);
         if (file.exists()){
             File RelativeFile = new File(SaveLocation.getSaveFolderLocation());
             RawAssetLoader.RawFileHandle config = RawAssetLoader.getLowLevelRelativeAsset(RelativeFile, puzzleConfigFileName);
-            puzzleConfig = JsonValue.readHjson(config.getString()).asObject();
+            try {
+                puzzleConfig = JsonValue.readHjson(config.getString()).asObject();
+            } catch (RuntimeException e){
+                LOGGER.error("Couldn't read hjson in the puzzle config file, using internal default | exception info: {}", e.toString());
+                config.dispose();
+                loadDefaultPuzzleConfig();
+            }
             config.dispose();
         } else {
             loadDefaultPuzzleConfig();
@@ -33,17 +40,20 @@ public class PuzzleConfig {
     }
 
     public static void loadDefaultPuzzleConfig(){
-        PUZZLE_CONFIG.info("loading default puzzle config");
+        LOGGER.info("loading default puzzle config");
         puzzleConfig = getDefaultJson();
         savePuzzleConfig();
     }
 
     public static void savePuzzleConfig(){
         File file = new File(SaveLocation.getSaveFolderLocation() + puzzleConfigFileName);
-        try (FileWriter writer = new FileWriter(file)) {
+        try {
+            FileWriter writer = new FileWriter(file);
+            if(!file.exists())
+                Files.createFile(file.toPath());
             writer.write(puzzleConfig.toString(Stringify.FORMATTED));
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException e){
+            LOGGER.error("IO exception with '{}' ",file.getAbsoluteFile());
         }
     }
 
