@@ -9,6 +9,7 @@ group = 'com.github.PuzzlesHQ'
 
 repositories {
     mavenCentral()
+    mavenLocal()
     maven { url "https://libraries.minecraft.net" }
     maven {
         url = "https://jitpack.io"

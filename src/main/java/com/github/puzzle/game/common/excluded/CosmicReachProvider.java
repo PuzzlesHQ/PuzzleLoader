@@ -7,6 +7,7 @@ import com.github.puzzle.core.loader.meta.EnvType;
 import com.github.puzzle.core.loader.meta.ModInfo;
 import com.github.puzzle.core.loader.meta.Version;
 import com.github.puzzle.core.loader.provider.IGameProvider;
+import com.github.puzzle.core.loader.provider.mixin.PuzzleLoaderMixinService;
 import com.github.puzzle.core.loader.provider.mod.ModContainer;
 import com.github.puzzle.core.loader.provider.mod.entrypoint.impls.CommonTransformerInitializer;
 import com.github.puzzle.core.loader.util.ModLocator;
@@ -37,7 +38,7 @@ public class CosmicReachProvider implements IGameProvider {
 
     public CosmicReachProvider() {
         Piece.provider = this;
-
+        System.setProperty("mixin.service", PuzzleLoaderMixinService.class.getName()); //Java 24 issues
         MixinUtil.start();
     }
 
