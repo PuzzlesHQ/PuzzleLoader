@@ -7,6 +7,7 @@ import com.badlogic.gdx.utils.Queue;
 import com.github.puzzle.core.loader.meta.Env;
 import com.github.puzzle.core.loader.meta.EnvType;
 import finalforeach.cosmicreach.GameSingletons;
+import finalforeach.cosmicreach.blockentities.BlockEntity;
 import finalforeach.cosmicreach.blocks.BlockPosition;
 import finalforeach.cosmicreach.blocks.BlockState;
 import finalforeach.cosmicreach.lighting.BlockLightPropagator;
@@ -20,59 +21,17 @@ import finalforeach.cosmicreach.worldgen.ChunkColumn;
 
 public class BlockUtil {
 
-    public static class BlockReplaceSettings {
-        public static final BlockReplaceSettings DEFAULT = new BlockReplaceSettings();
-
-        boolean doRemeshing = true;
-        boolean doBlockLightPropagation = true;
-        private final boolean isImmutable;
-
-        private BlockReplaceSettings(boolean isImmutable) {
-            this.isImmutable = isImmutable;
+    @Env(EnvType.SERVER)
+    public static void setBlockAt(Zone zone, BlockState state, BlockPosition pos) {
+        if (pos.chunk() != null){
+            BlockSetter.get().replaceBlock(zone, state, pos);
         }
-
-        public BlockReplaceSettings() {
-            isImmutable = false;
-        }
-
-        public BlockReplaceSettings doesRemeshing(boolean doRemeshing) {
-            if (isImmutable) throw new RuntimeException("Cannot set \"doesRemeshing\" on the immutable BlockReplaceSetting");
-
-            this.doRemeshing = doRemeshing;
-            return this;
-        }
-
-        public BlockReplaceSettings doesBlockLightPropagation(boolean doBlockLightPropagation) {
-            if (isImmutable) throw new RuntimeException("Cannot set \"doesBlockLightPropagation\" on the immutable BlockReplaceSetting");
-
-            this.doBlockLightPropagation = doBlockLightPropagation;
-            return this;
-        }
-
     }
 
-    private static final Queue<BlockPosition> tmpQueue = new Queue<>();
-
     @Env(EnvType.SERVER)
-    public static void setBlockAt(Zone zone, BlockState state, BlockPosition pos, BlockReplaceSettings settings) {
-        getChunkAtVec(zone, pos.getGlobalX(), pos.getGlobalY(), pos.getGlobalZ());
-
-        BlockState oldBlockState = pos.getBlockState();
-        if (state != oldBlockState) {
-            pos.setBlockState(state);
-            if (settings.doBlockLightPropagation) {
-                adjustLightsAfterReplace(zone, oldBlockState, state, pos, tmpQueue);
-            }
-            if (settings.doRemeshing) {
-                if (state.getModel() != oldBlockState.getModel() && GameSingletons.isClient) {
-                    pos.chunk().flagTouchingChunksForRemeshing(zone, pos.localX(), pos.localY(), pos.localZ(), true);
-                    GameSingletons.meshGenThread.requestImmediateResorting();
-                }
-            }
-        }
-
-        if (GameSingletons.isHost && ServerSingletons.SERVER != null) {
-            ServerSingletons.SERVER.broadcast(zone, new BlockReplacePacket(zone, state, pos));
+    public static void setBlockAt(Zone zone, BlockState targetBlockState, BlockEntity be, BlockPosition pos, boolean callBlockEntityOnCreate) {
+        if (pos.chunk() != null){
+            BlockSetter.get().replaceBlock(zone, targetBlockState, be, pos, callBlockEntityOnCreate);
         }
     }
 
@@ -112,25 +71,20 @@ public class BlockUtil {
 
     }
 
-    @Env(EnvType.SERVER)
-    public static void setBlockAt(Zone zone, BlockState state, BlockPosition pos) {
-        setBlockAt(zone, state, pos, BlockReplaceSettings.DEFAULT);
-    }
-
-    public static void setBlockAt(Zone zone, BlockState state, Vector3 vector3, BlockReplaceSettings settings) {
-        setBlockAt(zone, state, (int) vector3.x, (int) vector3.y, (int) vector3.z, settings);
-    }
-
-    public static void setBlockAt(Zone zone, BlockState state, int x, int y, int z, BlockReplaceSettings settings) {
-        setBlockAt(zone, state, getBlockPosAtVec(zone, x, y, z), settings);
-    }
-
     public static void setBlockAt(Zone zone, BlockState state, Vector3 vector3) {
         setBlockAt(zone, state, (int) vector3.x, (int) vector3.y, (int) vector3.z);
     }
 
     public static void setBlockAt(Zone zone, BlockState state, int x, int y, int z) {
         setBlockAt(zone, state, getBlockPosAtVec(zone, x, y, z));
+    }
+
+    public static void setBlockAt(Zone zone, BlockState state, BlockEntity be, Vector3 vector3, boolean callBlockEntityOnCreate) {
+        setBlockAt(zone, state, be, (int) vector3.x, (int) vector3.y, (int) vector3.z, callBlockEntityOnCreate);
+    }
+
+    public static void setBlockAt(Zone zone, BlockState state, BlockEntity be, int x, int y, int z, boolean callBlockEntityOnCreate) {
+        setBlockAt(zone, state, be, getBlockPosAtVec(zone, x, y, z), callBlockEntityOnCreate);
     }
 
     public static Chunk getChunkAtVec(Zone zone, int x, int y, int z) {

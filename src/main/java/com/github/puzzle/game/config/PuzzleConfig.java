@@ -16,13 +16,14 @@ import java.nio.file.Files;
 import java.time.LocalDate;
 
 public class PuzzleConfig {
-    public static final Logger LOGGER = LoggerFactory.getLogger("Puzzle | Config");
-    public static JsonObject puzzleConfig = new JsonObject();
-    public static String puzzleConfigFileName = "/PuzzleSettings.json";
+    private static final Logger LOGGER = LoggerFactory.getLogger("Puzzle | Config");
+    private static JsonObject puzzleConfig;
+    private static final String puzzleConfigFileName = "/PuzzleSettings.json";
 
     public static void loadPuzzleConfig(){
         LOGGER.info("loading puzzle config");
         File file = new File(SaveLocation.getSaveFolderLocation() + puzzleConfigFileName);
+        System.out.println(file.getAbsoluteFile());
         if (file.exists()){
             File RelativeFile = new File(SaveLocation.getSaveFolderLocation());
             RawAssetLoader.RawFileHandle config = RawAssetLoader.getLowLevelRelativeAsset(RelativeFile, puzzleConfigFileName);
@@ -58,7 +59,7 @@ public class PuzzleConfig {
     }
 
 
-    public static JsonObject getDefaultJson(){
+    private static JsonObject getDefaultJson(){
         return new JsonObject()
                 .add("isAprilFools", false);
     }
